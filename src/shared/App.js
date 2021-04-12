@@ -7,14 +7,14 @@ import {BrowserRouter, Route, Switch} from "react-router-dom";
 import { ConnectedRouter } from "connected-react-router";
 import { history } from "../redux/configureStore";
 import { useDispatch, useSelector } from "react-redux";
-import { actionCreators as userActions } from "../redux/modules/user"
+// import { actionCreators as userActions } from "../redux/modules/user"
 
 
 
 function App() {
 
   const dispatch = useDispatch()
-  //
+
  
     return (
       <ReactContainer>
@@ -37,4 +37,11 @@ function App() {
  
 }
 
+
+const ReactContainer = styled.div`
+  background-color: #FAFAFA;
+  width:100vw;
+  height:100vh;
+  overflow-x: hidden;
+`
 export default App;
