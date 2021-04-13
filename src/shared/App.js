@@ -14,6 +14,7 @@ import Login from "../pages/Login";
 import Signup from "../pages/Signup";
 import Header from "../components/Header";
 import Detail from '../pages/Detail';
+import NotFound from '../pages/NotFound';
 
 
 function App() {
@@ -25,17 +26,15 @@ function App() {
       <ReactContainer>
         <Header/>
         <ConnectedRouter history={history}>
-
           <Switch>
             {/* <Route path="/" exact component={PostList}/> */}
             <Route path="/logins" exact component={Login}/>
             <Route path="/signups" exact component={Signup}/>
-            <Route path="/details" exact component={Detail}/> 
+            <Route path="/details" exact component={Detail}/>
+            <Route exact component={NotFound}/>
             {/* <Route path="/upload" exact component={PostWrite}/> */}
             {/* <Route path="/upload/:id" exact component={PostWrite}/> */} */}
-            {/* {/* <Route exact component={NotFound}/> */}
           </Switch>
-       
         </ConnectedRouter>
       </ReactContainer>
     );

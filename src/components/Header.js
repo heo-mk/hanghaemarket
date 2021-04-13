@@ -1,9 +1,11 @@
 import React from "react";
 import styled from "styled-components"
 import hhlogo1 from "../shared/hhlogo1.png";
+import CustomizedInputBase from "../elements/SearchBar";
 
 import { history } from "../redux/configureStore";
 import { useDispatch} from "react-redux";
+import { SelectAll } from "@material-ui/icons";
 // import { actionCreators as userActions } from "../redux/modules/user";  
 
 const Header = () => { 
@@ -11,13 +13,30 @@ const Header = () => {
 
   return(
     <React.Fragment>
-      <HeaderContainer>
-        <HeaderInnerContainer>
-          <TitleImg src={hhlogo1}/>
-          <HeaderIcons>
-          </HeaderIcons>
-        </HeaderInnerContainer>
-      </HeaderContainer>
+        <HeaderContainer>
+            <HeaderInnerContainer>
+                <HeaderLeft>
+                    <TitleImg src={hhlogo1}/>
+                </HeaderLeft>
+                <HeaderCenter>
+                    <SearchBox>
+                        <CustomizedInputBase/>
+                    </SearchBox>
+                    <ItemListBox>
+                        <Sellbutton>판매하기</Sellbutton>
+                        <MyShop>내상점</MyShop>
+                        <HHtalk>항해톡</HHtalk>
+                    </ItemListBox>
+                </HeaderCenter>
+                <HeaderRight>
+                    <GoDetails>상품상세보기</GoDetails>
+                    <LoginSignupItems>
+                        <LoginBtn>로그인</LoginBtn>
+                        <SignupBtn>회원가입</SignupBtn>
+                    </LoginSignupItems>
+                </HeaderRight>
+            </HeaderInnerContainer>
+        </HeaderContainer>
     </React.Fragment>
   )
 };
@@ -35,6 +54,7 @@ const HeaderContainer = styled.div`
   border-bottom: 1px solid #DBDBDB;
   z-index: 10;
 `;
+
 const HeaderInnerContainer = styled.div`
   display: flex;
   align-items: center;
@@ -50,6 +70,10 @@ const HeaderInnerContainer = styled.div`
   }
 `;
 
+const HeaderLeft = styled.div`
+  display: flex;
+`;
+
 const TitleImg = styled.img`
   width: 103px;
   height: 29px;
@@ -57,8 +81,129 @@ const TitleImg = styled.img`
   cursor: pointer;
 `;
 
-const HeaderIcons = styled.div`
-  width: 80px;
+const HeaderCenter = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const SearchBox = styled.div`
+  padding-top: 10px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  width: 400px;
+`;
+
+const ItemListBox = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 10px;
+`;
+
+const Sellbutton = styled.button`
+  width: 80px;
+  height: 30px;
+  align-items: center;
+  text-align: center;
+  /* padding-top: 10px; */
+  border: none;
+  border-radius: 2px;
+  outline: none;
+  margin-right: 20px;
+  background-color: transparent;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+`;
+
+const MyShop = styled.button`
+  width: 80px;
+  height: 30px;
+  align-items: center;
+  text-align: center;
+  /* padding-top: 10px; */
+  border: none;
+  border-radius: 2px;
+  outline: none;
+  margin-right: 20px;
+  background-color: transparent;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+`;
+
+const HHtalk = styled.button`
+  width: 80px;
+  height: 30px;
+  align-items: center;
+  text-align: center;
+  /* padding-top: 10px; */
+  border: none;
+  border-radius: 2px;
+  outline: none;
+  background-color: transparent;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+`;
+
+const HeaderRight = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const GoDetails = styled.div`
+  display: flex;
+  font-size: 14px;
+  color: green;
+  margin-bottom: 25px;
+  padding: 5px;
+  border-radius: 4px;
+  
+  cursor: pointer;
+  &:hover { 
+    background-color: #D49466;
+  }
+`;
+
+const LoginSignupItems = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const LoginBtn = styled.button`
+  width: 65px;
+  height: 25px;
+  font-size: 12px;
+  font-weight: 500;
+  border: none;
+  border-radius: 4px;
+  outline: none;
+  margin-right: 10px;
+  cursor: pointer;
+  /* backgroud-color: ; */
+  &:hover { 
+    background-color: #D49466;
+  }
+`;
+
+const SignupBtn = styled.button`
+  width: 65px;
+  height: 25px;
+  font-size: 12px;
+  font-weight: 500;
+  border: none;
+  border-radius: 4px;
+  outline: none;
+  cursor: pointer;
+  /* backgroud-color: ; */
+  &:hover { 
+    background-color: #D49466;
+  }
 `;

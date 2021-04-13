@@ -70,6 +70,11 @@ const Detail =(props)=>{
     );
 }
 
+Detail.defaultProps = {
+
+};
+
+
 const SellInfo=styled.div`
 display: flex;
 padding: 30px 0px;
