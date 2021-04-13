@@ -9,10 +9,11 @@ import { history } from "../redux/configureStore";
 import { useDispatch, useSelector } from "react-redux";
 // import { actionCreators as userActions } from "../redux/modules/user"
 
+
 import Login from "../pages/Login";
 import Signup from "../pages/Signup";
 import Header from "../components/Header";
-
+import Detail from '../pages/Detail';
 
 
 function App() {
@@ -29,12 +30,12 @@ function App() {
             {/* <Route path="/" exact component={PostList}/> */}
             <Route path="/logins" exact component={Login}/>
             <Route path="/signups" exact component={Signup}/>
+            <Route path="/details" exact component={Detail}/> 
             {/* <Route path="/upload" exact component={PostWrite}/> */}
             {/* <Route path="/upload/:id" exact component={PostWrite}/> */} */}
             {/* {/* <Route exact component={NotFound}/> */}
           </Switch>
-
-
+       
         </ConnectedRouter>
       </ReactContainer>
     );
