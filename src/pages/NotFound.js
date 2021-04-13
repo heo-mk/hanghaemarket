@@ -6,7 +6,7 @@ const NotFound = (props) => {
 
   return (
     <React.Fragment>
-      <NotExist src={hhlogo1}/>
+      <NonExist src={hhlogo1}/>
     </React.Fragment>
   )
 }
@@ -17,8 +17,8 @@ const NonExist = styled.img`
   border: none;
   outline: none;
   position: fixed;
-  width: 450px;
-  height: 400px;
+  width: 943px;
+  height: 234px;
   font-size: 50px;
   border-radius: 10px;
   background-color: transparent;
@@ -34,7 +34,7 @@ const NonExist = styled.img`
   z-index: 10;
 
   /* 화면이 614px 이하가 되면 이미지가 절반으로 축소되는 반응형 */
-  @media (max-width: 614px){
+  @media (max-width: 943px){
     width: 50%;
     height: auto;
   }

@@ -14,35 +14,61 @@ const Login = () => {
 
   return (
     <React.Fragment>
-      <LoginContainer>
-        <LoginImg src={hhlogo1} />
-        <LoginInput placeholder="Email" /> 
-        <LoginInput placeholder="Password" type="password" />
-        <LoginBtn>Log In</LoginBtn>   
-      </LoginContainer>
-      <AccountContainer>
-        <NoAccount>
-          회원이 아니신가요? 
-          <GotoSignup>
-            회원가입
-          </GotoSignup>
-        </NoAccount>
-      </AccountContainer>
+      <LoginMainContainer>
+        <LoginContainer>
+          <LoginImg src={hhlogo1} />
+          <LoginInput placeholder="이메일" /> 
+          <LoginInput placeholder="비밀번호" type="password" />
+          <LoginBtn>Log In</LoginBtn>   
+        </LoginContainer>
+        <AccountContainer>
+          <NoAccount>
+            회원이 아니신가요? 
+            <GotoSignup>
+              회원가입
+            </GotoSignup>
+          </NoAccount>
+        </AccountContainer>
+      </LoginMainContainer>
     </React.Fragment>
   )
 }
 
 export default Login;
 
+const LoginMainContainer = styled.div`
+  /* 최상단과 항상 떨어져 있게 함 */
+  padding-top: 90px; 
+  display: flex;
+  flex-direction: column;
+  /* @media (max-width: 1000px){
+    heigth: 
+  } */
+`;
+
 const LoginContainer = styled.div`
-  width: 500px;
+  width: 400px;
   border: 1px solid #DBDBDB;
   margin: auto;
-  margin-top: 30px;
-  background-color: #FFFFFF; 
+  margin-top: 20px;
+  background-color: #FFFFFF;
+  display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 160px 0px;
+  padding: 30px 0px;
+`;
+
+const AccountContainer = styled.div`
+  width: 400px;
+  border: 1px solid #DBDBDB;
+  margin: auto;
+  margin-top: 15px;
+  margin-bottom: 20px;
+  background-color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3px 0px;
 `;
 
 const LoginImg = styled.img`
@@ -62,7 +88,7 @@ const LoginInput = styled.input`
   outline: none;
   border-radius: 5px;
   height: 20px;
-  margin-bottom: 6px;
+  margin-bottom: 12px;
 `;
 
 const LoginBtn = styled.button`
@@ -78,18 +104,6 @@ const LoginBtn = styled.button`
   background-color: #0095F6;
   color: white;
 `;
-
-const AccountContainer = styled.div`
-  width: 350px;
-  border: 1px solid #DBDBDB;
-  margin: auto;
-  margin-top: 15px;
-  background-color: #FFFFFF;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 3px 0px;
-`
 
 const NoAccount = styled.p`
   font-size: 14px;
