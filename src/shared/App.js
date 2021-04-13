@@ -9,35 +9,37 @@ import { history } from "../redux/configureStore";
 import { useDispatch, useSelector } from "react-redux";
 // import { actionCreators as userActions } from "../redux/modules/user"
 
-import Detail from '../pages/Detail';
+
 import Login from "../pages/Login";
+import Signup from "../pages/Signup";
+import Header from "../components/Header";
+import Detail from '../pages/Detail';
+
 
 function App() {
 
   const dispatch = useDispatch()
 
- 
+
     return (
       <ReactContainer>
-        {/* <Header/> */}
+        <Header/>
         <ConnectedRouter history={history}>
 
-        <Switch> 
-            <Route path="/login" exact component={Login}/>
-        </Switch> 
-         
-          {/* {/* <Route path="/upload" exact component={PostWrite}/>
-          <Route path="/upload/:id" exact component={PostWrite}/> */} 
-          {/* NotFound 페이지 */}
-          {/* <Route exact component={NotFound}/> */}
+          <Switch>
+            {/* <Route path="/" exact component={PostList}/> */}
+            <Route path="/logins" exact component={Login}/>
+            <Route path="/signups" exact component={Signup}/>
+            <Route path="/details" exact component={Detail}/> 
+            {/* <Route path="/upload" exact component={PostWrite}/> */}
+            {/* <Route path="/upload/:id" exact component={PostWrite}/> */} */}
+            {/* {/* <Route exact component={NotFound}/> */}
+          </Switch>
        
-
-        <Detail/>
         </ConnectedRouter>
       </ReactContainer>
     );
   
- 
 }
 
 
