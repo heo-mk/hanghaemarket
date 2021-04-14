@@ -4,6 +4,9 @@ import img from "../shared/watch6.jpg";
 
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+import ChatIcon from '@material-ui/icons/Chat';
+
+import ProductInfoTab from '../elements/ProductInfoTab';
 
 
 
@@ -12,6 +15,7 @@ const Detail =(props)=>{
 
     return (
     <React.Fragment>
+        <DetailMainContainer>
         <SellInfo>
             <ImgBox><img src={img} width="400px" height="400px"></img></ImgBox>
             <InfoBox>
@@ -26,16 +30,27 @@ const Detail =(props)=>{
                 <ButtonBox>
                   
                     <LikeButton>
-                    <FavoriteBorderIcon fontSize="small"/>
+                        <HeartStyle>
+                            <FavoriteBorderIcon style={{ fontSize: 15 }}/>
+                        </HeartStyle>
                       찜
                     </LikeButton>
                      
-                    <ChatButton>채팅하기</ChatButton>
+                    <ChatButton>
+                        <ChatStyle>
+                            <ChatIcon style={{ fontSize: 15 }}></ChatIcon>
+                        </ChatStyle>
+                        채팅하기
+                        </ChatButton>
                 </ButtonBox>            
             </InfoBox>
         </SellInfo>
-
-        <WrapInfo>
+        
+        <WrapTab>
+            <ProductInfoTab/>
+        </WrapTab>
+        
+        {/* <WrapInfo>
             <SelectInfoBar>
                 <ProductInfoButton><h3>상품정보</h3></ProductInfoButton>
                 <StoreInfoButton><h3>상점정보</h3></StoreInfoButton>
@@ -55,8 +70,8 @@ const Detail =(props)=>{
 
                 </StoreInfo>
             </WrapSelectInfo>
-        </WrapInfo>
-
+        </WrapInfo> */}
+      </DetailMainContainer>
     </React.Fragment>
         
     );
@@ -66,23 +81,28 @@ Detail.defaultProps = {
 
 };
 
+const DetailMainContainer= styled.div`
+  padding-top: 90px; 
+  
+`;
 
 const SellInfo=styled.div`
 display: flex;
 padding: 30px 0px;
 justify-content:center;
-padding-top: 120px;
+
 padding-bottom: 20px;
 
 `;
 
 const ImgBox=styled.div`
-margin-top: 15px;
+margin-top: 10px;
 margin-right: 150px;
 flex-shrink: 0;
 `;
 
 const InfoBox=styled.div`
+margin-top: 10px
 width:500px;
 height: 400px;
 display: flex;
@@ -94,6 +114,7 @@ align-items:center;
 `;
 
 const ProductContentsBox=styled.div`
+padding-right: 100px;
 margin: 0px;
 border: 0px;
 font: inherit;
@@ -132,8 +153,9 @@ color:#fff;
 cursor: pointer;
 `;
 
-
-
+const HeartStyle=styled.div`
+margin-bottom: 2px;
+`;
 
 const ChatButton=styled.button`
 
@@ -148,8 +170,19 @@ color:#fff;
 cursor: pointer;
 `;
 
+const ChatStyle=styled.div`
+margin-bottom: 2px;
+`;
+
+const WrapTab=styled.div`
+padding-top: 30px; 
+width: 1000px;
+margin: auto;
+
+`;
 const WrapInfo=styled.div`
 justify-content:center;
+
 `;
 const SelectInfoBar=styled.div`
 display: flex;

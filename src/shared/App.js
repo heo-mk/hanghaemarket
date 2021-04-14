@@ -33,7 +33,7 @@ function App() {
             <Route path="/boards/details" exact component={Detail}/>
             <Route exact component={NotFound}/>
             {/* <Route path="/upload" exact component={PostWrite}/> */}
-            {/* <Route path="/upload/:id" exact component={PostWrite}/> */} */}
+            {/* <Route path="/upload/:id" exact component={PostWrite}/> */} 
           </Switch>
         </ConnectedRouter>
       </ReactContainer>
