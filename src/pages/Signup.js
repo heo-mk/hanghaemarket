@@ -3,16 +3,82 @@ import styled from "styled-components"
 import hhlogo1 from "../shared/hhlogo1.png";
 import ProfileUpload from "../shared/ProfileUpload";
 
-// import { actionCreators as userActions } from "../redux/modules/user"
+import {emailCheck} from "../shared/common"
+import { actionCreators as userActions } from "../redux/modules/user"
 // import { actionCreators as imageActions } from "../redux/modules/image"
 import { useDispatch, useSelector } from "react-redux";
+import { Email } from "@material-ui/icons";
 // import ProfileUpload from "../shared/ProfileUpload"
 
 const Signup = () => {
   const dispatch = useDispatch();
   // const profile_preview = useSelector((state) => state.image.profile_preview);
-  const [id, setId] = useState('');
-  const [pwd, setPwd] = useState('');
+  const [email, setEmail] = useState('');
+  const [username, setName] = useState('');
+  const [password, setPwd] = useState('');
+  const [pwdConfirm, setConfirmedPwd] = useState('');
+  const [city, setCity] = useState('');
+  const [street, setStreet] = useState('');
+  
+  const ok_submit = email && username && password && pwdConfirm && city && street ? true : false;
+
+  // React.useEffect(() => {
+  //   dispatch()
+  // }, [])
+
+  const submitEmail= (e) => {
+    // console.log(e.target.value);
+    setEmail(e.target.value);
+  };
+
+  const submitName = (e) => {
+    // console.log(e.target.value);
+    setName(e.target.value);
+  };
+
+  const submitPwd = (e) => {
+    // console.log(e.target.value);
+    setPwd(e.target.value)
+  }
+
+  const submitConfirmedPwd = (e) => {
+    // console.log(e.target.value);
+    setConfirmedPwd(e.target.value)
+  }
+
+  const submitCity = (e) => {
+    // console.log(e.target.value);
+    setCity(e.target.value)
+  }
+
+  const submitStreet = (e) => {
+    // console.log(e.target.value);
+    setStreet(e.target.value)
+  }
+
+  const signup = () => {
+    if (!email || !username || !password || !pwdConfirm || !city || !street) {
+      window.alert("아이디, 이름, 비밀번호, 거주하는 시/군/구, 거주하는 동/리를 모두 입력해주세요!");
+      return;
+    }
+  
+    if (!emailCheck(email)) {
+      window.alert('이메일 형식이 맞지 않습니다!');
+      return;
+    }
+
+    // if (password !== pwdConfirm) {
+    //   window.alert("비밀번호와 비빌번호 확인이 일치 하지 않습니다!");
+    //   return;
+    // }
+
+    dispatch(userActions.signupAPI(email, username, password, city, street))
+  }
+
+  // const ImageError = () => {
+  //   window.alert('잘못된 이미지 주소입니다.')
+  //   dispatch(imageActions.profilePreview(url))
+  // }
 
   return (
     <React.Fragment>
@@ -25,13 +91,17 @@ const Signup = () => {
           <ProfileImg />
           {/* <ProfileUpload/> */}
           {/* <ProfileUpload/> */}
-          <SignupInput placeholder="이메일"/>
-          <SignupInput placeholder="이름"/>
-          <SignupInput placeholder="비밀번호" type="password"/>
-          <SignupInput placeholder="비밀번호 확인" type="password"/>
-          <SignupInput placeholder="거주하는 곳의 시/군/구" type="password"/>
-          <SignupInput placeholder="거주하는 동/리" type="password"/>
-          <SignupBtn>회원가입</SignupBtn>
+          <SignupInput placeholder="이메일" onChange={submitEmail}/>
+          <SignupInput placeholder="닉네임" onChange={submitName}/>
+          <SignupInput placeholder="비밀번호"  onChange={submitPwd}/>
+          {/* <SignupInput placeholder="비밀번호 확인" type="password" onChange={submitConfirmedPwd}/> */}
+          <SignupInput placeholder="거주하는 곳의 시/군/구" onChange={submitCity}/>
+          <SignupInput placeholder="거주하는 동/리" onChange={submitStreet} />
+          {ok_submit ? (
+            <SignupBtn onClick={signup}>회원가입</SignupBtn>
+          ) : (
+            <SignupBtn style={{opactiy: "0.3"}}>회원가입</SignupBtn>
+          )}
         </SignupContainer>
       </SignupMainContainer>
     </React.Fragment>

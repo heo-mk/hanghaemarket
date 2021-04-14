@@ -1,32 +1,61 @@
 import React, {useState} from "react";
 import styled from "styled-components";
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector} from "react-redux";
 import { history } from "../redux/configureStore";
+import { actionCreators as userActions } from "../redux/modules/user";
 
+import {emailCheck} from "../shared/common";
 import hhlogo1 from "../shared/hhlogo1.png";
 
 const Login = () => {
   const dispatch = useDispatch();
-  const [id, setId] = useState();
-  const [pwd, setPwd] = useState();
-  // const ok_submit = id && pwd ? true : false;
+  const [email, setEmail] = useState();
+  const [username, setName] = useState('');
+  const [password, setPwd] = useState('');
+  const ok_submit = username && password ? true : false;
+
+  const submitEmail = (e) => {
+    setEmail(e.target.value);
+  }
+
+  const submitName = (e) => {
+    setName(e.target.value);
+  };
+
+
+  const submitPwd = (e) => {
+    setPwd(e.target.value);
+  }
+
+  const login = () => {
+    // 정규표현식으로 이메일 형식 체크
+    // if(!emailCheck(email)){
+    //   window.alert('이메일 형식에 맞지 않습니다!');
+    //   return;
+    // }
+    dispatch(userActions.loginAPI(username, password))
+  }
 
   return (
     <React.Fragment>
       <LoginMainContainer>
         <LoginContainer>
           <LoginImg src={hhlogo1} />
-          <LoginInput placeholder="이메일" /> 
-          <LoginInput placeholder="비밀번호" type="password" />
-          <LoginBtn>Log In</LoginBtn>   
+          <LoginInput placeholder="닉네임" onChange={submitName} /> 
+          <LoginInput placeholder="비밀번호" onChange={submitPwd} type="password" />
+          {ok_submit ? (
+            <LoginBtn onClick={login}>Log In</LoginBtn>
+          ) : (
+            <LoginBtn style={{opactiy: "0.3"}}>Log In</LoginBtn>
+          )}
         </LoginContainer>
         <AccountContainer>
           <NoAccount>
             회원이 아니신가요? 
-            <GotoSignup>
-              회원가입
-            </GotoSignup>
+            <GotoSignup onClick={() => {
+              history.push('/signups')
+            }}>회원가입</GotoSignup>
           </NoAccount>
         </AccountContainer>
       </LoginMainContainer>
