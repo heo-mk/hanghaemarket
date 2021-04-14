@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from 'react'
 import styled from "styled-components"
 import hhlogo1 from "../shared/hhlogo1.png";
 import CustomizedInputBase from "../elements/SearchBar";
@@ -10,34 +10,64 @@ import { SelectAll } from "@material-ui/icons";
 
 const Header = () => { 
   const dispatch = useDispatch();
+  const [is_login, setIsLogin] = React.useState(false);
 
-  return(
-    <React.Fragment>
-        <HeaderContainer>
-            <HeaderInnerContainer>
-                <HeaderLeft>
-                    <TitleImg src={hhlogo1}/>
-                </HeaderLeft>
-                <HeaderCenter>
-                    <SearchBox>
-                        <CustomizedInputBase/>
-                    </SearchBox>
-                    <ItemListBox>
-                        <Sellbutton>판매하기</Sellbutton>
-                        <MyShop>내상점</MyShop>
-                        <HHtalk>항해톡</HHtalk>
-                    </ItemListBox>
-                </HeaderCenter>
-                <HeaderRight>
-                    <GoDetails>상품상세보기</GoDetails>
-                    <LoginSignupItems>
-                        <LoginBtn>로그인</LoginBtn>
-                        <SignupBtn>회원가입</SignupBtn>
-                    </LoginSignupItems>
-                </HeaderRight>
-            </HeaderInnerContainer>
-        </HeaderContainer>
-    </React.Fragment>
+  if (is_login) {
+    return (
+        <React.Fragment>
+                <HeaderContainer>
+                    <HeaderInnerContainer>
+                        <HeaderLeft>
+                            <TitleImg src={hhlogo1}/>
+                        </HeaderLeft>
+                        <HeaderCenter>
+                            <SearchBox>
+                                <CustomizedInputBase/>
+                            </SearchBox>
+                            <ItemListBox>
+                                <Sellbutton>판매하기</Sellbutton>
+                                <MyShop>내상점</MyShop>
+                                <HHtalk>항해톡</HHtalk>
+                            </ItemListBox>
+                        </HeaderCenter>
+                        <HeaderRight>
+                            <GoDetails>상품상세보기</GoDetails>
+                            <LoginSignupItems>
+                                <LoginAndOutBtn>로그아웃</LoginAndOutBtn>
+                            </LoginSignupItems>
+                        </HeaderRight>
+                    </HeaderInnerContainer>
+                </HeaderContainer>
+            </React.Fragment>
+        );
+    }
+    return (
+        <React.Fragment>
+            <HeaderContainer>
+                <HeaderInnerContainer>
+                    <HeaderLeft>
+                        <TitleImg src={hhlogo1}/>
+                    </HeaderLeft>
+                    <HeaderCenter>
+                        <SearchBox>
+                            <CustomizedInputBase/>
+                        </SearchBox>
+                        <ItemListBox>
+                            <Sellbutton>판매하기</Sellbutton>
+                            <MyShop>내상점</MyShop>
+                            <HHtalk>항해톡</HHtalk>
+                        </ItemListBox>
+                    </HeaderCenter>
+                    <HeaderRight>
+                        <GoDetails>상품상세보기</GoDetails>
+                        <LoginSignupItems>
+                            <LoginAndOutBtn>로그인</LoginAndOutBtn>
+                            <SignupBtn>회원가입</SignupBtn>
+                        </LoginSignupItems>
+                    </HeaderRight>
+                </HeaderInnerContainer>
+            </HeaderContainer>
+        </React.Fragment>
   )
 };
 
@@ -177,7 +207,7 @@ const LoginSignupItems = styled.div`
   align-items: center;
 `;
 
-const LoginBtn = styled.button`
+const LoginAndOutBtn = styled.button`
   width: 65px;
   height: 25px;
   font-size: 12px;
