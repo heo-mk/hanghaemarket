@@ -28,7 +28,7 @@ function App() {
         <ConnectedRouter history={history}>
           <Switch>
             {/* <Route path="/" exact component={PostList}/> */}
-            <Route path="/logins" exact component={Login}/>
+            <Route path="/login" exact component={Login}/>
             <Route path="/signups" exact component={Signup}/>
             <Route path="/boards/details" exact component={Detail}/>
             <Route exact component={NotFound}/>
