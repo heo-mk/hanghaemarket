@@ -150,6 +150,7 @@ border:1px solid #6fa1f6;
 width:15vw;
 font-size:15px;
 color:#fff;
+cursor: pointer;
 `;
 
 const HeartStyle=styled.div`
@@ -166,6 +167,7 @@ border:1px solid #6fa1f6;
 width:15vw;
 font-size:15px;
 color:#fff;
+cursor: pointer;
 `;
 
 const ChatStyle=styled.div`
