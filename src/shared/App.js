@@ -9,12 +9,12 @@ import { history } from "../redux/configureStore";
 import { useDispatch, useSelector } from "react-redux";
 // import { actionCreators as userActions } from "../redux/modules/user"
 
-
 import Login from "../pages/Login";
 import Signup from "../pages/Signup";
 import Header from "../components/Header";
 import Detail from '../pages/Detail';
 import NotFound from '../pages/NotFound';
+
 import Main from '../pages/Main';
 
 function App() {

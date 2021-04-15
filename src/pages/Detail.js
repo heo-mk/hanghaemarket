@@ -11,7 +11,12 @@ import ProductInfoTab from '../elements/ProductInfoTab';
 
 
 const Detail =(props)=>{
-
+    
+    const [btnChange, setBtnChange]=useState(false);
+    const changeHeart=()=>{
+      setBtnChange(!btnChange);
+    }
+    
 
     return (
     <React.Fragment>
@@ -29,16 +34,29 @@ const Detail =(props)=>{
                 </ProductContentsBox>            
                 <ButtonBox>
                   
-                    <LikeButton>
-                        <HeartStyle>
+                    <LikeButton
+                     onClick={(e)=>{
+                        if(btnChange===false)
+                        {
+                          changeHeart();
+                          e.preventDefault();
+                          e.stopPropagation();
+                        }else{
+                          changeHeart();
+                          e.preventDefault();
+                          e.stopPropagation();
+                        }
+                      }}>
+                    {btnChange===false? <FavoriteBorderIcon style={{ fontSize: 15, margin: "0 10px" }}/>:<FavoriteIcon style={{ fontSize: 15 }}/>}
+                        {/* <HeartStyle>
                             <FavoriteBorderIcon style={{ fontSize: 15 }}/>
-                        </HeartStyle>
+                        </HeartStyle> */}
                       찜
                     </LikeButton>
                      
                     <ChatButton>
                         <ChatStyle>
-                            <ChatIcon style={{ fontSize: 15 }}></ChatIcon>
+                            <ChatIcon style={{ fontSize: 15,  margin: "0 10px" }}></ChatIcon>
                         </ChatStyle>
                         채팅하기
                         </ChatButton>
