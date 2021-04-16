@@ -8,7 +8,7 @@ const Main=(props)=>{
     return (
         <React.Fragment>
             <MainMainContainer>
-                <Carousel/>
+                {/* <Carousel/> */}
                 <PostList/>     
             </MainMainContainer>
         </React.Fragment>
