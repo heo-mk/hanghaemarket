@@ -97,45 +97,51 @@ const loginAPI = (username, password) => {
         "Content-Type": "application/json;charset=UTF-8",
         // 'Content-Type' : 'application/json', //클라이언트가 서버한테 요청하는(원하는) 타입
         'Accept' : 'application/json', //현재 서버한테 보내는 데이터 타입
-        // 'Access-Control-Allow-Origin' : '*',
+        'Access-Control-Allow-Origin' : '*',
       },
     })
       // 그러면 서버에서 클라이언트로 response(응답)으로 
       // header에선 token(JWT)이 오고,
       // body에선 id, name이 온다.
-    .then(function (response) {
-      console.log(response);
-      console.log(response.data);
-      if (response.headers.token) {
-        console.log(response.data.token);
-        localStorage.setItem('is_token', response.data.token);
-        localStorage.setItem('uid', response.body.id);
-        localStorage.setItem('username', response.data.name);
+    .then((response) => {
+      console.log(response)
+      console.log(response.data); // body 데이터
+      console.log(response.headers.authorization);  // undefined getItem
+      console.log('로그인 되었습니다!');
+      //권한에 대한 디폴트 값 = API응답으로 받아온 토큰값 
+      // axios.defaults.headers.common[
+      //     'Authorization'
+      //   ] = `Bearer ${response.data.token}`;
+      // const token = localStorage.setItem('Authorization', response.headers.authorization);
+      // const token = localStorage.setItem('Authorization', token.accessToken);
+      localStorage.setItem('Authorization', response.headers.authorization);
+      localStorage.setItem('uid', response.data.id);
+      localStorage.setItem('username', response.data.name);
         // setUser를 발동시켜서
         // 리덕스의 is_login 값을 true로 변경한다.
         dispatch(
           setUser(
-            {
+            { 
               uid: response.data.id,   
               username: response.data.name,
             }
           )
         )
-        window.alert('로그인 되었습니다!');
+        // window.alert('로그인 되었습니다!');
         history.replace('/');
-      }
       }).catch((error) => {
         console.log(error);
         window.alert('로그인 실패!')
       });  
     };
   }
-    
+
+
 // 로그인 상태 유지 체크 
 const loginCheckStore = () => {
   return function (dispatch, getState, { history }) {
     // 로컬스토리지의 토큰 가져오기
-    const token = localStorage.getItem('is_token');
+    const token = localStorage.getItem('Authorization');  // token의 키 이름이 Authorization
     const uid = localStorage.getItem('uid');
     const username = localStorage.getItem('username');
     // 토큰 없으면 재로그인
@@ -156,7 +162,7 @@ const loginCheckStore = () => {
 
 const isLogin = () => {
   return function (dispatch, getState, { history }) {
-    const token = localStorage.getItem('is_token');
+    const token = localStorage.getItem('Authorization');
     const uid = localStorage.getItem('uid');
     const username = localStorage.getItem('username');
 
@@ -174,7 +180,7 @@ const isLogin = () => {
 // 로컬스토리지의 토큰을 없앤다.
 const logout = () => {
   return function (dispatch, getstate) {
-    localStorage.removeItem('is_token');
+    localStorage.removeItem("Authorization");
     localStorage.removeItem("uid");
     localStorage.removeItem("username")
     dispatch(logOut());
