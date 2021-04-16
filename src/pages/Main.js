@@ -9,7 +9,7 @@ const Main=(props)=>{
         <React.Fragment>
             <MainMainContainer>
                 <Carousel/>
-                <PostList/>     
+                <PostList/>
             </MainMainContainer>
         </React.Fragment>
     );
