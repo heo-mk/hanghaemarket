@@ -4,15 +4,25 @@ import hhlogo1 from "../shared/hhlogo1.png";
 import CustomizedInputBase from "../elements/SearchBar";
 
 import { history } from "../redux/configureStore";
-import { useDispatch} from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { SelectAll } from "@material-ui/icons";
-// import { actionCreators as userActions } from "../redux/modules/user";  
+import { actionCreators as userActions } from "../redux/modules/user";  
 
 const Header = () => { 
   const dispatch = useDispatch();
-  const [is_login, setIsLogin] = React.useState(false);
+  const is_login = useSelector((state) => state.user.is_login);
+  console.log(is_login)
 
-  if (is_login) {
+  // 토큰이 있으면 로그인 상태, 없으면 로그인 유도
+  React.useEffect(() => {
+    dispatch(userActions.loginCheckStore());
+  }, []);
+
+  // 로그아웃 함수, 로그아웃 버튼을 누르면 발동
+  const logOut = () => {
+    dispatch(userActions.logout());
+  }
+
     return (
         <React.Fragment>
                 <HeaderContainer>
@@ -33,7 +43,29 @@ const Header = () => {
                         <HeaderRight>
                             <GoDetails>상품상세보기</GoDetails>
                             <LoginSignupItems>
-                                <LoginAndOutBtn>로그아웃</LoginAndOutBtn>
+                              {/* is_login 값을 이용해 로그인/로그아웃 분기 */}
+                              {is_login && (
+                                  <React.Fragment>
+                                      <LoginAndOutBtn
+                                        onClick={logOut}
+                                        > 로그아웃 
+                                      </LoginAndOutBtn>
+                                  </React.Fragment>
+                              )}
+                              {!is_login && (
+                                  <React.Fragment>
+                                      <LoginAndOutBtn
+                                        onClick={() => 
+                                          {history.push('/login')}}
+                                        > 로그인
+                                      </LoginAndOutBtn>
+                                      <SignupBtn
+                                        onClick={() => 
+                                          {history.push('/signups')}}
+                                      > 회원가입
+                                      </SignupBtn>
+                                  </React.Fragment>
+                              )}
                             </LoginSignupItems>
                         </HeaderRight>
                     </HeaderInnerContainer>
@@ -41,35 +73,6 @@ const Header = () => {
             </React.Fragment>
         );
     }
-    return (
-        <React.Fragment>
-            <HeaderContainer>
-                <HeaderInnerContainer>
-                    <HeaderLeft>
-                        <TitleImg src={hhlogo1}/>
-                    </HeaderLeft>
-                    <HeaderCenter>
-                        <SearchBox>
-                            <CustomizedInputBase/>
-                        </SearchBox>
-                        <ItemListBox>
-                            <Sellbutton>판매하기</Sellbutton>
-                            <MyShop>내상점</MyShop>
-                            <HHtalk>항해톡</HHtalk>
-                        </ItemListBox>
-                    </HeaderCenter>
-                    <HeaderRight>
-                        <GoDetails>상품상세보기</GoDetails>
-                        <LoginSignupItems>
-                            <LoginAndOutBtn>로그인</LoginAndOutBtn>
-                            <SignupBtn>회원가입</SignupBtn>
-                        </LoginSignupItems>
-                    </HeaderRight>
-                </HeaderInnerContainer>
-            </HeaderContainer>
-        </React.Fragment>
-  )
-};
 
 export default Header;
 

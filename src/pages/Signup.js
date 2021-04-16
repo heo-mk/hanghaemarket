@@ -20,8 +20,8 @@ const Signup = () => {
   const [city, setCity] = useState('');
   const [street, setStreet] = useState('');
   
-  const ok_submit = email && username && password && pwdConfirm && city && street ? true : false;
-
+  const ok_submit = email && password && username && city && street ? true : false;
+// && pwdConfirm 
   // React.useEffect(() => {
   //   dispatch()
   // }, [])
@@ -55,9 +55,9 @@ const Signup = () => {
     // console.log(e.target.value);
     setStreet(e.target.value)
   }
-
+// !pwdConfirm ||
   const signup = () => {
-    if (!email || !username || !password || !pwdConfirm || !city || !street) {
+    if (!email || !username || !password || !city || !street) {
       window.alert("아이디, 이름, 비밀번호, 거주하는 시/군/구, 거주하는 동/리를 모두 입력해주세요!");
       return;
     }
@@ -72,7 +72,7 @@ const Signup = () => {
     //   return;
     // }
 
-    dispatch(userActions.signupAPI(email, username, password, city, street))
+    dispatch(userActions.signupAPI(email, password, username, city, street))
   }
 
   // const ImageError = () => {
@@ -88,12 +88,12 @@ const Signup = () => {
           <SignupText>
             자신의 사진을 보여주세요!
           </SignupText>
-          <ProfileImg />
+          {/* <ProfileImg /> */}
           {/* <ProfileUpload/> */}
           {/* <ProfileUpload/> */}
           <SignupInput placeholder="이메일" onChange={submitEmail}/>
+          <SignupInput placeholder="비밀번호" type="password" onChange={submitPwd}/>
           <SignupInput placeholder="닉네임" onChange={submitName}/>
-          <SignupInput placeholder="비밀번호"  onChange={submitPwd}/>
           {/* <SignupInput placeholder="비밀번호 확인" type="password" onChange={submitConfirmedPwd}/> */}
           <SignupInput placeholder="거주하는 곳의 시/군/구" onChange={submitCity}/>
           <SignupInput placeholder="거주하는 동/리" onChange={submitStreet} />
