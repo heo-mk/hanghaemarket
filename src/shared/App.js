@@ -13,6 +13,7 @@ import Login from "../pages/Login";
 import Signup from "../pages/Signup";
 import Header from "../components/Header";
 import Detail from '../pages/Detail';
+import Selling from "../pages/Selling";
 import NotFound from '../pages/NotFound';
 
 import Main from '../pages/Main';
@@ -32,6 +33,7 @@ function App() {
             <Route path="/login" exact component={Login}/>
             <Route path="/signups" exact component={Signup}/>
             <Route path="/boards/details" exact component={Detail}/>
+            <Route path="/selling" exact component={Selling}/>
             <Route exact component={NotFound}/>
             {/* <Route path="/upload" exact component={PostWrite}/> */}
             {/* <Route path="/upload/:id" exact component={PostWrite}/> */} 

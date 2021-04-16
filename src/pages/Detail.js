@@ -5,6 +5,7 @@ import img from "../shared/watch6.jpg";
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import ChatIcon from '@material-ui/icons/Chat';
+import VisibilityIcon from '@material-ui/icons/Visibility';
 
 import ProductInfoTab from '../elements/ProductInfoTab';
 
@@ -27,7 +28,10 @@ const Detail =(props)=>{
                 <ProductContentsBox>
                     <h3>애플워치6 스테인리스 싸게 팝니다.</h3>
                     <PriceBox><p><span>110,000</span> 원</p></PriceBox>
-                   
+                    <IconsBox>
+                        <FavoriteIcon style={{ fontSize: 20,  margin: "5px 10px", color:"#CCCCCC" }}/>    
+                        <VisibilityIcon style={{ fontSize: 25,  margin: "5px 10px", color:"#CCCCCC" }}/>
+                    </IconsBox>
                     <p>상품상태: 사용감 있음</p>
                     <p>배송비: 배송비 별도</p>
                     <p>거래지역: 분당, 판교, 강남</p>    
@@ -150,6 +154,12 @@ padding-bottom: 3px;
 border-bottom: 1px solid rgb(238, 238, 238);
 `;
 
+const IconsBox=styled.div`
+
+display: flex;
+-webkit-box-align: center;
+align-items: center;
+`;
 
 const ButtonBox=styled.div`
 display: flex;
