@@ -1,20 +1,15 @@
 import React from "react";
 import styled from "styled-components";
+import Carousel from "../components/Carousel";
 import PostList from '../pages/PostList';
 
-const Main=(props)=>{
 
+const Main=(props)=>{
     return (
         <React.Fragment>
             <MainMainContainer>
-                {/* <WrapTodays> */}
-                  
-                    {/* <AllProducts>
-                        <OneProducts> */}
-                            <PostList/>
-                        {/* </OneProducts>
-                    </AllProducts> */}
-                {/* </WrapTodays>    */}
+                <Carousel/>
+                <PostList/>     
             </MainMainContainer>
         </React.Fragment>
     );
