@@ -6,7 +6,7 @@ import styled from "styled-component";
 import CloseIcon from '@material-ui/icons/Close';
 
 // import { actionCreators as chatActions } from "../redux/modules/chat"
-import { actionCreators as userActions } from "../redux/modules/user"; 
+// import { actionCreators as userActions } from "../redux/modules/user"; 
 import { useDispatch } from "react-redux";
 
 const ChatModal = (props) => {
@@ -15,7 +15,7 @@ const ChatModal = (props) => {
   console.log(is_login)
 
   const [chats, setChats] = useState();
-  const ok_submit = chat? true: false;
+  const ok_submit = chats? true: false;
   console.log(props)
 
   // 입력된 데이터를 채팅글귀용 데이터로 설정하는 함수
@@ -36,6 +36,30 @@ const ChatModal = (props) => {
     // dispatch(chatActions.addChatAPI(chat, props.id))
   }
 
+  // 시간을 설정해주는 함수.
+  const timeForToday = (value) => {
+    const today = new Date();
+    const timeValue = new Date(value);
+
+    const betweenTime = Math.floor((today.getTime() - timeValue.getTime()) / 1000 / 60);
+    if (betweenTime < 1) return '방금전';
+    if (betweenTime < 60) {
+        return `${betweenTime}분전`;
+    }
+
+    const betweenTimeHour = Math.floor(betweenTime / 60);
+    if (betweenTimeHour < 24) {
+        return `${betweenTimeHour}시간전`;
+    }
+
+    const betweenTimeDay = Math.floor(betweenTime / 60 / 24);
+    if (betweenTimeDay < 365) {
+        return `${betweenTimeDay}일전`;
+    }
+
+    return `${Math.floor(betweenTimeDay / 365)}년전`;
+  }
+
   // 채팅창은 크게 헤더+바디로 구성
   return( 
     <React.Fragment>
@@ -48,19 +72,42 @@ const ChatModal = (props) => {
       </ExitContainer>
       {/* 모달 본체 */}
       <ModalComponent>
-        <ModalHeader>
+        <Header>
+          <ChatRoomInfo>
+            {/* <ProCircle src={props.profile_image_url} /> */}
+            <ProCircle/>
+            <SellerOfThis>{props.username}</SellerOfThis>
+          </ChatRoomInfo>
+        </Header>
+        <BodyChatBox>
+          {props.is_chat ?
+          props.chat_list.map((c, idx) => {
+            return 
+              <ChatBox>
+                <ProCircle src={c.profile_url}/>
+                <Chat>
+                  <div>
+                    <Chatername>{c.user_name}</Chatername>
+                      {c.chat}
+                    <InsertTime>{timeForToday(props.insert_dt)}</InsertTime>
+                  </div>
+                </Chat>
+              </ChatBox>
+          })
+          : null}
 
-        </ModalHeader>
-        <ModalBody>
-          <ModalChatBox/>
-        </ModalBody>
-        <ModalChatInput>
-
-        </ModalChatInput>
-
+        </BodyChatBox>
+        <ChatInputBox>
+          <ChatInput 
+              type="text"
+              placeholder="채팅입력"
+              onChange={selectComment} 
+              value={comments}/>
+          {ok_submit ? 
+            <ChatUpload onClick={addChat}>게시</ChatUpload> 
+            : <ChatUpload style={{opacity: "0.3"}}>게시</ChatUpload> }
+        </ChatInputBox>
       </ModalComponent>
-
-
     </React.Fragment>
   )
 }
@@ -99,11 +146,24 @@ const ExitBtn = styled.button`
   font-size: 14px;
 `;
 
-const ModalContainer = styled.div`
+const ModalComponent = styled.div`
   position: fixed;
-  width: 950px;
+  width: 700px;
   height: 600px;
-
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  display: flex;
+  z-index: 20px;
+  
+  @media (max-width: 950px) {
+    width: 350px;
+  }
+  
+  @media (max-width: 350px) {
+    width: 100%
+  }
 `;
 
 const ModalHeader = styled.div`
@@ -114,19 +174,33 @@ const ModalHeader = styled.div`
   justify-content: space-between;
 `;
 
-const ModalBody = styled.div`
-  padding: 16px;
+const ChatRoomInfo = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  font-size: 14px;
 `;
 
-const ModalChatBox = styled.div`
-  padding: 0px 16px;
-  margin-right: 0px;
+const ProCircle = styled.img`
+  height: 32px;
+  width: 32px;
+  border-radius: 50%;
+  background-size: cover;
+  margin-right: 10px;
+`;
+
+const SellerOfThis = styled.span`
+  font-size: 14px;
+  font-weight: 600;
+  margin-right: 5px;
+`;
+
+const BodyChatBox = styled.div`
+  padding: 16px;
   display: flex;
   flex-direction: column;
-  height: 480px;
+  justify-content: space-between;
+  border-bottom: 1px solid #EFEFEF;
   /* 채팅량이 많으면 스크롤로 아래 부분이
   위로 올라가게 해서 댓글이 보이게 하는 부분 */
   overflow-y: scroll;
@@ -135,6 +209,56 @@ const ModalChatBox = styled.div`
   };
 `;
 
-const ModalChatInput = styled.div`
+const ChatInputBox = styled.div`
+  width: 100%;
+  height: 56px;
+  padding: 0px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+  border-top: 1px solid #EFEFEF;
+`;
 
+const ChatInput = styled.input`
+  background: transparent;
+  border: none;
+  outline: none;
+  width: 80%
+`;
+
+const ChatUpload = styled.div`
+  font-size: 14px;
+  color: #3897F0;
+  cursor: pointer;
+  font-weight: 600;
+`;
+
+// BodyChatBox 안의 채팅란 설계
+const ChatBox = styled.div`
+  display: flex;
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 10px;
+  margin-bottom: 10px;
+`;       
+
+const Chat = styled.div`
+  width: 100%;
+  font-size: 14px;
+  display: flex;
+  justify-content: space-between;
+`;
+
+const Chatername = styled.span`
+  font-size: 14px;
+  font-weight: 600;
+  margin-right: 5px;
+`;
+
+const InsertTime = styled.div`
+  font-size: 10px;
+  color: #999;
+  border-bottom: 1px solid #EFEFEF;
+  padding: 16px;
 `;

@@ -1,8 +1,16 @@
 import React from "react";
 import styled from "styled-components";
 import Post from "../components/Post";
+// import {actionCreators as postActions} from "../redux/modules/post";
 
 const PostList=(props)=>{
+  const dispatch = useDispatch();
+  // const post_list = useSelector((state) => state.post.list);
+
+  // React.useEffect(() => {
+  //   dispatch(postActions.getPostaAPI());
+  // }, []);
+
 
     return(
         <React.Fragment>
@@ -10,6 +18,9 @@ const PostList=(props)=>{
                 <h2>오늘의 상품 추천!</h2>     
                 <WrapProducts>           
                     <Post/>
+                    {/* {post_list.map((p, idx) => {
+                      return <Post key={p.id} {...p}/>
+                    })} */}
                 </WrapProducts>
             </PostListContainer>
         </React.Fragment>
