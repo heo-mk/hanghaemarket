@@ -5,8 +5,8 @@ import React, {useState} from "react";
 import styled from "styled-component";
 import CloseIcon from '@material-ui/icons/Close';
 
-// import { actionCreators as chatActions } from "../redux/modules/chat"
-// import { actionCreators as userActions } from "../redux/modules/user"; 
+import { actionCreators as chatActions } from "../redux/modules/chat"
+import { actionCreators as userActions } from "../redux/modules/user"; 
 import { useDispatch } from "react-redux";
 
 const ChatModal = (props) => {
@@ -24,16 +24,17 @@ const ChatModal = (props) => {
     setChats(e.target.value);
   }
 
+  
   // 채팅글귀 데이터를 전송하는 함수
   const addChat = () => {
-    console.log(chats)
-    let chat_info = {
+    // if(!contents) {
+    //   return;
+    // }
+    let chat = {
       chats: chats,
-      // username: props.userInfo.username,
-      // profile_url: props.userInfo.uid,
     }
-
-    // dispatch(chatActions.addChatAPI(chat, props.id))
+    console.log(chat);
+    dispatch(chatActions.addChatAPI(chat))
   }
 
   // 시간을 설정해주는 함수.
@@ -58,6 +59,7 @@ const ChatModal = (props) => {
     }
 
     return `${Math.floor(betweenTimeDay / 365)}년전`;
+    
   }
 
   // 채팅창은 크게 헤더+바디로 구성
@@ -70,7 +72,7 @@ const ChatModal = (props) => {
           <CloseIcon fontsize="large"/>
         </ExitBtn>
       </ExitContainer>
-      {/* 모달 본체 */}
+      {/* 모달 본체 : 헤더 + 바디 + 맨 아래 채팅 입력창*/}
       <ModalComponent>
         <Header>
           <ChatRoomInfo>
@@ -227,7 +229,7 @@ const ChatInput = styled.input`
   width: 80%
 `;
 
-const ChatUpload = styled.div`
+const ChatUpload = styled.button`
   font-size: 14px;
   color: #3897F0;
   cursor: pointer;

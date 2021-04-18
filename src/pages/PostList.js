@@ -1,10 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import Post from "../components/Post";
-// import {actionCreators as postActions} from "../redux/modules/post";
-
-import {useSelector,useDispatch} from "react-redux";
 import {actionCreators as postActions} from "../redux/modules/post";
+import {useSelector,useDispatch} from "react-redux";
 
 const PostList=(props)=>{
     

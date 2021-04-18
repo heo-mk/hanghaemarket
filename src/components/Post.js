@@ -3,7 +3,7 @@ import Grid from "../elements/Grid";
 import Image from "../elements/Image";
 import Text from "../elements/Text";
 
-const Post =(props)=>{
+const Post = (props) =>{
 
     return(
     
@@ -14,7 +14,7 @@ const Post =(props)=>{
                 <Image src={props.src}/>      
             </Grid>
             <Grid padding="16px">
-               <Text bold size="14px">{props.title}</Text>
+              <Text bold size="14px">{props.title}</Text>
             </Grid>
             <Grid padding="0px 16px">
                 <Text bold size="22px" margin="0">{props.price}</Text>

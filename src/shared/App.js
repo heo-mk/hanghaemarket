@@ -7,7 +7,7 @@ import {BrowserRouter, Route, Switch} from "react-router-dom";
 import { ConnectedRouter } from "connected-react-router";
 import { history } from "../redux/configureStore";
 import { useDispatch, useSelector } from "react-redux";
-// import { actionCreators as userActions } from "../redux/modules/user"
+import { actionCreators as userActions } from "../redux/modules/user"
 
 import Login from "../pages/Login";
 import Signup from "../pages/Signup";
@@ -21,7 +21,13 @@ import Main from '../pages/Main';
 function App() {
 
   const dispatch = useDispatch()
+  const is_localStorage = localStorage.getItem('Authorization') ? true : false;
 
+  React.useEffect(() => {
+    if(is_localStorage) {
+      dispatch(userActions.loginCheckStore());
+    }
+  }, [])
 
     return (
       <ReactContainer>
@@ -32,7 +38,7 @@ function App() {
             <Route path="/" exact component={Main}/>
             <Route path="/login" exact component={Login}/>
             <Route path="/signups" exact component={Signup}/>
-            <Route path="/boards/details" exact component={Detail}/>
+            <Route path="/boards/details/:id" exact component={Detail}/>
             <Route path="/upload" exact component={PostWrite}/>
             <Route exact component={NotFound}/>
             {/* <Route path="/upload" exact component={PostWrite}/> */}
