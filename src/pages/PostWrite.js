@@ -11,6 +11,7 @@ const PostWrite=(props)=>{
   const addPost = () => {
     dispatch(postActions);
     props.history.push("/");
+    //
   }
 
   const input_title=React.useRef(null);
