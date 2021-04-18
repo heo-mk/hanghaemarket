@@ -18,15 +18,16 @@ import { useDispatch, useSelector } from "react-redux";
 
 const Detail =(props)=>{
     const dispatch = useDispatch();
-    const is_login = useSelector((state) => state.user.is_login());
+    const is_login = useSelector((state) => state.user.is_login);
     const [ chat, setChats ] = useState();
     const [ is_chatmodal, setChatModal ] = useState();
     const [ btnChange, setBtnChange ] = useState(false);
 
+    const detail_id = props.match.params.id;  // 참고 사이트 : https://velopert.com/3417
     const is_me = useSelector((state) => state.user.user.username);  // 지금 로그인한 바로 나!
     const user_info = useSelector((state) => state.user.user);  // 
-    // const chat_list = useSelector((state) => state.chat.list[props.id]);
-    // const is_chat = chat_list ? true : false;
+    const chat_list = useSelector((state) => state.chat.list[props.id]);  // 채팅리스트를 가져온다
+    const is_chat = chat_list ? true : false;  // 채팅리스트가 있는가?
     
     const changeHeart = () => {
       setBtnChange(!btnChange);
@@ -54,10 +55,11 @@ const Detail =(props)=>{
       console.log(chats);
       let chat_info = {
         chat: chats,
-        username: user_info.username,
+        username: userInfo.username,
       }
 
-      // dispatch(chatActions.addChatAPI(chat_info, props.id));
+      dispatch(chatActions.addChatAPI(chat_info, detail_id));
+      setChats('')
     }
 
     return (
@@ -99,12 +101,19 @@ const Detail =(props)=>{
                       찜
                     </LikeButton>
 
-                    <ChatButton>
+                    <ChatButton 
+                      onclick={openChatModal}
+                      {...props}
+                      is_chat={is_chat}
+                      chat_list={chat_list}
+                      is_me={is_me}
+                      // user_info={user_info} 
+                      >
                         <ChatStyle>
                             <ChatIcon style={{ fontSize: 15,  margin: "0 10px" }}></ChatIcon>
                         </ChatStyle>
                         채팅하기
-                        </ChatButton>
+                    </ChatButton>
                 </ButtonBox>            
             </InfoBox>
         </SellInfo>
@@ -138,12 +147,12 @@ const Detail =(props)=>{
         {is_chatmodal ? 
           <ChatModal
             close={closeChatModal}
-            open={openChatModal}
+            {...props}
             // chat_list={chat_list}
             // is_chat={is_chat}
-            is_me={is_me}
-            user_info={user_info}
-            {...props} />
+            // is_me={is_me}
+            // user_info={user_info}
+          />
           : null}
     </React.Fragment>
         

@@ -14,9 +14,9 @@ const Header = () => {
   console.log(is_login)
 
   // 토큰이 있으면 로그인 상태, 없으면 로그인 유도
-  React.useEffect(() => {
-    dispatch(userActions.loginCheckStore());
-  }, []);
+  // React.useEffect(() => {
+  //   dispatch(userActions.loginCheckStore());
+  // }, []);
 
   // 로그아웃 함수, 로그아웃 버튼을 누르면 발동
   const logOut = () => {

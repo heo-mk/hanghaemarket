@@ -4,6 +4,9 @@ import styled from "styled-components";
 import {useDispatch, useSelector} from "react-redux";
 import {addTitle, addUserName} from "../redux/modules/post";
 
+import {actionCreators as imageActions} from "../redux/modules/image"
+import {actionCreators as postActions} from "../redux/modules/post"
+
 const PostWrite=(props)=>{
 
   const dispatch=useDispatch();
@@ -16,7 +19,7 @@ const PostWrite=(props)=>{
                 <WrapInputs>
                     <ImageBox>
                         <ImageTitle><h4>이미지</h4></ImageTitle>
-                        <ImageInput placeholder="이미지 등록"/>
+                        <ImageInput type="file" placeholder="이미지 등록"/>
                     </ImageBox>
                     
                     <TitleBox>
@@ -95,10 +98,9 @@ border-bottom: 1px solid rgb(220, 219, 228);
 `;
 
 const ImageInput=styled.input`
-type=file;
+/* type: file; */
 width: 100px;
 height:100px;
-
 `;
 
 const Title=styled.div`
