@@ -2,6 +2,8 @@ import React,{useState} from 'react';
 import styled from 'styled-components';
 import img from "../shared/watch6.jpg";
 
+import ChatModal from "../components/chatModal";
+
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import ChatIcon from '@material-ui/icons/Chat';
@@ -9,15 +11,54 @@ import VisibilityIcon from '@material-ui/icons/Visibility';
 
 import ProductInfoTab from '../elements/ProductInfoTab';
 
-
+import { history } from "../redux/configureStore";
+import { useDispatch, useSelector } from "react-redux"; 
+// import { actionCreators as userActions } from "../redux/modules/user"
+// import { actionCreators as chatActions} from "../redux/modules/chat"
 
 const Detail =(props)=>{
+    const dispatch = useDispatch();
+    const is_login = useSelector((state) => state.user.is_login());
+    const [ chat, setChats ] = useState();
+    const [ is_chatmodal, setChatModal ] = useState();
+    const [ btnChange, setBtnChange ] = useState(false);
+
+    const is_me = useSelector((state) => state.user.user.username);  // 지금 로그인한 바로 나!
+    const user_info = useSelector((state) => state.user.user);  // 
+    // const chat_list = useSelector((state) => state.chat.list[props.id]);
+    // const is_chat = chat_list ? true : false;
     
-    const [btnChange, setBtnChange]=useState(false);
-    const changeHeart=()=>{
+    const changeHeart = () => {
       setBtnChange(!btnChange);
+    };
+
+    // React.useEffect(() => {
+    //   dispatch(chatActions.getChatAPI.())
+    // }, [])
+
+    // 채팅모달창을 제어하는 함수들
+    const selectChat = (e) => {
+      console.log(e.target.value);
+      setChats(e.target.value);
+    };
+
+    const openChatModal = () => {
+      setChatModal(true);
+    };
+
+    const closeChatModal = () => {
+      setChatModal(false);
+    };
+
+    const addChat = () => {
+      console.log(chats);
+      let chat_info = {
+        chat: chats,
+        username: user_info.username,
+      }
+
+      // dispatch(chatActions.addChatAPI(chat_info, props.id));
     }
-    
 
     return (
     <React.Fragment>
@@ -39,7 +80,7 @@ const Detail =(props)=>{
                 <ButtonBox>
                   
                     <LikeButton
-                     onClick={(e)=>{
+                      onClick={(e)=>{
                         if(btnChange===false)
                         {
                           changeHeart();
@@ -57,7 +98,7 @@ const Detail =(props)=>{
                         </HeartStyle> */}
                       찜
                     </LikeButton>
-                     
+
                     <ChatButton>
                         <ChatStyle>
                             <ChatIcon style={{ fontSize: 15,  margin: "0 10px" }}></ChatIcon>
@@ -94,6 +135,16 @@ const Detail =(props)=>{
             </WrapSelectInfo>
         </WrapInfo> */}
       </DetailMainContainer>
+        {is_chatmodal ? 
+          <ChatModal
+            close={closeChatModal}
+            open={openChatModal}
+            // chat_list={chat_list}
+            // is_chat={is_chat}
+            is_me={is_me}
+            user_info={user_info}
+            {...props} />
+          : null}
     </React.Fragment>
         
     );
@@ -123,8 +174,8 @@ margin-right: 150px;
 flex-shrink: 0;
 `;
 
-const InfoBox=styled.div`
-margin-top: 10px
+const InfoBox = styled.div`
+margin-top: 10px;
 width:500px;
 height: 400px;
 display: flex;

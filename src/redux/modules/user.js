@@ -108,12 +108,6 @@ const loginAPI = (username, password) => {
       console.log(response.data); // body 데이터
       console.log(response.headers.authorization);  // undefined getItem
       console.log('로그인 되었습니다!');
-      //권한에 대한 디폴트 값 = API응답으로 받아온 토큰값 
-      // axios.defaults.headers.common[
-      //     'Authorization'
-      //   ] = `Bearer ${response.data.token}`;
-      // const token = localStorage.setItem('Authorization', response.headers.authorization);
-      // const token = localStorage.setItem('Authorization', token.accessToken);
       localStorage.setItem('Authorization', response.headers.authorization);
       localStorage.setItem('uid', response.data.id);
       localStorage.setItem('username', response.data.name);
