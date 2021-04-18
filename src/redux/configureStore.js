@@ -6,7 +6,6 @@ import { connectRouter } from "connected-react-router"
 // import Comment from './modules/comment'
 import User from './modules/user'
 import Post from "./modules/post"
-// import chat from "./modules/chat"
 // import Image from "./modules/image"
 
 

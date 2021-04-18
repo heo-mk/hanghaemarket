@@ -2,18 +2,16 @@ import React from "react";
 import styled from "styled-components";
 import Post from "../components/Post";
 import {actionCreators as postActions} from "../redux/modules/post";
+import {useSelector,useDispatch} from "react-redux";
 
 const PostList=(props)=>{
-  const dispatch = useDispatch();
-  const post_list = useSelector((state) => state.post.list);
-
-  // React.useEffect(() => {
-  //   dispatch(postActions.getPostAPI());
-  // }, []);
-
-
-    return( 
-        <React.Fragment>  
+    
+    const dispatch=useDispatch();
+    const post_list=useSelector((state)=>state.post.list);
+    console.log(post_list); //안나옴
+    
+    return(
+        <React.Fragment>
             <PostListContainer>
                 <h2>오늘의 상품 추천!</h2>     
                 <WrapProducts>           
