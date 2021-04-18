@@ -7,9 +7,9 @@ const PostList=(props)=>{
   const dispatch = useDispatch();
   const post_list = useSelector((state) => state.post.list);
 
-  React.useEffect(() => {
-    dispatch(postActions.getPostAPI());
-  }, []);
+  // React.useEffect(() => {
+  //   dispatch(postActions.getPostAPI());
+  // }, []);
 
 
     return( 
