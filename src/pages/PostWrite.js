@@ -2,12 +2,19 @@ import React from "react";
 import styled from "styled-components";
 
 import {useDispatch, useSelector} from "react-redux";
-import {addTitle, addUserName} from "../redux/modules/post";
+import {actionCreators as postActions} from "../redux/modules/post";
+import {history} from "../redux/configureStore";
 
 const PostWrite=(props)=>{
 
   const dispatch=useDispatch();
-  const title=React.useRef(null);
+  const addPost = () => {
+    dispatch(postActions);
+    props.history.push("/");
+  }
+
+  const input_title=React.useRef(null);
+ 
     return(
         <React.Fragment>
             <SellingMainContainer>
@@ -16,17 +23,17 @@ const PostWrite=(props)=>{
                 <WrapInputs>
                     <ImageBox>
                         <ImageTitle><h4>이미지</h4></ImageTitle>
-                        <ImageInput placeholder="이미지 등록"/>
+                        <ImageInput type="file"/>
                     </ImageBox>
                     
                     <TitleBox>
                         <Title ><h4>제목</h4></Title>
-                        <TitleInput ref={title} placeholder="상품 제목을 입력해주세요."/>
+                        <TitleInput ref={input_title} placeholder="상품 제목을 입력해주세요."/>
                     </TitleBox>
 
                     <PriceBox>
                         <Price><h4>가격</h4></Price>
-                        <PriceInput ref={title} placeholder="가격을 입력해주세요."/>
+                        <PriceInput  placeholder="가격을 입력해주세요."/>
                     </PriceBox>
 
                     <ContentsBox>
@@ -35,11 +42,7 @@ const PostWrite=(props)=>{
                     </ContentsBox>
 
                     <EnrollButtonBox>
-                        <EnrollButton onClick={()=>{
-                            dispatch(addUserName(title.current.value));
-                            // props.history.push("/");
-                            
-                        }}>등록하기</EnrollButton>
+                        <EnrollButton onClick={addPost}>등록하기</EnrollButton>
                     </EnrollButtonBox>
                 </WrapInputs>
               </SellingContainer>
@@ -95,9 +98,7 @@ border-bottom: 1px solid rgb(220, 219, 228);
 `;
 
 const ImageInput=styled.input`
-type=file;
-width: 100px;
-height:100px;
+padding-top: 35px
 
 `;
 
