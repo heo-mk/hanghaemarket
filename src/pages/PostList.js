@@ -20,7 +20,7 @@ const PostList = (props) => {
             <PostListContainer>
                 <h2>오늘의 상품 추천!</h2>     
                 <WrapProducts>           
-                    <Post/>
+                   
                     {post_list.map((p, idx) => {
                       return <Post key={p.id} {...p}/>
                     })}
@@ -52,10 +52,10 @@ const Title=styled.h2`
 `;
 
 const WrapProducts=styled.div`
-// display:flex;
-// flex-direction:row;
-// flex-wrap:wrap;
-// justify-content:space-evenly;
+display:flex;
+flex-direction:row;
+flex-wrap:wrap;
+justify-content:space-evenly;
 `;
 
 export default PostList;
