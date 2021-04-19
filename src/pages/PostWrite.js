@@ -73,8 +73,9 @@ const PostWrite = (props) => {
       // exchange: false,
       // status: false,
     }
-    console.log(post)
-    dispatch(postActions.addPostAPI(post))
+    console.log(post);
+    dispatch(postActions.addPostAPI(post));
+    history.replace('/');
     //dispatch(markerActions.addBoard(props.markerId, markerClass ))
     // props.close()
   }

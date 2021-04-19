@@ -27,12 +27,16 @@ const Post = (props) =>{
     setChangeModal(true);
   };
 
+  const goDetail = () => {
+    history.replace("/boards/details/");
+  }
+
     return(
     
         //Grid안의 것들이 children으로 넘어감
         <React.Fragment>
           {/* <Link style={{textDecoration:"none"}} to ="/upload"> */}
-          <Grid border="1px solid #eee" width="230px"  margin-right="11px" margin-bottom="11px"> 
+          <Grid onClick={goDetail} border="1px solid #eee" width="230px"  margin-right="11px" margin-bottom="11px"> 
           {props.user_id === is_me?
                   <MoreHorizIcon height="14px" width="14px" cursor="pointer" onClick={openChangeModal}/> 
                   : null}

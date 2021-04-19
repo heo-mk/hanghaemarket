@@ -23,6 +23,10 @@ const Header = () => {
     dispatch(userActions.logout());
   }
 
+  const goPostWrite = (e) => {
+    history.replace("/upload");
+  }
+
     return (
         <React.Fragment>
                 <HeaderContainer>
@@ -35,7 +39,7 @@ const Header = () => {
                                 <CustomizedInputBase/>
                             </SearchBox>
                             <ItemListBox>
-                                <Sellbutton>판매하기</Sellbutton>
+                                <Sellbutton onClick={goPostWrite}>판매하기</Sellbutton>
                                 <MyShop>내상점</MyShop>
                                 <HHtalk>항해톡</HHtalk>
                             </ItemListBox>
