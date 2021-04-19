@@ -19,7 +19,7 @@ const DELETE_POST= "DELETE_POST";  // Post 삭제
 const addPost = createAction(ADD_POST, (post) => ({post}));
 const setPost = createAction(SET_POST, (post_list) => ({post_list}));
 const editPost = createAction(EDIT_POST, (post, post_id) => ({post, post_id}));
-const deletePost = createAction(DELETE_POST, (post_id) => ({post_id}));
+const deletePost = createAction(DELETE_POST, (id) => ({id}));
 
 
 //initialStates
@@ -103,6 +103,7 @@ const getPostAPI = (boardId) => {
       })
       console.log(post_list);
       dispatch(setPost(post_list));
+      
     }).catch((error) => {
       window.alert("상품게시물을 가져오지 못했습니다.");
       console.log(error);
@@ -122,7 +123,7 @@ const editPostAPI = (boardId, post) => {
     const _post_idx = getState().post.list.findIndex((p) => p.id === boardId);
     const _post = getState().post.list[_post_idx];
 
-    if(_image === _post.product_image) {  // 같은 이미지라면
+    if(_image === _post.image_url) {  // 같은 이미지라면
       const formData = new formData();
       // formData.append('images', post.images);
       formData.append('title', post.title);
@@ -145,7 +146,7 @@ const editPostAPI = (boardId, post) => {
             content: post.content,
           }
           dispatch(editPost(post_info, boardId))  // 리덕스에서도 수정하기.
-
+          history.replace("/");
         }).catch((error) => {
           console.log(error);
           window.alert("상품게시물이 수정되지 않았습니다.")
@@ -177,7 +178,7 @@ const editPostAPI = (boardId, post) => {
               content: post.content,
             }
             dispatch(editPost(post_info, boardId))  // 리덕스에서도 수정하기.
-
+            history.replace("/");
           }).catch((error) => {
             console.log(error);
             window.alert("상품게시물이 수정되지 않았습니다.")

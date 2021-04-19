@@ -1,4 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
+
+import UploadImage from "../shared/UploadImage";
+
+import { actionCreators as imageActions } from "../redux/modules/image"
+import {history} from "../redux/configureStore"
 
 import { useDispatch, useSelector } from "react-redux";
 import {actionCreators as postActions} from "../redux/modules/post"
@@ -9,11 +14,45 @@ const PostWrite = (props) => {
   const dispatch = useDispatch()
  
   const [title, setTitle] = useState()
+  const [price, setPrice]=useState()
   const [contents, setContents] = useState()
   const [image, setImage] = useState()
-  
+ 
+  const preview = useSelector((state) => state.image.preview);
+  const post_list = useSelector((state) => state.post.list);
+  const post_id = props.match.params.id;
+  const is_edit = post_id ? true : false;  // 수정 중인지, 첫 작성인지 여부 판별
+  const _post = is_edit? post_list.find((p) => p.id == post_id) : null;
+
+  console.log(_post)
+
+  React.useEffect(() => {
+    if (is_edit && !_post) {
+      console.log("포스트 정보가 없어요!");
+      history.goBack();
+
+      return;
+    }
+
+    if (is_edit){
+      dispatch(imageActions.setPreview(_post.image_url)) // 페이지가 렌더링 되면서 기존 이미지 같이 렌더링
+    } else{
+      dispatch(imageActions.setPreview("http://via.placeholder.com/400x300"))
+    }
+  }, [])
+
+  const ImageError = () => {
+    window.alert('잘못된 이미지 주소입니다.😐')
+
+    dispatch(imageActions.setPreview("http://via.placeholder.com/400x300"))
+  }
+
   const changeTitle = (e) => {
     setTitle(e.target.value)
+  }
+
+  const changePrice = (e) => {
+    setPrice(e.target.value)
   }
 
   const changeContents = (e) => {
@@ -24,6 +63,7 @@ const PostWrite = (props) => {
    
     let post = {   
       title: title,
+      price: price,
       contents: contents,
       image: image
     }
@@ -33,6 +73,20 @@ const PostWrite = (props) => {
     props.close()
   }
 
+  const editPost = () => {
+    if(!contents){
+      window.alert("😗빈칸을 채워주세요...ㅎㅎ")
+      return;
+    }
+
+    let post={
+      contents: contents,
+    }
+    console.log(post_id)
+    dispatch(postActions.editPostAX(post_id , post)) 
+  }
+
+
   return (
     <React.Fragment>
       <WriteBackground onClick={props.close} />
@@ -40,14 +94,16 @@ const PostWrite = (props) => {
         
         <WriteContent>
           <WriteUpload>
-            <ImageInput type="file" placeholder="이미지 등록"/>
+            {/* <ImageInput type="file" placeholder="이미지 등록"/> */}
+            <UploadImage/>
           </WriteUpload>
-          <WriteImg />
+          <WriteImg src={preview ? preview : "http://via.placeholder.com/400x300"}
+                onError={ImageError}  />
           <WriteTitle>
             <TextField id="standard-basic" value={title} label="제목" style={{width: "100%"}} onChange={changeTitle} />
           </WriteTitle>
           <WritePrice>
-            <TextField id="standard-basic" value={title} label="가격" style={{width: "100%"}} onChange={changeTitle} />
+            <TextField id="standard-basic" value={price} label="가격" style={{width: "100%"}} onChange={changePrice} />
           </WritePrice>
           <TextField
                 id="outlined-multiline-static"
@@ -58,9 +114,11 @@ const PostWrite = (props) => {
                 value={contents}
                 onChange = {changeContents}
               />
-        <WriteSubmit onClick={addPost}>
-          게시글 작성
-        </WriteSubmit> 
+          {is_edit ? (
+                <WriteSubmit onClick={editPost}>게시글 수정</WriteSubmit>
+              ) : (
+                <WriteSubmit onClick={addPost}>게시글 작성</WriteSubmit> 
+              )}
           </WriteContent>
       
       
