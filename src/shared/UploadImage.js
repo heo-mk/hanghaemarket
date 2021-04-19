@@ -16,7 +16,7 @@ const UploadImage = (props) => {
   const selectFile = (e) => {
     console.log(e.target.value);
     console.log(fileInput.current.files[0]);
-    // props.setImage(fileInput.current.files[0]);
+    props.setImage(fileInput.current.files[0]);  // 이 부분이 사진을 파일로 보내는 핵심
     const reader = new FileReader();
     const file = fileInput.current.files[0]
 
@@ -32,7 +32,7 @@ const UploadImage = (props) => {
     reader.readAsDataURL(file);
 
     reader.onloadend = () => {
-      console.log(reader.result);
+      // console.log(reader.result);
       dispatch(imageActions.setPreview(reader.result))
     }
   }

@@ -44,7 +44,7 @@ const signupAPI = (email, password, username, city, street) => {
     // }
     console.log(email, password, username, city, street);
     
-    const API = "http://dmsql5303.shop/signups";
+    const API = "http://seungwook.shop/signups";
     console.log(API);
 
     axios.post(API,
@@ -86,7 +86,7 @@ const loginAPI = (username, password) => {
   return function (dispatch, getState, {history}) {
 
     console.log(username, password);
-    const API = 'http://dmsql5303.shop/login';
+    const API = 'http://seungwook.shop/login';
     axios.post(API, {
       // 클라이언트에서 서버로 request(요청)하며 보내주는 데이터
       // 로그인창에서 클라이언트가 입력하는 데이터
@@ -112,6 +112,7 @@ const loginAPI = (username, password) => {
       localStorage.setItem('Authorization', response.headers.authorization);
       localStorage.setItem('uid', response.data.id);
       localStorage.setItem('username', response.data.name);
+      localStorage.setItem('email', response.data.email);
         // setUser를 발동시켜서
         // 리덕스의 is_login 값을 true로 변경한다.
         dispatch(
@@ -119,6 +120,7 @@ const loginAPI = (username, password) => {
             { 
               uid: response.data.id,   
               username: response.data.name,
+              email: response.data.email,
             }
           )
         )
@@ -139,6 +141,7 @@ const loginCheckStore = () => {
     const token = localStorage.getItem('Authorization');  // token의 키 이름이 Authorization
     const uid = localStorage.getItem('uid');
     const username = localStorage.getItem('username');
+    const email = localStorage.getItem('email');
     // 토큰 없으면 재로그인
     // 있다면 로그인 유지
       if(!token) {
@@ -148,6 +151,7 @@ const loginCheckStore = () => {
         dispatch(setUser({
           uid: uid,
           uername: username,
+          email: email,
         })
       )
     }

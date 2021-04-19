@@ -17,14 +17,14 @@ const PostWrite = (props) => {
   const [price, setPrice]=useState()
   const [contents, setContents] = useState()
   const [image, setImage] = useState()
- 
+
   const preview = useSelector((state) => state.image.preview);
   const post_list = useSelector((state) => state.post.list);
   const post_id = props.match.params.id;
   const is_edit = post_id ? true : false;  // 수정 중인지, 첫 작성인지 여부 판별
   const _post = is_edit? post_list.find((p) => p.id == post_id) : null;
 
-  console.log(_post)
+  // console.log(_post)
 
   React.useEffect(() => {
     if (is_edit && !_post) {
@@ -59,18 +59,24 @@ const PostWrite = (props) => {
     setContents(e.target.value)
   }
 
+  // const changeImage = (e) => {
+  //   setImage(e.target.value)
+  // }
+
   const addPost = () => {
-   
+
     let post = {   
       title: title,
       price: price,
-      contents: contents,
-      image: image
+      content: contents,
+      image: image,
+      // exchange: false,
+      // status: false,
     }
     console.log(post)
-    dispatch(postActions.addPostAX(post))
+    dispatch(postActions.addPostAPI(post))
     //dispatch(markerActions.addBoard(props.markerId, markerClass ))
-    props.close()
+    // props.close()
   }
 
   const editPost = () => {
@@ -80,10 +86,15 @@ const PostWrite = (props) => {
     }
 
     let post={
-      contents: contents,
+      title: title,
+      price: price,
+      content: contents,
+      image: image,
+      // exchange: false,
+      // status: false,
     }
     console.log(post_id)
-    dispatch(postActions.editPostAX(post_id , post)) 
+    dispatch(postActions.editPostAPI(post_id , post)) 
   }
 
 
@@ -94,8 +105,7 @@ const PostWrite = (props) => {
         
         <WriteContent>
           <WriteUpload>
-            {/* <ImageInput type="file" placeholder="이미지 등록"/> */}
-            <UploadImage/>
+            <UploadImage setImage={setImage}/>
           </WriteUpload>
           <WriteImg src={preview ? preview : "http://via.placeholder.com/400x300"}
                 onError={ImageError}  />
