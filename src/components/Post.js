@@ -15,7 +15,7 @@ import { Link } from "react-router-dom";
 
 const Post = (props) =>{
   
-  {_onClick, childern, bg,  } = props
+  const {image_url, title, price,content, id} = props;
 
   const dispatch = useDispatch();
   const is_login = useSelector((state) => state.user.is_login);
@@ -37,11 +37,11 @@ const Post = (props) =>{
         <React.Fragment>
           {/* <Link style={{textDecoration:"none"}} to ="/upload"> */}
           <Grid onClick={goDetail} border="1px solid #eee" width="230px"  margin-right="11px" margin-bottom="11px"> 
-          {props.user_id === is_me?
+          {props.id === is_me?
                   <MoreHorizIcon height="14px" width="14px" cursor="pointer" onClick={openChangeModal}/> 
                   : null}
             <Grid padding="16px">
-                <Image src={props.src}/>      
+                <Image src={props.image_url}/>      
             </Grid>
             <Grid padding="16px">
               <Text bold size="14px">{props.title}</Text>
@@ -50,7 +50,7 @@ const Post = (props) =>{
                 <Text bold size="22px" margin="0">{props.price}</Text>
             </Grid>
             <Grid>
-               <Text bold size="14px">{props.contents}</Text>
+               <Text bold size="14px">{props.content}</Text>
             </Grid>
           </Grid>
           {/* </Link> */}
@@ -61,11 +61,12 @@ const Post = (props) =>{
 
 Post.defaultProps={
     
-    imgUrl:"https://jieunpic.s3.ap-northeast-2.amazonaws.com/watch6.jpg",
+    image_url:"https://jieunpic.s3.ap-northeast-2.amazonaws.com/watch6.jpg",
     title:"애플워치 스테인리스 싸게 팝니다.",
     price:"110,000원",
-    contents: "교환, 환불 어렵습니다.",
-    insert_dt:"2021-03-12 10:00:00",
+    content: "교환, 환불 어렵습니다.",
+    //insert_dt:"2021-03-12 10:00:00",
+    id:"",
     
 };
 
