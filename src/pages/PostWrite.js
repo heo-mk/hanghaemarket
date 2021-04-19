@@ -37,6 +37,7 @@ const PostWrite = (props) => {
     <React.Fragment>
       <WriteBackground onClick={props.close} />
       <WriteBox>
+        
         <WriteContent>
           <WriteUpload>
             <ImageInput type="file" placeholder="이미지 등록"/>
@@ -60,8 +61,9 @@ const PostWrite = (props) => {
         <WriteSubmit onClick={addPost}>
           게시글 작성
         </WriteSubmit> 
-          
-        </WriteContent>
+          </WriteContent>
+      
+      
       </WriteBox>
     </React.Fragment>
   )
