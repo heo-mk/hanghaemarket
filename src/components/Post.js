@@ -15,7 +15,6 @@ import { Link } from "react-router-dom";
 
 const Post = (props) =>{
   
-  {_onClick, childern, bg,  } = props
 
   const dispatch = useDispatch();
   const is_login = useSelector((state) => state.user.is_login);
@@ -61,7 +60,7 @@ const Post = (props) =>{
 
 Post.defaultProps={
     
-    imgUrl:"https://jieunpic.s3.ap-northeast-2.amazonaws.com/watch6.jpg",
+    img_url:"https://jieunpic.s3.ap-northeast-2.amazonaws.com/watch6.jpg",
     title:"애플워치 스테인리스 싸게 팝니다.",
     price:"110,000원",
     contents: "교환, 환불 어렵습니다.",
