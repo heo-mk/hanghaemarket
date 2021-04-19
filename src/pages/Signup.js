@@ -1,30 +1,31 @@
 import React, {useState} from "react"
 import styled from "styled-components"
 import hhlogo1 from "../shared/hhlogo1.png";
-import ProfileUpload from "../shared/ProfileUpload";
+import UploadImage from "../shared/UploadImage";
 
 import {emailCheck} from "../shared/common"
 import { actionCreators as userActions } from "../redux/modules/user"
-// import { actionCreators as imageActions } from "../redux/modules/image"
+import { actionCreators as imageActions } from "../redux/modules/image"
 import { useDispatch, useSelector } from "react-redux";
-import { Email } from "@material-ui/icons";
-// import ProfileUpload from "../shared/ProfileUpload"
+// import { Email } from "@material-ui/icons";
 
 const Signup = () => {
   const dispatch = useDispatch();
-  // const profile_preview = useSelector((state) => state.image.profile_preview);
+  const profile_preview = useSelector((state) => state.image.profile_preview);
   const [email, setEmail] = useState('');
   const [username, setName] = useState('');
   const [password, setPwd] = useState('');
   const [pwdConfirm, setConfirmedPwd] = useState('');
   const [city, setCity] = useState('');
   const [street, setStreet] = useState('');
+  const profile_anonymous = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBjZn8mOw7F4rtWWKbEIIHOr_w_GAeHiXPgA&usqp=CAU"
   
   const ok_submit = email && password && username && city && street ? true : false;
-// && pwdConfirm 
-  // React.useEffect(() => {
-  //   dispatch()
-  // }, [])
+                              // && pwdConfirm 
+
+  React.useEffect(() => {
+    dispatch(imageActions.profilePreview(profile_anonymous))
+  }, [])
 
   const submitEmail= (e) => {
     // console.log(e.target.value);
@@ -75,10 +76,10 @@ const Signup = () => {
     dispatch(userActions.signupAPI(email, password, username, city, street))
   }
 
-  // const ImageError = () => {
-  //   window.alert('잘못된 이미지 주소입니다.')
-  //   dispatch(imageActions.profilePreview(url))
-  // }
+  const ImageError = () => {
+    window.alert('잘못된 이미지 주소입니다.')
+    dispatch(imageActions.profilePreview(profile_anonymous))
+  }
 
   return (
     <React.Fragment>
@@ -88,13 +89,14 @@ const Signup = () => {
           <SignupText>
             자신의 사진을 보여주세요!
           </SignupText>
-          {/* <ProfileImg /> */}
-          {/* <ProfileUpload/> */}
-          {/* <ProfileUpload/> */}
+          <ProfileImg 
+            src={profile_preview ? profile_preview : profile_anonymous}
+            onError={ImageError}/>
+          <UploadImage/>
           <SignupInput placeholder="이메일" onChange={submitEmail}/>
           <SignupInput placeholder="비밀번호" type="password" onChange={submitPwd}/>
-          <SignupInput placeholder="닉네임" onChange={submitName}/>
           {/* <SignupInput placeholder="비밀번호 확인" type="password" onChange={submitConfirmedPwd}/> */}
+          <SignupInput placeholder="닉네임" onChange={submitName}/>
           <SignupInput placeholder="거주하는 곳의 시/군/구" onChange={submitCity}/>
           <SignupInput placeholder="거주하는 동/리" onChange={submitStreet} />
           {ok_submit ? (

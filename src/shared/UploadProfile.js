@@ -7,7 +7,7 @@ import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import {useDispatch, useSelector} from "react-redux";
 import {actionCreators as imageActions} from "../redux/modules/image"
 
-const Upload = () => {
+const ProfileUpload = () => {
   const dispatch = useDispatch();
   const is_uploading = useSelector(state => state.image.uploading)
   const fileInput = React.useRef();
@@ -46,4 +46,4 @@ const Upload = () => {
   ) 
 }
 
-export default Upload;
+export default ProfileUpload
