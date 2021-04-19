@@ -13,7 +13,7 @@ import { history } from "../redux/configureStore";
 import { useDispatch, useSelector } from "react-redux"; 
 import { Link } from "react-router-dom";
 
-const Post = (props) =>{
+const Post = (props) =>{ 
 
   const dispatch = useDispatch();
   const is_login = useSelector((state) => state.user.is_login);

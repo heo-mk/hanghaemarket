@@ -13,7 +13,7 @@ import ProductInfoTab from '../elements/ProductInfoTab';
 
 import { history } from "../redux/configureStore";
 import { useDispatch, useSelector } from "react-redux"; 
-// import { actionCreators as userActions } from "../redux/modules/user"
+import { actionCreators as userActions } from "../redux/modules/user"
 // import { actionCreators as chatActions} from "../redux/modules/chat"
 
 const Detail =(props)=>{
@@ -26,8 +26,8 @@ const Detail =(props)=>{
     const detail_id = props.match.params.id;  // 참고 사이트 : https://velopert.com/3417
     const is_me = useSelector((state) => state.user.user.username);  // 지금 로그인한 바로 나!
     const user_info = useSelector((state) => state.user.user);  // 
-    const chat_list = useSelector((state) => state.chat.list[props.id]);  // 채팅리스트를 가져온다
-    const is_chat = chat_list ? true : false;  // 채팅리스트가 있는가?
+    // const chat_list = useSelector((state) => state.chat.list[props.id]);  // 채팅리스트를 가져온다
+    // const is_chat = chat_list ? true : false;  // 채팅리스트가 있는가?
     
     const changeHeart = () => {
       setBtnChange(!btnChange);

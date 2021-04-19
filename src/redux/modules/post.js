@@ -2,6 +2,7 @@
 //PostWrite.js에서 상품 이미지, 제목, 가격을 적으면
 //리듀서에서 상태값을 받아오게 하는거
 import {createAction, handleActions} from "redux-actions";
+import {actionCreators as imageActions} from "./image";
 import {produce} from "immer";
 import axios from 'axios';
 import {history} from "../configureStore";
@@ -59,14 +60,14 @@ const addPostAPI = (post) => {
   axios.post(API, formData, token)
     .then((response) => {
       console.log(response.data)
-      if(response.data === "true") {
-        window.alelrt("상품게시물 저장 완료!")
-      }
+      // if(response.data === "true") {
+      //   window.alelrt("상품게시물 저장 완료!")
+      // };
       
-      // boardId = response.data.boardId; 백엔드와 이거 논의
-      // dispatch(getPostAPI(boardId)); 논의가 되면 이거까지 살린다.
+      const boardId = response.data.boardId; 
+      dispatch(getPostAPI(boardId)); 
       // dispatch(deletePostAPI(boardId)), 이건 하지 않는다.
-      // dispatch(imageActions.setPreview("http://via.placeholder.com/400x300"));
+      dispatch(imageActions.setPreview("http://via.placeholder.com/400x300"));
       // disaptch(addPost(post_list));
       history.replace("/");
     }).catch((error) => {
@@ -89,10 +90,11 @@ const getPostAPI = (boardId) => {
         response.data.forEach((_post) => {
 
         let post = {
-          // id: _post.id,
-          // id: boardId, 상품게시물의 id, 백엔드와 논의 되면 이걸 살리면 됨. API URL 용도
+          // id: _post.id, 설명용. 이게 아니라 아래것을 쓸 것이다.
+          id: boardId, 
           seller_id: _post.userId,  // 작성자 id, 노션에는 response에 작성자 정보가 없음.
           // 수정할 때 변경할 데이터는 아래 네가지
+          email: _post.userEmail,
           image_url: _post.imageUrl,
           title: _post.title,
           price: _post.price,
