@@ -35,6 +35,8 @@ const initialPost={
     title:"애플워치 스테인리스 싸게 팝니다.",
     price:"110,000원",
     content: "",
+    exchange: false,
+    status: false,
     // insert_dt: "2021-03-12 10:00:00",
     
 };
@@ -46,17 +48,17 @@ const addPostAPI = (post) => {
 
   // 데이터를 JSON 형식으로 준비
   const formData = new FormData();
-  formData.append('images', post.images); //이름을 image가 아니라 file로 보내기?
+  formData.append('file', post.image); //이름을 image가 아니라 file로 보내기?
   formData.append('title', post.title);
   formData.append('price', post.price);
   formData.append('content', post.content);
 
-  const _token = localStorage.getState("Authorization");
+  const _token = localStorage.getItem("Authorization");
   let token = {
-    headers : { Authorization: `${_token}`}
+    headers : { Authorization: `${_token}` }, 
   }
 
-  const API = 'http://dmsql5303.shop/boards';
+  const API = 'http://seungwook.shop/boards';
   axios.post(API, formData, token)
     .then((response) => {
       console.log(response.data)
@@ -64,8 +66,10 @@ const addPostAPI = (post) => {
       //   window.alelrt("상품게시물 저장 완료!")
       // };
       
-      const boardId = response.data.boardId; 
-      dispatch(getPostAPI(boardId)); 
+      // const boardId = response.data.BoardId; 
+      const boardId = response.data.id; 
+      console.log(boardId);
+      // dispatch(getPostAPI(boardId)); 
       // dispatch(deletePostAPI(boardId)), 이건 하지 않는다.
       dispatch(imageActions.setPreview("http://via.placeholder.com/400x300"));
       // disaptch(addPost(post_list));
@@ -74,37 +78,72 @@ const addPostAPI = (post) => {
       console.log(error)
       window.alert("상품게시물을 저장하지 못했습니다.")
     })
+  }
+}
+
+const getMainAPI = () => {
+  return function (dispatch, getState) {
+  const API = 'http://seungwook.shop/main';   
+  axios.get(API)
+    .then((response) => {
+    console.log(response.data)
+    
+    let post_list = [];
+
+    response.data.forEach((_post) => {
+      let post = {
+        // id: _post.id, 설명용. 이게 아니라 아래것을 쓸 것이다.
+        id: _post.id, 
+        // seller_id: _post.userId,  // 작성자 id, 노션에는 response에 작성자 정보가 없음.
+        // 수정할 때 변경할 데이터는 아래 네가지
+        // email: _post.userEmail,
+        image_url: _post.imgUrl,
+        title: _post.title,
+        price: _post.price,
+        content: _post.content,
+      };
+        post_list.unshift(post);
+      })
+
+      console.log(post_list);
+      dispatch(setPost(post_list));
+      history.replace("/");
+    }).catch((error) => {
+      console.log(error)
+      window.alert("상품게시물들을 가져오지 못했습니다.")
+    })
   } 
 }
 
 // 서버에 있는 상품 데이터를 가져온다.
 const getPostAPI = (boardId) => {
   return function (dispatch, getState) {
+
+    const _token = localStorage.getItem("Authorization");
+    let token = {
+      headers : { Authorization: `${_token}` }, 
+    }
     
-    const API = `http://dmsql5303.shop/boards/${boardId}/details`;
-    axios.get(API)
+    const API = `http://seungwook.shop/boards/${boardId}/details`;
+    axios.get(API, token)
       .then((response) => {
         console.log(response.data);
 
         let post_list = [];
-        response.data.forEach((_post) => {
 
         let post = {
           // id: _post.id, 설명용. 이게 아니라 아래것을 쓸 것이다.
           id: boardId, 
-          seller_id: _post.userId,  // 작성자 id, 노션에는 response에 작성자 정보가 없음.
+          seller_id: response.data.userId,  // 작성자 id, 노션에는 response에 작성자 정보가 없음.
           // 수정할 때 변경할 데이터는 아래 네가지
-          email: _post.userEmail,
-          image_url: _post.imageUrl,
-          title: _post.title,
-          price: _post.price,
-          content: _post.content,
+          email: response.data.userEmail,
+          image_url: response.data.imageUrl,
+          title: response.data.title,
+          price: response.data.price,
+          content: response.data.content,
         }
         
-        post_list.unshift(post); // 최신순으로 포스트가 정렬되게 unshift로 한다.
-       
-        
-      })
+      post_list.unshift(post); // 최신순으로 포스트가 정렬되게 unshift로 한다.
       console.log(post_list);
       dispatch(setPost(post_list));
       
@@ -134,13 +173,13 @@ const editPostAPI = (boardId, post) => {
       formData.append('price', post.price);
       formData.append('content', post.content);
 
-      const _token = localStorage.getState("Authorization");
+      const _token = localStorage.getItem("Authorization");
       let token = {
         headers : { Authorization: `${_token}`}
       }
     
       console.log(post)
-      const API = `http://dmsql5303.shop/boards/${boardId}`;
+      const API = `http://seungwook.shop/boards/${boardId}`;
       axios.put(API, formData, token)
         .then((response) => {
           console.log(response.data);
@@ -159,19 +198,19 @@ const editPostAPI = (boardId, post) => {
       
       } else {
         const formData = new formData();
-        formData.append('images', post.images);
+        formData.append('file', post.image);
         // formData.append('imgUrl', post.imgUrl);
         formData.append('title', post.title);
         formData.append('price', post.price);
         formData.append('content', post.content);
         
-        const _token = localStorage.getState("Authorization");
+        const _token = localStorage.getItem("Authorization");
         let token = {
-        headers : { Authorization: `${_token}`}
+        headers : {Authorization: `${_token}`}
         }
     
         console.log(post)
-        const API = `http://dmsql5303.shop/boards/${boardId}`;
+        const API = `http://seungwook.shop/boards/${boardId}`;
         axios.put(API, formData, token)
           .then((response) => {
             console.log(response.data);
@@ -196,12 +235,12 @@ const editPostAPI = (boardId, post) => {
 const deletePostAPI = (boardId) => {
   return function (dispatch, getState) {
     
-  const _token = localStorage.getState("Authorization");
+  const _token = localStorage.getItem("Authorization");
   let token = {
     headers : { Authorization: `${_token}`}
   }
 
-  const API = `http://dmsql5303.shop/boards/${boardId}`;
+  const API = `http://seungwook.shop/boards/${boardId}`;
   axios.delete(API, token)
     .then((response) => {
       console.log(response.data);
@@ -257,6 +296,9 @@ const actionCreators={
     deletePost,
     addPostAPI,
     getPostAPI,
+    editPostAPI,
+    deletePostAPI,
+    getMainAPI,
 };
 
 export { actionCreators };

@@ -1,18 +1,18 @@
 import React from "react";
 import styled from "styled-components";
+
 import Post from "../components/Post";
 import {actionCreators as postActions} from "../redux/modules/post";
 import {useSelector,useDispatch} from "react-redux";
 
-const PostList=(props)=>{
+const PostList = (props) => {
     
-    const dispatch=useDispatch();
-    const post_list=useSelector((state)=>state.post.list);
+    const dispatch = useDispatch();
+    const post_list = useSelector((state) => state.post.list);
     console.log(post_list); //안나옴
-    
-    
+
     React.useEffect(() => {
-        dispatch(postActions.getPostAPI());
+      dispatch(postActions.getMainAPI());
     }, []);
 
     return(
