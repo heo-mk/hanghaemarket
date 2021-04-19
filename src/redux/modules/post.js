@@ -105,6 +105,7 @@ const getPostAPI = (boardId) => {
       })
       console.log(post_list);
       dispatch(setPost(post_list));
+      
     }).catch((error) => {
       window.alert("상품게시물을 가져오지 못했습니다.");
       console.log(error);
@@ -147,8 +148,7 @@ const editPostAPI = (boardId, post) => {
             content: post.content,
           }
           dispatch(editPost(post_info, boardId))  // 리덕스에서도 수정하기.
-          history.replace("/")
-
+          history.replace("/");
         }).catch((error) => {
           console.log(error);
           window.alert("상품게시물이 수정되지 않았습니다.")
@@ -180,7 +180,7 @@ const editPostAPI = (boardId, post) => {
               content: post.content,
             }
             dispatch(editPost(post_info, boardId))  // 리덕스에서도 수정하기.
-            history.replace("/")
+            history.replace("/");
           }).catch((error) => {
             console.log(error);
             window.alert("상품게시물이 수정되지 않았습니다.")

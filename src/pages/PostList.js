@@ -16,9 +16,9 @@ const PostList=(props)=>{
                 <h2>오늘의 상품 추천!</h2>     
                 <WrapProducts>           
                     <Post/>
-                    {/* {post_list.map((p, idx) => {
+                    {post_list.map((p, idx) => {
                       return <Post key={p.id} {...p}/>
-                    })} */}
+                    })}
                 </WrapProducts>
             </PostListContainer>
         </React.Fragment>
