@@ -10,6 +10,11 @@ const PostList=(props)=>{
     const post_list=useSelector((state)=>state.post.list);
     console.log(post_list); //안나옴
     
+    
+    React.useEffect(() => {
+        dispatch(postActions.getPostAPI());
+    }, []);
+
     return(
         <React.Fragment>
             <PostListContainer>

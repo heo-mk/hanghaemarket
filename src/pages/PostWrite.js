@@ -24,7 +24,7 @@ const PostWrite = (props) => {
   const is_edit = post_id ? true : false;  // 수정 중인지, 첫 작성인지 여부 판별
   const _post = is_edit? post_list.find((p) => p.id == post_id) : null;
 
-  console.log(_post)
+  //console.log(_post)
 
   React.useEffect(() => {
     if (is_edit && !_post) {
@@ -49,15 +49,18 @@ const PostWrite = (props) => {
 
   const changeTitle = (e) => {
     setTitle(e.target.value)
+    console.log(e.target.value)
   }
 
   const changePrice = (e) => {
     setPrice(e.target.value)
+    console.log(e.target.value)
   }
 
   const changeContents = (e) => {
     setContents(e.target.value)
   }
+
 
   const addPost = () => {
    
@@ -68,9 +71,10 @@ const PostWrite = (props) => {
       image: image
     }
     console.log(post)
-    dispatch(postActions.addPostAX(post))
+    //dispatch(postActions.addPostAX(post))
+    history.replace("/")
     //dispatch(markerActions.addBoard(props.markerId, markerClass ))
-    props.close()
+    //props.close()
   }
 
   const editPost = () => {

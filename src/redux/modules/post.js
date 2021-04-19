@@ -102,6 +102,8 @@ const getPostAPI = (boardId) => {
         }
         
         post_list.unshift(post); // 최신순으로 포스트가 정렬되게 unshift로 한다.
+       
+        
       })
       console.log(post_list);
       dispatch(setPost(post_list));
