@@ -50,7 +50,7 @@ const addPostAPI = (post) => {
   formData.append('price', post.price);
   formData.append('content', post.content);
 
-  const _token = loginStorage.getState("Authorization");
+  const _token = localStorage.getState("Authorization");
   let token = {
     headers : { Authorization: `${_token}`}
   }
@@ -129,7 +129,7 @@ const editPostAPI = (boardId, post) => {
       formData.append('price', post.price);
       formData.append('content', post.content);
 
-      const _token = loginStorage.getState("Authorization");
+      const _token = localStorage.getState("Authorization");
       let token = {
         headers : { Authorization: `${_token}`}
       }
@@ -160,7 +160,7 @@ const editPostAPI = (boardId, post) => {
         formData.append('price', post.price);
         formData.append('content', post.content);
         
-        const _token = loginStorage.getState("Authorization");
+        const _token = localStorage.getState("Authorization");
         let token = {
         headers : { Authorization: `${_token}`}
         }
@@ -191,14 +191,14 @@ const editPostAPI = (boardId, post) => {
 const deletePostAPI = (boardId) => {
   return function (dispatch, getState) {
     
-  const _token = loginStorage.getState("Authorization");
+  const _token = localStorage.getState("Authorization");
   let token = {
     headers : { Authorization: `${_token}`}
   }
 
   const API = `http://dmsql5303.shop/boards/${boardId}`;
   axios.delete(API, token)
-    .then((resonse) => {
+    .then((response) => {
       console.log(response.data);
       dispatch(deletePost(boardId));
     })
