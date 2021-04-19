@@ -6,7 +6,7 @@ import Text from "../elements/Text";
 import { history } from "../redux/configureStore";
 import { Link } from "react-router-dom";
 
-const Post = (props) =>{
+const Post = (props) =>{ 
 
     return(
     

@@ -7,7 +7,7 @@ import TextField from '@material-ui/core/TextField';
 
 const PostWrite = (props) => {
   const dispatch = useDispatch()
- 
+
   const [title, setTitle] = useState()
   const [contents, setContents] = useState()
   const [image, setImage] = useState()

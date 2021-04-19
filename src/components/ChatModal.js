@@ -12,9 +12,15 @@ import { useDispatch } from "react-redux";
 const ChatModal = (props) => {
   const dispatch = useDispatch();
   const is_login = useSelector((state) => state.user.is_login);
-  console.log(is_login)
-
   const [chats, setChats] = useState();
+
+  const is_me = useSelector((state) => state.user.user.uid);
+  const user_info = useSelector((state) => state.user.user);
+  const chat_list = useSelector((state) => state.comment.list[props.id]);
+  const is_chat = chat_list ? true : false;
+
+  console.log(is_login)
+  
   const ok_submit = chats? true: false;
   console.log(props)
 
@@ -31,7 +37,10 @@ const ChatModal = (props) => {
     //   return;
     // }
     let chat = {
-      chats: chats,
+      chat: chats,  // 입력한 채팅메시지
+      username: user_info.username,
+      useremail: user_info.email,
+      // profileUrl: user_info.
     }
     console.log(chat);
     dispatch(chatActions.addChatAPI(chat))

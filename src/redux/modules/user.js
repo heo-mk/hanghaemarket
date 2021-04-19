@@ -19,7 +19,8 @@ const initialState = {
     password: "", 
     email: "", 
     city: "",
-    street: ""
+    street: "",
+    // profile: "",
   },
   is_login: false,
 }
