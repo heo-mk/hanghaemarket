@@ -38,7 +38,7 @@ function App() {
             <Route path="/" exact component={Main}/>
             <Route path="/login" exact component={Login}/>
             <Route path="/signups" exact component={Signup}/>
-            <Route path="/boards/details/:id" exact component={Detail}/>
+            <Route path="/boards/details" exact component={Detail}/>
             <Route path="/upload" exact component={PostWrite}/>
             <Route exact component={NotFound}/>
             {/* <Route path="/upload" exact component={PostWrite}/> */}

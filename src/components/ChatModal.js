@@ -2,7 +2,7 @@
 // Detail.js (부모 컴포넌트) => ChatModal.js (자식 컴포넌트)
 import React, {useState} from "react";
 
-import styled from "styled-component";
+import styled from "styled-components";
 import CloseIcon from '@material-ui/icons/Close';
 
 import { actionCreators as chatActions } from "../redux/modules/chat"

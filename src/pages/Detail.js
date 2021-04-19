@@ -2,11 +2,11 @@ import React,{useState} from 'react';
 import styled from 'styled-components';
 import img from "../shared/watch6.jpg";
 
-import ChatModal from "../components/chatModal";
+// import ChatModal from "../components/ChatModal";
 
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
-import ChatIcon from '@material-ui/icons/Chat';
+//import ChatIcon from '@material-ui/icons/Chat';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 
 import ProductInfoTab from '../elements/ProductInfoTab';
@@ -38,29 +38,29 @@ const Detail =(props)=>{
     // }, [])
 
     // 채팅모달창을 제어하는 함수들
-    const selectChat = (e) => {
-      console.log(e.target.value);
-      setChats(e.target.value);
-    };
+    // const selectChat = (e) => {
+    //   console.log(e.target.value);
+    //   setChats(e.target.value);
+    // };
 
-    const openChatModal = () => {
-      setChatModal(true);
-    };
+    // const openChatModal = () => {
+    //   setChatModal(true);
+    // };
 
-    const closeChatModal = () => {
-      setChatModal(false);
-    };
+    // const closeChatModal = () => {
+    //   setChatModal(false);
+    // };
 
-    const addChat = () => {
-      console.log(chats);
-      let chat_info = {
-        chat: chats,
-        username: userInfo.username,
-      }
+    // const addChat = () => {
+    //   console.log(chats);
+    //   let chat_info = {
+    //     chat: chats,
+    //     username: userInfo.username,
+    //   }
 
-      dispatch(chatActions.addChatAPI(chat_info, detail_id));
-      setChats('')
-    }
+    //   dispatch(chatActions.addChatAPI(chat_info, detail_id));
+    //   setChats('')
+    // }
 
     return (
     <React.Fragment>
@@ -101,7 +101,7 @@ const Detail =(props)=>{
                       찜
                     </LikeButton>
 
-                    <ChatButton 
+                    {/* <ChatButton 
                       onclick={openChatModal}
                       {...props}
                       is_chat={is_chat}
@@ -113,7 +113,7 @@ const Detail =(props)=>{
                             <ChatIcon style={{ fontSize: 15,  margin: "0 10px" }}></ChatIcon>
                         </ChatStyle>
                         채팅하기
-                    </ChatButton>
+                    </ChatButton> */}
                 </ButtonBox>            
             </InfoBox>
         </SellInfo>
@@ -144,7 +144,7 @@ const Detail =(props)=>{
             </WrapSelectInfo>
         </WrapInfo> */}
       </DetailMainContainer>
-        {is_chatmodal ? 
+        {/* {is_chatmodal ? 
           <ChatModal
             close={closeChatModal}
             {...props}
@@ -153,7 +153,7 @@ const Detail =(props)=>{
             // is_me={is_me}
             // user_info={user_info}
           />
-          : null}
+          : null} */}
     </React.Fragment>
         
     );
