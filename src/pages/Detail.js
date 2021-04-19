@@ -2,7 +2,7 @@ import React,{useState} from 'react';
 import styled from 'styled-components';
 import img from "../shared/watch6.jpg";
 
-import ChatModal from "../components/chatModal";
+// import ChatModal from "../components/chatModal";
 
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
