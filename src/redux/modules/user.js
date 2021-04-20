@@ -3,6 +3,7 @@ import axios from "axios"  // 서버 통신용 패키지 axios
 import {createAction, handleActions} from "redux-actions";
 import { produce } from "immer";
 import { history } from "../configureStore";
+import { useRadioGroup } from "@material-ui/core";
 
 // Action 선언
 const SET_USER = "SET_USER";
@@ -52,8 +53,8 @@ const signupAPI = (email, password, username, city, street) => {
       // 회원가입창에서 클라이언트가 입력하는 데이터
       {
         email: email,           
-        password: password,  // 숫자, 영어 대문자, 소문자, 특수기호, 8-20자
-        username: username,  // id개념, 한글이 아니라 영어로 보내기, 영어+숫자, 4-12글자
+        password: password,  // 숫자, 영어 대문자, 소문자, 특수기호, 8-20자  1234567#Aaa
+        username: username,  // id개념, 한글이 아니라 영어로 보내기, 영어+숫자, 4-12글자 
         city: city,           
         street: street,
       },
@@ -115,16 +116,13 @@ const loginAPI = (username, password) => {
       localStorage.setItem('email', response.data.email);
         // setUser를 발동시켜서
         // 리덕스의 is_login 값을 true로 변경한다.
-        dispatch(
-          setUser(
-            { 
-              uid: response.data.id,   
-              username: response.data.name,
-              email: response.data.email,
-            }
-          )
-        )
-        // window.alert('로그인 되었습니다!');
+        let user={
+          uid: response.data.id,   
+          username: response.data.name,
+          email: response.data.email,
+        }
+        dispatch(setUser(user))
+         window.alert('로그인 되었습니다!');
         history.replace('/');
       }).catch((error) => {
         console.log(error);
@@ -148,12 +146,13 @@ const loginCheckStore = () => {
         window.alert('재로그인이 필요합니다.')
         return;
       }else{
-        dispatch(setUser({
+        let user={
           uid: uid,
           uername: username,
           email: email,
-        })
-      )
+        }
+        dispatch(setUser(user))
+      
     }
   };
 };
@@ -168,10 +167,11 @@ const isLogin = () => {
     if (!token) {
       return false;
     }
-    dispatch(setUser({
+    let user={
       uid: uid,
       username: username,
-    }));
+    }
+    dispatch(setUser(user));
   }
 }
 
@@ -181,7 +181,8 @@ const logout = () => {
   return function (dispatch, getstate) {
     localStorage.removeItem("Authorization");
     localStorage.removeItem("uid");
-    localStorage.removeItem("username")
+    localStorage.removeItem("username");
+    localStorage.removeItem("email");
     dispatch(logOut());
     history.replace('/');
   }

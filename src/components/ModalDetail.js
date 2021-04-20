@@ -5,30 +5,30 @@ import CloseIcon from '@material-ui/icons/Close';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 
-import {actionCreators as commentActions} from "../redux/modules/comment"
+//import {actionCreators as commentActions} from "../redux/modules/comment"
 import { useDispatch } from "react-redux"; 
 
 const ModalDetail = (props) => {
   const dispatch = useDispatch();
-  const [comments, setComments ] = useState();
-  const ok_submit = comments ? true : false
-  console.log(props)
-  const selectComment = (e) => {
-    console.log(e.target.value)
-    setComments(e.target.value)
-  }
+  //const [comments, setComments ] = useState();
+  //const ok_submit = comments ? true : false
+  // console.log(props)
+  // const selectComment = (e) => {
+  //   console.log(e.target.value)
+  //   setComments(e.target.value)
+  // }
 
-  const addComment = () => {
-    console.log(comments)
-    let comment_info = {
-      comment: comments,
-      user_name: props.user_info.user_name,
-      profile_url: props.user_info.profile_url , 
-    }
+  // const addComment = () => {
+  //   console.log(comments)
+  //   let comment_info = {
+  //     comment: comments,
+  //     user_name: props.user_info.user_name,
+  //     profile_url: props.user_info.profile_url , 
+  //   }
 
-    dispatch(commentActions.addCommentAX(comment_info, props.id))
-    setComments('')
-  }
+  //   dispatch(commentActions.addCommentAX(comment_info, props.id))
+  //   setComments('')
+  // }
 
   return(
     <React.Fragment>
@@ -53,7 +53,7 @@ const ModalDetail = (props) => {
             : null}
             
           </ModalHeader>
-          <ModalCmtBox>
+          {/* <ModalCmtBox>
             {props.is_comment ? 
             props.comment_list.map((c, idx) => {
               return <ModalCmt>
@@ -78,12 +78,12 @@ const ModalDetail = (props) => {
               : null
           }
             
-          </ModalCmtBox>
-          <ModalCmtInputBox>
+          </ModalCmtBox> */}
+          {/* <ModalCmtInputBox>
             <ModalCmtInput type="text" placeholder="댓글달기..." onChange={selectComment} value={comments} />
             {ok_submit ? <ModalUpload onClick={addComment} >게시</ModalUpload>
             : <ModalUpload style={{opacity: "0.3"}} >게시</ModalUpload>}
-          </ModalCmtInputBox>
+          </ModalCmtInputBox> */}
         </ModalRightContainer>
       </ModalComponent>
     </React.Fragment>

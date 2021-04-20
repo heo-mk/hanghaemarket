@@ -40,7 +40,7 @@ const ModalForChange = (props) => {
             e.stopPropagation();
             console.log(props)
             // 클릭하면 게시물 삭제
-            dispatch(postActions.deletePostAX(props.seller_id));
+            dispatch(postActions.deletePostAPI(props.seller_id));
             }}>게시물 삭제</DeleteBox>
       </ModalBox>
     </React.Fragment>
