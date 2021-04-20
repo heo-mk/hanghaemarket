@@ -25,8 +25,12 @@ const deletePost = createAction(DELETE_POST, (id) => ({id}));
 
 //initialStates
 const initialState={
-  list : [],
+  list : [
+    
+  ],
+
 };
+
 
 const initialPost={
     id: 0,
@@ -165,8 +169,13 @@ const editPostAPI = (boardId, post) => {
     const _image = getState().image.preview;
     const _post_idx = getState().post.list.findIndex((p) => p.id === boardId);
     const _post = getState().post.list[_post_idx];
+    
+    console.log(_post);
 
-    if(_image === _post.image_url) {  // 같은 이미지라면
+  //여기서 image_url 가져올수없다고 자꾸 에러뜸
+  //프리뷰에 있는 이미지(_image)랑 post에 있는 이미지랑 같니?
+
+    if(_image === _post.image_url) {  // 같은 이미지라면 
       const formData = new formData();
       // formData.append('images', post.images);
       formData.append('title', post.title);
@@ -273,6 +282,7 @@ export default handleActions({
 
     [EDIT_POST]: (state, action) => produce(state, (draft) => {
       let idx = draft.list.findIndex((p) => p.id === action.payload.post_id);
+      //찾았으면 몇번쨰고 
       draft.list[idx] = {...draft.list[idx], ...action.payload.post}
     }),
     

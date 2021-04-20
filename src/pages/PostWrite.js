@@ -12,19 +12,24 @@ import TextField from '@material-ui/core/TextField';
 
 const PostWrite = (props) => {
   const dispatch = useDispatch()
-
-  const [title, setTitle] = useState()
-  const [price, setPrice]=useState()
-  const [contents, setContents] = useState()
-  const [image, setImage] = useState()
-
   const preview = useSelector((state) => state.image.preview);
+  
+  //기존 게시물 정보는 리덕스에서 가져올거임.
+  //포스트 데이터 가지고 오려는거임.
   const post_list = useSelector((state) => state.post.list);
-  const post_id = props.match.params.id;
+  const post_id = props.match.params.id; //주소창에서 params로 넘어온거 갖고있음
   const is_edit = post_id ? true : false;  // 수정 중인지, 첫 작성인지 여부 판별
+  
+  //여기서 포스트리스트꺼 찾을거야
+ //수정모드가 아닌 작성모드일 땐 null
   const _post = is_edit? post_list.find((p) => p.id == post_id) : null;
+  const [title, setTitle] = useState(_post ? _post.title : "")
+  const [price, setPrice]=useState(_post ? _post.price : "")
+  const [contents, setContents] = useState(_post ? _post.content : "")
+  const [image, setImage] = useState(_post? _post.image : "" )
 
-  // console.log(_post)
+
+  console.log(_post)//내가 클릭한거 가져와야되는데 신발 정보가 나옴
 
   React.useEffect(() => {
     if (is_edit && !_post) {
@@ -80,6 +85,7 @@ const PostWrite = (props) => {
     // props.close()
   }
 
+  // 수정된 것을 리듀서-스토어에 디스패치해서 변경된 데이터를 본페이지에서 렌더링 되게 요청
   const editPost = () => {
     if(!contents){
       window.alert("😗빈칸을 채워주세요...ㅎㅎ")
@@ -123,6 +129,8 @@ const PostWrite = (props) => {
                 rows={3}
                 variant="outlined"
                 value={contents}
+                // title="title"
+                // price="price"
                 onChange = {changeContents}
               />
           {is_edit ? (

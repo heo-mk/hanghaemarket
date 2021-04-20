@@ -13,6 +13,7 @@ const PostList = (props) => {
 
     React.useEffect(() => {
       dispatch(postActions.getMainAPI());
+      
     }, []);
 
     return(

@@ -3,7 +3,7 @@ import Grid from "../elements/Grid";
 import Image from "../elements/Image";
 import Text from "../elements/Text";
 
-
+import ModalDetail from "../components/ModalDetail";
 import ModalForChange from "../components/ModalForChange";
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 
@@ -14,7 +14,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 const Post = (props) =>{
-
+  
   const {image_url, title, price, content, id, seller_id} = props;
   console.log(props)  // 여기서 seller_id는 number
 
@@ -23,11 +23,24 @@ const Post = (props) =>{
   const is_me = useSelector((state) => state.user.user.uid);  // 로그인한 사용자. 
   const user_info = useSelector((state) => state.user.user);
   console.log(user_info); // 여기서 uid는 string
-  
+  const [ is_modal, setDetailModal ] = useState();
   const [ is_changemodal, setChangeModal] = useState();
+
+
+  const openDetailModal = () => {
+    setDetailModal(true);
+  };
+
+  const closeDetailModal = () => {
+    setDetailModal(false);
+  };
 
   const openChangeModal = () => {
     setChangeModal(true);
+  };
+
+  const closeChangeModal = () => {
+    setChangeModal(false);
   };
 
   const goDetail = () => {
@@ -38,7 +51,7 @@ const Post = (props) =>{
     
         //Grid안의 것들이 children으로 넘어감
         <React.Fragment>
-          {/* <Link style={{textDecoration:"none"}} to ="/upload"> */}
+        
           <Grid onClick={goDetail} border="1px solid #eee" width="230px"  margin-right="11px" margin-bottom="11px"> 
           {props.seller_id == is_me?
                   <MoreHorizIcon height="14px" width="14px" cursor="pointer" onClick={openChangeModal}/> 
@@ -56,7 +69,12 @@ const Post = (props) =>{
                <Text bold size="14px">{props.content}</Text>
             </Grid>
           </Grid>
-          {/* </Link> */}
+          
+            {/* 모든 요소들의 밖에서 상세페이지 모달, 수정/삭제 모달을 제어 */}
+          {is_modal ? <ModalDetail close={closeDetailModal} {...props} user_info={user_info}  is_me={is_me} openChangeModal={openChangeModal}  />        
+          : null}
+          {is_changemodal ? <ModalForChange close={closeChangeModal} {...props}/>        
+          : null}
         </React.Fragment>
     );
 
