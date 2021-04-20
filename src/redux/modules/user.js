@@ -116,11 +116,7 @@ const loginAPI = (username, password) => {
       localStorage.setItem('email', response.data.email);
         // setUser를 발동시켜서
         // 리덕스의 is_login 값을 true로 변경한다.
-<<<<<<< HEAD
-        let user = {
-=======
         let user={
->>>>>>> upstream/main
           uid: response.data.id,   
           username: response.data.name,
           email: response.data.email,
@@ -150,20 +146,13 @@ const loginCheckStore = () => {
         window.alert('재로그인이 필요합니다.')
         return;
       }else{
-<<<<<<< HEAD
-        let user = {
-=======
         let user={
->>>>>>> upstream/main
           uid: uid,
           uername: username,
           email: email,
         }
         dispatch(setUser(user))
-<<<<<<< HEAD
-=======
       
->>>>>>> upstream/main
     }
   };
 };
@@ -178,18 +167,10 @@ const isLogin = () => {
     if (!token) {
       return false;
     }
-<<<<<<< HEAD
-    let user = {
-          uid: uid,
-          uername: username,
-      }
-
-=======
     let user={
       uid: uid,
       username: username,
     }
->>>>>>> upstream/main
     dispatch(setUser(user));
   }
 }
