@@ -115,16 +115,13 @@ const loginAPI = (username, password) => {
       localStorage.setItem('email', response.data.email);
         // setUser를 발동시켜서
         // 리덕스의 is_login 값을 true로 변경한다.
-        dispatch(
-          setUser(
-            { 
-              uid: response.data.id,   
-              username: response.data.name,
-              email: response.data.email,
-            }
-          )
-        )
-        // window.alert('로그인 되었습니다!');
+        let user = {
+          uid: response.data.id,   
+          username: response.data.name,
+          email: response.data.email,
+        }
+        dispatch(setUser(user))
+        window.alert('로그인 되었습니다!');
         history.replace('/');
       }).catch((error) => {
         console.log(error);
@@ -148,12 +145,12 @@ const loginCheckStore = () => {
         window.alert('재로그인이 필요합니다.')
         return;
       }else{
-        dispatch(setUser({
+        let user = {
           uid: uid,
           uername: username,
           email: email,
-        })
-      )
+        }
+        dispatch(setUser(user))
     }
   };
 };
@@ -168,10 +165,12 @@ const isLogin = () => {
     if (!token) {
       return false;
     }
-    dispatch(setUser({
-      uid: uid,
-      username: username,
-    }));
+    let user = {
+          uid: uid,
+          uername: username,
+      }
+
+    dispatch(setUser(user));
   }
 }
 
@@ -181,7 +180,8 @@ const logout = () => {
   return function (dispatch, getstate) {
     localStorage.removeItem("Authorization");
     localStorage.removeItem("uid");
-    localStorage.removeItem("username")
+    localStorage.removeItem("username");
+    localStorage.removeItem("email");
     dispatch(logOut());
     history.replace('/');
   }

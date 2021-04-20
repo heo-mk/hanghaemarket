@@ -20,7 +20,6 @@ const PostList = (props) => {
             <PostListContainer>
                 <h2>오늘의 상품 추천!</h2>     
                 <WrapProducts>           
-                   
                     {post_list.map((p, idx) => {
                       return <Post key={p.id} {...p}/>
                     })}

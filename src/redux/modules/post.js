@@ -94,7 +94,7 @@ const getMainAPI = () => {
       let post = {
         // id: _post.id, 설명용. 이게 아니라 아래것을 쓸 것이다.
         id: _post.id, 
-        // seller_id: _post.userId,  // 작성자 id, 노션에는 response에 작성자 정보가 없음.
+        seller_id: _post.userId,  // 작성자 id, 노션에는 response에 작성자 정보가 없음.
         // 수정할 때 변경할 데이터는 아래 네가지
         // email: _post.userEmail,
         image_url: _post.imgUrl,

@@ -14,13 +14,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 const Post = (props) =>{
-  
-  const {image_url, title, price,content, id} = props;
+
+  const {image_url, title, price, content, id, seller_id} = props;
+  console.log(props)  // 여기서 seller_id는 number
 
   const dispatch = useDispatch();
   const is_login = useSelector((state) => state.user.is_login);
-  const is_me = useSelector((state) => state.user.user.user_id);  // 로그인한 사용자. 
+  const is_me = useSelector((state) => state.user.user.uid);  // 로그인한 사용자. 
   const user_info = useSelector((state) => state.user.user);
+  console.log(user_info); // 여기서 uid는 string
+  
   const [ is_changemodal, setChangeModal] = useState();
 
   const openChangeModal = () => {
@@ -37,7 +40,7 @@ const Post = (props) =>{
         <React.Fragment>
           {/* <Link style={{textDecoration:"none"}} to ="/upload"> */}
           <Grid onClick={goDetail} border="1px solid #eee" width="230px"  margin-right="11px" margin-bottom="11px"> 
-          {props.id === is_me?
+          {props.seller_id == is_me?
                   <MoreHorizIcon height="14px" width="14px" cursor="pointer" onClick={openChangeModal}/> 
                   : null}
             <Grid padding="16px">
@@ -67,7 +70,7 @@ Post.defaultProps={
     content: "교환, 환불 어렵습니다.",
     //insert_dt:"2021-03-12 10:00:00",
     id:"",
-    
+    seller_id: "",
 };
 
 export default Post;
