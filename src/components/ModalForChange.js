@@ -27,25 +27,13 @@ const ModalForChange = (props) => {
         <EditBox 
           onClick={() => {
             // e.prevent..., e.stopPro.. 이것들로 이벤트 버블링을 막는다
-<<<<<<< HEAD
-            // e.preventDefault();
-            // e.stopPropagation();
-=======
-            
             console.log(props.id)
->>>>>>> upstream/main
             // 클릭하면 게시물 수정 페이지로 이동
             history.push(`/upload/${props.id}`)
             }}>게시물 수정</EditBox>
         <DeleteBox  
           onClick={() => {
             // e.prevent..., e.stopPro.. 이것들로 이벤트 버블링을 막는다
-<<<<<<< HEAD
-            // e.preventDefault();
-            // e.stopPropagation();
-=======
-            
->>>>>>> upstream/main
             console.log(props)
             // 클릭하면 게시물 삭제
             dispatch(postActions.deletePostAPI(props.id));
