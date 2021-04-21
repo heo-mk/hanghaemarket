@@ -21,7 +21,7 @@ const Detail =(props)=>{
 
   
     //여기에 클릭했을 때 getPostAPI 해온 정보들 가져오고싶음
-    
+  
     
     const dispatch = useDispatch();
     const is_login = useSelector((state) => state.user.is_login);
