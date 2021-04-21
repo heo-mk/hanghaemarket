@@ -23,7 +23,7 @@ const PostWrite = (props) => {
   const is_edit = post_id ? true : false;  // 수정 중인지, 첫 작성인지 여부 판별
   
   //여기서 포스트리스트꺼 찾을거야
- //수정모드가 아닌 작성모드일 땐 null
+  //수정모드가 아닌 작성모드일 땐 null
   const _post = is_edit? post_list.find((p) => p.id == post_id) : null;
   const [title, setTitle] = useState(_post ? _post.title : "")
   const [price, setPrice]=useState(_post ? _post.price : "")

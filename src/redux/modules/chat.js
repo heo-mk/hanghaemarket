@@ -77,7 +77,7 @@ const getChatList = () => async (dispatch, getState, { history }) => {
 // 채팅방 생성
 const createRoom = (data, closePopup) => async (dispatch, getState, { history }) => {
   try {
-    const response = await chatAPI.createRoom(data);
+    const response = await createRoom(data);
     window.alert('채팅방이 생성되었습니다.')
     dispatch(getChatList());
   }

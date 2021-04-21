@@ -10,7 +10,7 @@ import Stomp from 'stompjs';
 import SockJS from 'sockjs-client';
 import StompJS from '@stomp/stompjs';
 
-import { actionCreators as chatActions } from "../redux/modules/chat"
+// import { actionCreators as chatActions } from "../redux/modules/chat"
 import { actionCreators as userActions } from "../redux/modules/user"; 
 import { useDispatch, useSelector } from "react-redux";
 
@@ -23,7 +23,6 @@ const ChatModal = (props) => {
   const roomName = useSelector((state) => state.chat.currentChat.roomName);
   const roomId = useSelector((state) => state.chat.currentChat.roomId);
   
-  const dispatch = useDispatch();
   const is_login = useSelector((state) => state.user.is_login);
   
 
@@ -69,7 +68,7 @@ const ChatModal = (props) => {
         }
       );
     } catch (error) {
-      conole.log(error)
+      console.log(error)
     }
   } 
 

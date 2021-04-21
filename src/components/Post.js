@@ -69,6 +69,7 @@ const Post = (props) =>{
           </WrapModal>
               
             <ImgDiv onClick={goDetail}>
+              {/* <Image src={props.image_url}/> */}
               <Image src={props.image_url}/>
             </ImgDiv>               
             <TextDiv>

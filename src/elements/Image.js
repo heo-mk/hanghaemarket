@@ -22,7 +22,6 @@ Image.defaultProps = {
     shape: "rectangle",
     src: "https://jieunpic.s3.ap-northeast-2.amazonaws.com/watch6.jpg",
     size: 200,
-   
 }
 
 
