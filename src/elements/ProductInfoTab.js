@@ -10,6 +10,8 @@ import Box from '@material-ui/core/Box';
 
 import styled from 'styled-components';
 
+
+
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -89,6 +91,8 @@ export default function FullWidthTabs() {
     setValue(index);
   };
 
+ 
+
   return (
     <div className={classes.root}>
       <AppBar position="static" color="default">
@@ -112,7 +116,6 @@ export default function FullWidthTabs() {
       >
         <TabPanel value={value} index={0} dir={theme.direction}>
           <h3>상품 정보</h3>
-          사용감 있는 나이키버전 애플워치6 입니다. 교환, 환불 불가능합니다.
 
           <h3>상품 문의</h3>
           <QuestionInput/>

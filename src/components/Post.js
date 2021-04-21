@@ -30,7 +30,7 @@ const Post = (props) =>{
   const [ is_changemodal, setChangeModal] = useState();
   
   const BoardId=props.id;
-  const BoardTitle=props.title;
+ 
 
   const openDetailModal = () => {
     setDetailModal(true);
@@ -72,8 +72,8 @@ const Post = (props) =>{
               <Image src={props.image_url}/>
             </ImgDiv>               
             <TextDiv>
-              <Text bold size="14px">{props.title}</Text>
-              <Text bold size="22px" margin="0">{props.price}</Text>
+              <Text bold size="16px">{props.title}</Text>
+              <Text bold size="22px" margin="0">{props.price}원</Text>
               <Text bold size="14px">{props.content}</Text>
             </TextDiv>    
           </Grid>
@@ -109,7 +109,7 @@ border-radius: "30px";
 `;
 
 const WrapModal=styled.div`
-
+margin-left: 200px;
 `;
 
 const ImgDiv=styled.div`
