@@ -88,7 +88,7 @@ const Detail =(props)=>{
     <React.Fragment>
         <DetailMainContainer>
         <SellInfo>
-            <ImgBox><img src={post_info.image_url} width="400px" height="400px"></img></ImgBox>
+            <ImgBox><img src={post_target.image_url} width="400px" height="400px"></img></ImgBox>
             <InfoBox>
                 <ProductContentsBox>
                     
