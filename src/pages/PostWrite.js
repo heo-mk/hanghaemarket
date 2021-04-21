@@ -29,7 +29,7 @@ const PostWrite = (props) => {
   const [price, setPrice]=useState(_post ? _post.price : "")
   const [contents, setContents] = useState(_post ? _post.content : "")
   const [image, setImage] = useState(_post? _post.image : "" )
-  const [imgUrl, setImgUrl]=useState(_post? _post.imgUrl : "" );
+  // const [imgUrl, setImgUrl]=useState(_post? _post.imgUrl : "" );
 
 
   React.useEffect(() => {
@@ -65,9 +65,9 @@ const PostWrite = (props) => {
     setContents(e.target.value)
   }
 
-  const changeUrl=(e)=>{
-    setImgUrl(e.target.value)
-  }
+  // const changeUrl=(e)=>{
+  //   setImgUrl(e.target.value)
+  // }
   // const changeImage = (e) => {
   //   setImage(e.target.value)
   // }
@@ -79,8 +79,6 @@ const PostWrite = (props) => {
       price: price,
       content: contents,
       image: image,
-    
-      
       // exchange: false,
       // status: false,
     }
@@ -103,13 +101,13 @@ const PostWrite = (props) => {
       price: price,
       content: contents,
       image: image,
-      imgUrl: image_url,
+      // imgUrl: imgUrl,
       
       // exchange: false,
       // status: false,
     }
     console.log(post_id)  // ok
-    dispatch(postActions.editPostAPI(post_id , post)) 
+    dispatch(postActions.editPostAPI(post_id, post)) 
   }
 
 

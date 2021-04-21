@@ -25,9 +25,7 @@ const deletePost = createAction(DELETE_POST, (id) => ({id}));
 
 //initialStates   state => state.post.list
 const initialState={
-  list : [
-    
-  ],
+  list : [],
 
 };
 
@@ -167,28 +165,35 @@ const editPostAPI = (boardId, post) => {
       console.log("게시물이 없습니다!");
       return;
     }
-    
+      
+    // const _post_idx = getState().post.list.findIndex((p) => p.id == boardId);
+    // const _posts = getState().post.list
+    // console.log(_posts)
+    // console.log(_post_idx) 
+    // const _post = getState().post.list[_post_idx];
+
     const _image = getState().image.preview;
-    const _post_idx = getState().post.list.findIndex((p) => p.id == boardId);
-    const _posts = getState().post.list
-    console.log(_posts)
-    console.log(_post_idx) 
-    const _post = getState().post.list[_post_idx];
+    const post_list = getState().post.list;
+    console.log(post_list);
+    const target_idx = post_list.findIndex((p) => p.id == boardId);
+    console.log(target_idx);
+    const post_target = post_list[target_idx]
+    console.log(post_target);
     
     //0421 Post에 있는 img_url 가져와보기 ?? 아님 그냥 img_url인가...
-    const _img_url=getState().post.list.image_url;
+    // const _img_url=getState().post.list.image_url;
     
-    console.log(_post);
+    // console.log(_post);
 
   //여기서 image_url 가져올수없다고 자꾸 에러뜸
   //프리뷰에 있는 이미지(_image)랑 post에 있는 이미지랑 같니?
 
-    if(_image === _post.image_url) {  // 같은 이미지라면 
+    if(_image == post_target.image_url) {  // 같은 이미지라면 
       
       const formData = new FormData();
       //formData.append('file', post.image);
      //console.log(post.imgUrl); //imgUrl을 못받아오고있음
-      formData.append('imgUrl', post.imgUrl);
+      // formData.append('imgUrl', post.imgUrl);
       formData.append('title', post.title);
       formData.append('price', post.price);
       formData.append('content', post.content);
@@ -197,7 +202,7 @@ const editPostAPI = (boardId, post) => {
       let token = {
         headers : { Authorization: `${_token}`}
       }
-    
+
       console.log(post)
       const API = `http://seungwook.shop/boards/${boardId}`;
       axios.put(API, formData, token)
@@ -219,7 +224,7 @@ const editPostAPI = (boardId, post) => {
       } else {
         const formData = new FormData();
         formData.append('file', post.image);
-        // formData.append('imgUrl', post.imgUrl);
+        // formData.append('imgUrl', post.);
         formData.append('title', post.title);
         formData.append('price', post.price);
         formData.append('content', post.content);
@@ -279,7 +284,8 @@ export default handleActions({
     }),
 
     [SET_POST]: (state, action) => produce(state, (draft) => {
-      draft.list.push(...action.payload.post_list);
+      // draft.list.push(...action.payload.post_list);
+      draft.list.unshift(...action.payload.post_list);
       console.log(draft.list);
       draft.list = draft.list.reduce((acc, cur) => {
         if(acc.findIndex(a => a.id == cur.id) === -1) {   // 여기서 id는 getPostAPI에서 가져온 id: boardId 이거다.
