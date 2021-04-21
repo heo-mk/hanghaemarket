@@ -226,7 +226,7 @@ const editPostAPI = (boardId, post) => {
     
         console.log(post)
         const API = `http://seungwook.shop/boards/${boardId}`;
-        axios.put(API, formData, token)
+        axios.put(API, formData, token) //수정하라고 요청
           .then((response) => {
             console.log(response.data);
             let post_info = {
@@ -290,6 +290,7 @@ export default handleActions({
           acc[acc.findIndex((a) => a.id === cur.id)] = cur;
           return acc;
         }
+        
       }, [])
     }),
 
