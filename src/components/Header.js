@@ -32,7 +32,10 @@ const Header = () => {
                 <HeaderContainer>
                     <HeaderInnerContainer>
                         <HeaderLeft>
-                            <TitleImg src={hhlogo1}/>
+                            <TitleImg 
+                              src={hhlogo1}
+                              onClick={() => {
+                              history.push('/')}}/>
                         </HeaderLeft>
                         <HeaderCenter>
                             <SearchBox>
