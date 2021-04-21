@@ -104,7 +104,7 @@ const getMainAPI = () => {
         price: _post.price,
         content: _post.content,
       };
-        post_list.unshift(post);
+        post_list.push(post);
       })
 
       console.log(post_list);
@@ -173,7 +173,7 @@ const editPostAPI = (boardId, post) => {
     // const _post = getState().post.list[_post_idx];
 
     const _image = getState().image.preview;
-    const post_list = getState().post.list;
+    const post_list = getState().post.list;  //디테일부분이랑 똑같음
     console.log(post_list);
     const target_idx = post_list.findIndex((p) => p.id == boardId);
     console.log(target_idx);
@@ -188,7 +188,7 @@ const editPostAPI = (boardId, post) => {
   //여기서 image_url 가져올수없다고 자꾸 에러뜸
   //프리뷰에 있는 이미지(_image)랑 post에 있는 이미지랑 같니?
 
-    if(_image == post_target.image_url) {  // 같은 이미지라면 
+    if(!post.image) {  // 같은 이미지라면 
       
       const formData = new FormData();
       //formData.append('file', post.image);
@@ -236,7 +236,7 @@ const editPostAPI = (boardId, post) => {
     
         console.log(post)
         const API = `http://seungwook.shop/boards/${boardId}`;
-        axios.put(API, formData, token)
+        axios.put(API, formData, token) //수정하라고 요청
           .then((response) => {
             console.log(response.data);
             let post_info = {
@@ -294,6 +294,7 @@ export default handleActions({
           acc[acc.findIndex((a) => a.id === cur.id)] = cur;
           return acc;
         }
+        
       }, [])
     }),
 
