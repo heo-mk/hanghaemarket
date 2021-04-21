@@ -36,15 +36,20 @@ const Detail =(props)=>{
     // const is_chat = chat_list ? true : false;  // 채팅리스트가 있는가?
     console.log(is_me);
     console.log(user_info);
-    
- 
+    console.log(detail_id);
+
     // React.useEffect(() => {
     //   dispatch(postActions.getPostAPI(detail_id));
       
     // }, []);
-    
-    const post_info = useSelector((state) => state.post.list[detail_id])
-    console.log(post_info);
+
+    const post_list = useSelector((state) => state.post.list)
+    console.log(post_list);
+    const target_idx = post_list.findIndex((p) => p.id == detail_id);
+    console.log(target_idx);
+    const post_target = post_list[target_idx]
+    console.log(post_target);
+
 
     const changeHeart = () => {
       setBtnChange(!btnChange);
@@ -83,12 +88,12 @@ const Detail =(props)=>{
     <React.Fragment>
         <DetailMainContainer>
         <SellInfo>
-            <ImgBox><img src={post_info.image_url} width="400px" height="400px"></img></ImgBox>
+            <ImgBox><img src={post_target.image_url} width="400px" height="400px"></img></ImgBox>
             <InfoBox>
                 <ProductContentsBox>
                     
-                    <TitleBox>{post_info.title}</TitleBox>
-                    <PriceBox><p><span>{post_info.price}</span> 원</p></PriceBox>
+                    <div>{post_target.title}</div>
+                    <PriceBox><p><span>110,000</span> 원</p></PriceBox>
                     <IconsBox>
                         <FavoriteIcon style={{ fontSize: 20,  margin: "5px 10px", color:"#CCCCCC" }}/>    
                         <VisibilityIcon style={{ fontSize: 25,  margin: "5px 10px", color:"#CCCCCC" }}/>
