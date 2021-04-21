@@ -120,13 +120,14 @@ const getMainAPI = () => {
 }
 
 // 서버에 있는 상품 데이터를 가져온다.
-const getPostAPI = (boardId) => {
+const getPostAPI = (boardId) => { 
   return function (dispatch, getState) {
 
     const _token = localStorage.getItem("Authorization");
     let token = {
       headers : { Authorization: `${_token}` }, 
     }
+
     
     const API = `http://seungwook.shop/boards/${boardId}/details`;
     axios.get(API, token)
@@ -166,8 +167,12 @@ const editPostAPI = (boardId, post) => {
       console.log("게시물이 없습니다!");
       return;
     }
+    
     const _image = getState().image.preview;
     const _post_idx = getState().post.list.findIndex((p) => p.id == boardId);
+    const _posts = getState().post.list
+    console.log(_posts)
+    console.log(_post_idx) 
     const _post = getState().post.list[_post_idx];
     
     //0421 Post에 있는 img_url 가져와보기 ?? 아님 그냥 img_url인가...

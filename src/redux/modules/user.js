@@ -122,7 +122,7 @@ const loginAPI = (username, password) => {
           email: response.data.email,
         }
         dispatch(setUser(user))
-         window.alert('로그인 되었습니다!');
+        window.alert('로그인 되었습니다!');
         history.replace('/');
       }).catch((error) => {
         console.log(error);

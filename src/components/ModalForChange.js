@@ -10,7 +10,6 @@ import { history } from "../redux/configureStore";
 import { useDispatch } from "react-redux"; 
 
 
-
 const ModalForChange = (props) => {
   const dispatch = useDispatch();
   
@@ -28,7 +27,6 @@ const ModalForChange = (props) => {
         <EditBox 
           onClick={() => {
             // e.prevent..., e.stopPro.. 이것들로 이벤트 버블링을 막는다
-            
             console.log(props.id)
             // 클릭하면 게시물 수정 페이지로 이동
             history.push(`/upload/${props.id}`)
@@ -36,7 +34,6 @@ const ModalForChange = (props) => {
         <DeleteBox  
           onClick={() => {
             // e.prevent..., e.stopPro.. 이것들로 이벤트 버블링을 막는다
-            
             console.log(props)
             // 클릭하면 게시물 삭제
             dispatch(postActions.deletePostAPI(props.id));

@@ -110,7 +110,7 @@ const PostWrite = (props) => {
       // exchange: false,
       // status: false,
     }
-    console.log(post_id)
+    console.log(post_id)  // ok
     dispatch(postActions.editPostAPI(post_id , post)) 
   }
 

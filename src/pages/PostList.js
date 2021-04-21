@@ -21,7 +21,6 @@ const PostList = (props) => {
             <PostListContainer>
                 <Title>오늘의 상품 추천!</Title>     
                 <WrapProducts>           
-                   
                     {post_list.map((p, idx) => {
                       return <Post key={p.id} {...p}/>
                     })}

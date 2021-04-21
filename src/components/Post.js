@@ -51,7 +51,7 @@ const Post = (props) =>{
   };
 
   const goDetail = (e) => {
-   
+
     dispatch(postActions.getPostAPI(BoardId,BoardTitle));
     
     history.replace("/boards/details/");
@@ -72,13 +72,13 @@ const Post = (props) =>{
             <ImgDiv onClick={goDetail}>
               <Image src={props.image_url}/>
             </ImgDiv>               
-           <TextDiv>
+            <TextDiv>
               <Text bold size="14px">{props.title}</Text>
               <Text bold size="22px" margin="0">{props.price}</Text>
               <Text bold size="14px">{props.content}</Text>
-           </TextDiv>    
+            </TextDiv>    
           </Grid>
-         
+
           
             {/* 모든 요소들의 밖에서 상세페이지 모달, 수정/삭제 모달을 제어 */}
           {is_modal ? <ModalDetail close={closeDetailModal} {...props} user_info={user_info}  is_me={is_me} openChangeModal={openChangeModal}  />        
@@ -90,23 +90,22 @@ const Post = (props) =>{
 
 }
 
-Post.defaultProps={
-    
+Post.defaultProps = {
     image_url:"https://jieunpic.s3.ap-northeast-2.amazonaws.com/watch6.jpg",
     title:"애플워치 스테인리스 싸게 팝니다.",
     price:"110,000원",
     content: "교환, 환불 어렵습니다.",
     //insert_dt:"2021-03-12 10:00:00",
     id:"",
-    
+    seller_id: "",
 };
 
 const WrapPost=styled.div`
 
-width:230px  
-margin-right:11px 
-margin-bottom:20px
-border-radius: "30px"
+width: 230px;  
+margin-right: 11px; 
+margin-bottom: 20px;
+border-radius: "30px";
 
 `;
 
