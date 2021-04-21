@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 const Grid =(props)=>{
     
-    const {is_flex,width,margin,padding,bg,children} = props;
+    const {is_flex,width,margin,padding,bg,height,children} = props;
    
     const styles={
         is_flex:is_flex,
@@ -11,6 +11,7 @@ const Grid =(props)=>{
         margin:margin,
         padding:padding,
         bg:bg,
+        height:height,
         
     };
     return(
@@ -29,11 +30,13 @@ Grid.defaultProps={
     padding:false,
     margin:false,
     bg:false,
+    height:false,
 }
 
 const GridBox=styled.div`
     width: ${(props)=>props.width};
-    height:100%;
+    // height:100%;
+    ${(props)=>(props.height ? `height: ${props.height};`: "")}
     box-sizing:border-box;
     background-color:#eae7e7;
     ${(props)=>(props.padding ? `padding: ${props.padding};`: "")}

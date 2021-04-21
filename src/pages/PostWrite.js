@@ -32,8 +32,6 @@ const PostWrite = (props) => {
   const [imgUrl, setImgUrl]=useState(_post? _post.imgUrl : "" );
 
 
-  console.log(_post)//내가 클릭한거 가져와야되는데 신발 정보가 나옴
-
   React.useEffect(() => {
     if (is_edit && !_post) {
       console.log("포스트 정보가 없어요!");

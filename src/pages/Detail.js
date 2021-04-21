@@ -92,8 +92,8 @@ const Detail =(props)=>{
             <InfoBox>
                 <ProductContentsBox>
                     
-                    <div>{post_target.title}</div>
-                    <PriceBox><p><span>110,000</span> 원</p></PriceBox>
+                    <div><h2>{post_target.title}</h2></div>
+                    <PriceBox><p><span>{post_target.price}</span> 원</p></PriceBox>
                     <IconsBox>
                         <FavoriteIcon style={{ fontSize: 20,  margin: "5px 10px", color:"#CCCCCC" }}/>    
                         <VisibilityIcon style={{ fontSize: 25,  margin: "5px 10px", color:"#CCCCCC" }}/>
@@ -141,31 +141,30 @@ const Detail =(props)=>{
             </InfoBox>
         </SellInfo>
         
-        <WrapTab>
-            <ProductInfoTab/>
-        </WrapTab>
+        {/* <WrapTab>
+            <ProductInfoTab {...props}/>
+        </WrapTab> */}
         
-        {/* <WrapInfo>
+        <WrapInfo>
             <SelectInfoBar>
-                <ProductInfoButton><h3>상품정보</h3></ProductInfoButton>
-                <StoreInfoButton><h3>상점정보</h3></StoreInfoButton>
+                <ProductInfoButton><h3>상품정보</h3></ProductInfoButton>           
             </SelectInfoBar>
             
             <WrapSelectInfo>
                 <ProductInfo>
                     <div><h3>상품정보</h3></div>
-                    <div>사용감 있는 상품입니다. 반품, 환불은 불가합니다.</div>
+                    <div>{post_target.content}</div>
                     
-                    <div>상품문의</div>
-                    <div><input text/></div>
-                    <button>등록</button>
+                    <div><h3>상품문의</h3></div>
+                    <QuestionInput/>
+                   <QuestionButton>등록</QuestionButton>
 
                 </ProductInfo>
                 <StoreInfo>
 
                 </StoreInfo>
             </WrapSelectInfo>
-        </WrapInfo> */}
+        </WrapInfo>
       </DetailMainContainer>
         {/* {is_chatmodal ? 
           <ChatModal
@@ -295,6 +294,8 @@ margin: auto;
 `;
 const WrapInfo=styled.div`
 justify-content:center;
+width:1020px;
+margin:auto;
 
 `;
 const SelectInfoBar=styled.div`
@@ -304,18 +305,6 @@ margin-top: 30px;
 `;
 
 const ProductInfoButton=styled.button`
-// padding: 8px 24px;
-// background-color:#adaeaf;
-// border-radius:10px;
-// margin:8px;
-// border:1px solid #adaeaf;
-// width:15vw;
-// height:5vh;
-
-// & h3 {
-//     margin-top: 0px;
-//     margin-bottom: 0px;
-// }
 
 flex: 1 1 0%;
     -webkit-box-align: center;
@@ -323,13 +312,11 @@ flex: 1 1 0%;
     -webkit-box-pack: center;
     justify-content: center;
     display: flex;
-    border-top: 1px solid rgb(33, 33, 33);
-    border-right: 1px solid rgb(33, 33, 33);
-    border-bottom: 1px solid rgb(255, 255, 255);
-    background: rgb(255, 255, 255);
-    color: rgb(33, 33, 33);
-    font-weight: 600;
+    border-color: white;
+    background-color: #ebf2f5;
+ 
 `;
+
 const StoreInfoButton=styled.button`
 // padding: 8px 24px;
 // background-color:#adaeaf;
@@ -369,6 +356,33 @@ margin-left: 100px;
 `;
 const StoreInfo=styled.div`
 
+`;
+
+const QuestionInput = styled.input`
+  padding: 9px 0px 7px 8px;
+  background-color: #FAFAFA;
+  font-size: 13px;
+  line-height: 18px;
+  width: 500px;
+  color: #262626;
+  border: 1px solid #DBDBDB;
+  outline: none;
+  border-radius: 5px;
+  height: 30px;
+  margin-bottom: 12px;
+`;
+
+const QuestionButton=styled.button`
+margin-left: 15px;
+padding: 8px 24px;
+background-color:#6fa1f6;
+border-radius:50px;
+margin:8px;
+border:1px solid #6fa1f6;
+width:5vw;
+font-size:15px;
+color:#fff;
+cursor:point;
 `;
 
 export default Detail;
