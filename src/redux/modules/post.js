@@ -104,7 +104,7 @@ const getMainAPI = () => {
         price: _post.price,
         content: _post.content,
       };
-        post_list.unshift(post);
+        post_list.push(post);
       })
 
       console.log(post_list);
@@ -165,35 +165,21 @@ const editPostAPI = (boardId, post) => {
       console.log("게시물이 없습니다!");
       return;
     }
-      
-    // const _post_idx = getState().post.list.findIndex((p) => p.id == boardId);
-    // const _posts = getState().post.list
-    // console.log(_posts)
-    // console.log(_post_idx) 
-    // const _post = getState().post.list[_post_idx];
 
-    const _image = getState().image.preview;
+    // const _image = getState().image.preview;
     const post_list = getState().post.list;
     console.log(post_list);
     const target_idx = post_list.findIndex((p) => p.id == boardId);
     console.log(target_idx);
     const post_target = post_list[target_idx]
     console.log(post_target);
-    
-    //0421 Post에 있는 img_url 가져와보기 ?? 아님 그냥 img_url인가...
-    // const _img_url=getState().post.list.image_url;
-    
-    // console.log(_post);
 
-  //여기서 image_url 가져올수없다고 자꾸 에러뜸
-  //프리뷰에 있는 이미지(_image)랑 post에 있는 이미지랑 같니?
-
-    if(_image == post_target.image_url) {  // 같은 이미지라면 
+    if(!post.image) { // 같은 이미지를 그대로 두는 경우
       
       const formData = new FormData();
       //formData.append('file', post.image);
-     //console.log(post.imgUrl); //imgUrl을 못받아오고있음
-      // formData.append('imgUrl', post.imgUrl);
+      // console.log(post.imgUrl); //imgUrl을 못받아오고있음
+      formData.append('imgUrl', post_target.image_url);
       formData.append('title', post.title);
       formData.append('price', post.price);
       formData.append('content', post.content);
@@ -214,21 +200,25 @@ const editPostAPI = (boardId, post) => {
             content: post.content,
           }
           dispatch(editPost(post_info, boardId))  // 리덕스에서도 수정하기.
-          history.replace("/");
-        }).catch((error) => {
+        })
+        .then(() => {
+          dispatch(getMainAPI());
+          history.push("/");
+        })
+        .catch((error) => {
           console.log(error);
           window.alert("상품게시물이 수정되지 않았습니다.")
         })
         return;
       
-      } else {
+      } else {  // 사진을 바꿀 때
         const formData = new FormData();
         formData.append('file', post.image);
         // formData.append('imgUrl', post.);
         formData.append('title', post.title);
         formData.append('price', post.price);
         formData.append('content', post.content);
-        
+
         const _token = localStorage.getItem("Authorization");
         let token = {
         headers : {Authorization: `${_token}`}
@@ -240,14 +230,20 @@ const editPostAPI = (boardId, post) => {
           .then((response) => {
             console.log(response.data);
             let post_info = {
-              image_url: response.data.imageUrl,
+              image_url: response.data.imgUrl,
               title: post.title,
               price: post.price,
               content: post.content,
             }
             dispatch(editPost(post_info, boardId))  // 리덕스에서도 수정하기.
-            history.replace("/");
-          }).catch((error) => {
+            // history.replace("/");
+            dispatch(imageActions.setPreview("http://via.placeholder.com/400x300"));
+          })
+          .then(() => {
+            dispatch(getMainAPI());
+            history.push("/");
+          })
+          .catch((error) => {
             console.log(error);
             window.alert("상품게시물이 수정되지 않았습니다.")
           })
@@ -298,9 +294,13 @@ export default handleActions({
     }),
 
     [EDIT_POST]: (state, action) => produce(state, (draft) => {
-      let idx = draft.list.findIndex((p) => p.id === action.payload.post_id);
-      //찾았으면 몇번쨰고 
+      let idx = draft.list.findIndex((p) => p.id == action.payload.post_id);
+      //찾았으면 몇번쨰고
+      console.log(idx);
+      console.log(action.payload.post_id);
       draft.list[idx] = {...draft.list[idx], ...action.payload.post}
+      console.log(draft.list[idx]);
+      console.log(action.payload);
     }),
     
     [DELETE_POST]: (state, action) => produce(state, (draft) => {
