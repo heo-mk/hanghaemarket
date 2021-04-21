@@ -36,11 +36,12 @@ const Detail =(props)=>{
     // const is_chat = chat_list ? true : false;  // 채팅리스트가 있는가?
     console.log(is_me);
     console.log(user_info);
-
-    React.useEffect(() => {
-      dispatch(postActions.getPostAPI(detail_id));
+    
+ 
+    // React.useEffect(() => {
+    //   dispatch(postActions.getPostAPI(detail_id));
       
-    }, []);
+    // }, []);
     
     const post_info = useSelector((state) => state.post.list[detail_id])
     console.log(post_info);
@@ -82,12 +83,12 @@ const Detail =(props)=>{
     <React.Fragment>
         <DetailMainContainer>
         <SellInfo>
-            <ImgBox><img src={img} width="400px" height="400px"></img></ImgBox>
+            <ImgBox><img src={post_info.image_url} width="400px" height="400px"></img></ImgBox>
             <InfoBox>
                 <ProductContentsBox>
                     
-                    <div>{post_info.title} {props.title}</div>
-                    <PriceBox><p><span>110,000</span> 원</p></PriceBox>
+                    <TitleBox>{post_info.title}</TitleBox>
+                    <PriceBox><p><span>{post_info.price}</span> 원</p></PriceBox>
                     <IconsBox>
                         <FavoriteIcon style={{ fontSize: 20,  margin: "5px 10px", color:"#CCCCCC" }}/>    
                         <VisibilityIcon style={{ fontSize: 25,  margin: "5px 10px", color:"#CCCCCC" }}/>
@@ -194,6 +195,8 @@ padding-bottom: 20px;
 
 `;
 
+const TitleBox=styled.div`
+`;
 const ImgBox=styled.div`
 margin-top: 10px;
 margin-right: 150px;
