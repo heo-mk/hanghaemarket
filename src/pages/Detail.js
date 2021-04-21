@@ -88,7 +88,7 @@ const Detail =(props)=>{
     <React.Fragment>
         <DetailMainContainer>
         <SellInfo>
-            <ImgBox><img src={img} width="400px" height="400px"></img></ImgBox>
+            <ImgBox><img src={post_info.image_url} width="400px" height="400px"></img></ImgBox>
             <InfoBox>
                 <ProductContentsBox>
                     
@@ -200,6 +200,8 @@ padding-bottom: 20px;
 
 `;
 
+const TitleBox=styled.div`
+`;
 const ImgBox=styled.div`
 margin-top: 10px;
 margin-right: 150px;
