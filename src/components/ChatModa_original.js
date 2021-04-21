@@ -25,7 +25,7 @@ const ChatModal = (props) => {
   
   const dispatch = useDispatch();
   const is_login = useSelector((state) => state.user.is_login);
-  
+  // const [chats, setChats] = useState();
 
   // 토큰
   const dispatch = useDispatch();
@@ -33,108 +33,39 @@ const ChatModal = (props) => {
 
   // 보낼 메시지 텍스트
   const messageText = useSelector((state) => state.chat.messageText);
-  let sender = useSelector((state) => state.user.user?.username);
-  if (!sender) {
-    sender = localStorage.getItem('email');
-  }
+
 
   const is_me = useSelector((state) => state.user.user.uid);
   const user_info = useSelector((state) => state.user.user);
-  // const chat_info = useSelector((state) => state.chat.list[props.id]);
-  const [chats, setChats] = useState();
-  const ok_submit = chats ? true : false;
+  const chat_list = useSelector((state) => state.comment.list[props.id]);
+  const is_chat = chat_list ? true : false;
 
+  console.log(is_login)
+  
+  const ok_submit = chats? true: false;
+  console.log(props)
+
+  // 입력된 데이터를 채팅글귀용 데이터로 설정하는 함수
   const selectChat = (e) => {
     console.log(e.target.value);
     setChats(e.target.value);
   }
 
-
-  // 웹소켓 연결, 구독
-  async function wsConnectSubscribe() {
-    try {
-      await ws.connect(
-        {
-          token: token,
-        },
-        () => {
-          ws.subscribe(
-            `/sub/api/chat/rooms/${roomId}`,
-            (data) => {
-              const newMessage = JSON.parse(data.body);
-              dispatch(chatActions.getMessage(newMessage));
-            },
-            {token: token}
-          );
-        }
-      );
-    } catch (error) {
-      conole.log(error)
+  
+  // 채팅글귀 데이터를 전송하는 함수
+  const addChat = () => {
+    // if(!contents) {
+    //   return;
+    // }
+    let chat = {
+      chat: chats,  // 입력한 채팅메시지
+      username: user_info.username,
+      useremail: user_info.email,
+      // profileUrl: user_info.
     }
-  } 
-
-  // 웹소켓이 연결될 때까지 실행하는 함수
-  function waitForConnection(ws, callback) {
-    setTimeout(
-      function () {
-        // 연결되면 콜백함수 실행
-        if (ws.ws.readyState === 1) {
-          callback();
-          // 연결 안되면 재호출
-        } else {
-          waitForConnection(ws, callback);
-        }
-      }, 1 // 1밀리초 간격으로 실행
-    )
+    console.log(chat);
+    dispatch(chatActions.addChatAPI(chat))
   }
-
-  // 메시지 보내기
-  async function sendMessage(){
-    try {
-      // token이 없으면 로그인 페이지로 이동
-      if (!token) {
-        alert('토큰이 없습니다. 다시 로그인 해주세요!');
-        history.replace('/');
-      }
-      // send할 데이터
-      const data = {
-        type: 'TALK',
-        roomId: roomId,
-        sender: sender,
-        message: messageText,
-        senderEmail: null,
-      }
-      // 빈문자열이면 리턴
-      if (messageText === "" ) {
-        return;
-      }
-      // 로딩 중
-      dispatch(chatActions.isloading());
-      waitForConnection(ws, function () {
-        ws.send(
-          '/api/chat/message',
-          {token: token},
-          JSON.stringify(data)
-        );
-        console.log(ws.ws.readyState);
-        dispatch(chatActions.writeMessage(''))
-      })
-    } catch (error) {
-      console.log(error);
-      console.log(ws.ws.readyState);
-    }
-  }
-
-
-  // 렌더링 될 때 마다 연결, 구독. 다른 방으로 옮길 때 연결, 구독 해제
-  React.useEffect(() => {
-
-    wsConnectSubscribe();
-    return () => {
-      wsDisConnectUnsubscribe();
-    };
-  }, [roomId]);
-
 
   // 시간을 설정해주는 함수.
   const timeForToday = (value) => {
@@ -174,7 +105,7 @@ const ChatModal = (props) => {
       {/* 모달 본체 : 헤더 + 바디 + 맨 아래 채팅 입력창*/}
       <ModalComponent>
         <Header>
-          <ChatRoomInfo roomName={roomName}>
+          <ChatRoomInfo>
             {/* <ProCircle src={props.profile_image_url} /> */}
             <ProCircle/>
             <SellerOfThis>{props.username}</SellerOfThis>
@@ -182,17 +113,18 @@ const ChatModal = (props) => {
         </Header>
         <BodyChatBox>
           {props.is_chat ?
-          props.chat_info.map((c, idx) => {
-            <ChatBox>
-              {/* <ProCircle src={c.profile_url}/> */}
-              <Chat>
-                <div>
-                  <Chatername>{c.user_name}</Chatername>
-                    {c.chat}
-                  {/* <InsertTime>{timeForToday(props.insert_dt)}</InsertTime> */}
-                </div>
-              </Chat>
-            </ChatBox>
+          props.chat_list.map((c, idx) => {
+            return 
+              <ChatBox>
+                <ProCircle src={c.profile_url}/>
+                <Chat>
+                  <div>
+                    <Chatername>{c.user_name}</Chatername>
+                      {c.chat}
+                    <InsertTime>{timeForToday(props.insert_dt)}</InsertTime>
+                  </div>
+                </Chat>
+              </ChatBox>
           })
           : null}
 
@@ -201,8 +133,8 @@ const ChatModal = (props) => {
           <ChatInput 
               type="text"
               placeholder="채팅입력"
-              onChange={selectChat} 
-              value={chats}/>
+              onChange={selectComment} 
+              value={comments}/>
           {ok_submit ? 
             <ChatUpload onClick={addChat}>게시</ChatUpload> 
             : <ChatUpload style={{opacity: "0.3"}}>게시</ChatUpload> }

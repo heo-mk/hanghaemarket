@@ -68,7 +68,7 @@ const Detail =(props)=>{
         <SellInfo>
             <ImgBox><img src={img} width="400px" height="400px"></img></ImgBox>
             <InfoBox>
-                <ProductContentsBox>
+                <ProductContentsBox> 
                     <h3>애플워치6 스테인리스 싸게 팝니다.</h3>
                     <PriceBox><p><span>110,000</span> 원</p></PriceBox>
                     <IconsBox>

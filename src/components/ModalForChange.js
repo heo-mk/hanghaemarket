@@ -10,7 +10,6 @@ import { history } from "../redux/configureStore";
 import { useDispatch } from "react-redux"; 
 
 
-
 const ModalForChange = (props) => {
   const dispatch = useDispatch();
   
@@ -26,21 +25,21 @@ const ModalForChange = (props) => {
       {/* 여기까지는 모달 외부와 우측 상단 x표를 클릭하면 모달창이 없어지게 하는 요소들  */}
       <ModalBox>
         <EditBox 
-          onClick={(e) => {
+          onClick={() => {
             // e.prevent..., e.stopPro.. 이것들로 이벤트 버블링을 막는다
-            e.preventDefault();
-            e.stopPropagation();
+            // e.preventDefault();
+            // e.stopPropagation();
             // 클릭하면 게시물 수정 페이지로 이동
-            history.push(`/upload/${props.seller_id}`)
+            history.push(`/upload/${props.id}`)
             }}>게시물 수정</EditBox>
         <DeleteBox  
-          onClick={(e) => {
+          onClick={() => {
             // e.prevent..., e.stopPro.. 이것들로 이벤트 버블링을 막는다
-            e.preventDefault();
-            e.stopPropagation();
+            // e.preventDefault();
+            // e.stopPropagation();
             console.log(props)
             // 클릭하면 게시물 삭제
-            dispatch(postActions.deletePostAPI(props.seller_id));
+            dispatch(postActions.deletePostAPI(props.id));
             }}>게시물 삭제</DeleteBox>
       </ModalBox>
     </React.Fragment>

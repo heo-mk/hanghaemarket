@@ -120,13 +120,14 @@ const getMainAPI = () => {
 }
 
 // 서버에 있는 상품 데이터를 가져온다.
-const getPostAPI = (boardId) => {
+const getPostAPI = (boardId) => { 
   return function (dispatch, getState) {
 
     const _token = localStorage.getItem("Authorization");
     let token = {
       headers : { Authorization: `${_token}` }, 
     }
+
     
     const API = `http://seungwook.shop/boards/${boardId}/details`;
     axios.get(API, token)
@@ -166,8 +167,12 @@ const editPostAPI = (boardId, post) => {
       console.log("게시물이 없습니다!");
       return;
     }
+    
     const _image = getState().image.preview;
-    const _post_idx = getState().post.list.findIndex((p) => p.id === boardId);
+    const _post_idx = getState().post.list.findIndex((p) => p.id == boardId);
+    const _posts = getState().post.list
+    console.log(_posts)
+    console.log(_post_idx) 
     const _post = getState().post.list[_post_idx];
     
     console.log(_post);
@@ -175,8 +180,8 @@ const editPostAPI = (boardId, post) => {
   //여기서 image_url 가져올수없다고 자꾸 에러뜸
   //프리뷰에 있는 이미지(_image)랑 post에 있는 이미지랑 같니?
 
-    if(_image === _post.image_url) {  // 같은 이미지라면 
-      const formData = new formData();
+    if(_image == _post.image_url) {  // 같은 이미지라면 
+      const formData = new FormData();
       // formData.append('images', post.images);
       formData.append('title', post.title);
       formData.append('price', post.price);
@@ -206,7 +211,7 @@ const editPostAPI = (boardId, post) => {
         return;
       
       } else {
-        const formData = new formData();
+        const formData = new FormData();
         formData.append('file', post.image);
         // formData.append('imgUrl', post.imgUrl);
         formData.append('title', post.title);

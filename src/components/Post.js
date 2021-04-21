@@ -25,6 +25,7 @@ const Post = (props) =>{
   console.log(user_info); // 여기서 uid는 string
   const [ is_modal, setDetailModal ] = useState();
   const [ is_changemodal, setChangeModal] = useState();
+  // const BoradId = props.id;
 
 
   const openDetailModal = () => {
@@ -44,7 +45,8 @@ const Post = (props) =>{
   };
 
   const goDetail = () => {
-    history.replace("/boards/details/");
+    // dispatch(postAction.getPostAPI(boardId))
+    history.replace("/boards/details");
   }
 
     return(
@@ -52,12 +54,12 @@ const Post = (props) =>{
         //Grid안의 것들이 children으로 넘어감
         <React.Fragment>
         
-          <Grid onClick={goDetail} border="1px solid #eee" width="230px"  margin-right="11px" margin-bottom="11px"> 
+          <Grid border="1px solid #eee" width="230px"  margin-right="11px" margin-bottom="11px"> 
           {props.seller_id == is_me?
                   <MoreHorizIcon height="14px" width="14px" cursor="pointer" onClick={openChangeModal}/> 
                   : null}
             <Grid padding="16px">
-                <Image src={props.image_url}/>      
+                <Image src={props.image_url} onClick={goDetail}/>      
             </Grid>
             <Grid padding="16px">
               <Text bold size="14px">{props.title}</Text>
@@ -66,7 +68,7 @@ const Post = (props) =>{
                 <Text bold size="22px" margin="0">{props.price}</Text>
             </Grid>
             <Grid>
-               <Text bold size="14px">{props.content}</Text>
+              <Text bold size="14px">{props.content}</Text>
             </Grid>
           </Grid>
           
