@@ -17,12 +17,17 @@ import { actionCreators as userActions } from "../redux/modules/user"
 // import { actionCreators as chatActions} from "../redux/modules/chat"
 
 const Detail =(props)=>{
+   
+  
+    //여기에 클릭했을 때 getPostAPI 해온 정보들 가져오고싶음
+    
+    
     const dispatch = useDispatch();
     const is_login = useSelector((state) => state.user.is_login);
     const [ chat, setChats ] = useState();
     const [ is_chatmodal, setChatModal ] = useState();
     const [ btnChange, setBtnChange ] = useState(false);
-
+    
     const detail_id = props.match.params.id;  // 참고 사이트 : https://velopert.com/3417
     const is_me = useSelector((state) => state.user.user.username);  // 지금 로그인한 바로 나!
     const user_info = useSelector((state) => state.user.user);  // 
@@ -68,8 +73,14 @@ const Detail =(props)=>{
         <SellInfo>
             <ImgBox><img src={img} width="400px" height="400px"></img></ImgBox>
             <InfoBox>
+<<<<<<< HEAD
                 <ProductContentsBox> 
                     <h3>애플워치6 스테인리스 싸게 팝니다.</h3>
+=======
+                <ProductContentsBox>
+                    
+                    <h3>애플워치6 스테인리스 싸게 팝니다. {props.title}</h3>
+>>>>>>> upstream/main
                     <PriceBox><p><span>110,000</span> 원</p></PriceBox>
                     <IconsBox>
                         <FavoriteIcon style={{ fontSize: 20,  margin: "5px 10px", color:"#CCCCCC" }}/>    

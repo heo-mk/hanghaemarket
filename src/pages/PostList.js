@@ -19,7 +19,7 @@ const PostList = (props) => {
     return(
         <React.Fragment>
             <PostListContainer>
-                <h2>오늘의 상품 추천!</h2>     
+                <Title>오늘의 상품 추천!</Title>     
                 <WrapProducts>           
                     {post_list.map((p, idx) => {
                       return <Post key={p.id} {...p}/>
@@ -48,7 +48,7 @@ width:1000px;
 `;
 
 const Title=styled.h2`
-
+margin-top: 25px;
 `;
 
 const WrapProducts=styled.div`

@@ -76,7 +76,7 @@ const addPostAPI = (post) => {
       // dispatch(getPostAPI(boardId)); 
       // dispatch(deletePostAPI(boardId)), 이건 하지 않는다.
       dispatch(imageActions.setPreview("http://via.placeholder.com/400x300"));
-      // disaptch(addPost(post_list));
+      //disaptch(addPost(post_list));
       history.replace("/");
     }).catch((error) => {
       console.log(error)
@@ -175,14 +175,20 @@ const editPostAPI = (boardId, post) => {
     console.log(_post_idx) 
     const _post = getState().post.list[_post_idx];
     
+    //0421 Post에 있는 img_url 가져와보기 ?? 아님 그냥 img_url인가...
+    const _img_url=getState().post.list.image_url;
+    
     console.log(_post);
 
   //여기서 image_url 가져올수없다고 자꾸 에러뜸
   //프리뷰에 있는 이미지(_image)랑 post에 있는 이미지랑 같니?
 
-    if(_image == _post.image_url) {  // 같은 이미지라면 
+    if(_image === _post.image_url) {  // 같은 이미지라면 
+      
       const formData = new FormData();
-      // formData.append('images', post.images);
+      //formData.append('file', post.image);
+     //console.log(post.imgUrl); //imgUrl을 못받아오고있음
+      formData.append('imgUrl', post.imgUrl);
       formData.append('title', post.title);
       formData.append('price', post.price);
       formData.append('content', post.content);

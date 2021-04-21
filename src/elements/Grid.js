@@ -11,6 +11,7 @@ const Grid =(props)=>{
         margin:margin,
         padding:padding,
         bg:bg,
+        
     };
     return(
         <React.Fragment>
@@ -42,5 +43,6 @@ const GridBox=styled.div`
          `display: flex; 
          align-items: center;
          justify-content: space-between; `:""}
+
 `;
 export default Grid;
