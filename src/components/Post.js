@@ -31,7 +31,6 @@ const Post = (props) =>{
   
   const BoardId=props.id;
   const BoardTitle=props.title;
-  console.log(BoardTitle);
 
   const openDetailModal = () => {
     setDetailModal(true);
@@ -50,11 +49,11 @@ const Post = (props) =>{
     setChangeModal(false);
   };
 
-  const goDetail = (e) => {
+  const goDetail = () => {
 
-    dispatch(postActions.getPostAPI(BoardId));
-    
-    history.replace("/boards/details/");
+    // dispatch(postActions.getPostAPI(BoardId));
+    // history.replace("/boards/details/");
+    history.push(`/boards/details/${BoardId}`);
   }
 
     return(

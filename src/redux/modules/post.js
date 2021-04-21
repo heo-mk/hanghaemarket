@@ -23,7 +23,7 @@ const editPost = createAction(EDIT_POST, (post, post_id) => ({post, post_id}));
 const deletePost = createAction(DELETE_POST, (id) => ({id}));
 
 
-//initialStates
+//initialStates   state => state.post.list
 const initialState={
   list : [
     

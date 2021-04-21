@@ -14,10 +14,11 @@ import ProductInfoTab from '../elements/ProductInfoTab';
 import { history } from "../redux/configureStore";
 import { useDispatch, useSelector } from "react-redux"; 
 import { actionCreators as userActions } from "../redux/modules/user"
+import { actionCreators as postActions } from "../redux/modules/post"
 // import { actionCreators as chatActions} from "../redux/modules/chat"
 
 const Detail =(props)=>{
-   
+
   
     //여기에 클릭했을 때 getPostAPI 해온 정보들 가져오고싶음
   
@@ -28,13 +29,22 @@ const Detail =(props)=>{
     const [ is_chatmodal, setChatModal ] = useState();
     const [ btnChange, setBtnChange ] = useState(false);
     
-
-    const detail_id = props.match.params.id;  // 참고 사이트 : https://velopert.com/3417
+    const detail_id = props.match.params.ids;  // 참고 사이트 : https://velopert.com/3417
     const is_me = useSelector((state) => state.user.user.username);  // 지금 로그인한 바로 나!
     const user_info = useSelector((state) => state.user.user);  // 
     // const chat_list = useSelector((state) => state.chat.list[props.id]);  // 채팅리스트를 가져온다
     // const is_chat = chat_list ? true : false;  // 채팅리스트가 있는가?
+    console.log(is_me);
+    console.log(user_info);
+
+    React.useEffect(() => {
+      dispatch(postActions.getPostAPI(detail_id));
+      
+    }, []);
     
+    const post_info = useSelector((state) => state.post.list[detail_id])
+    console.log(post_info);
+
     const changeHeart = () => {
       setBtnChange(!btnChange);
     };
@@ -76,7 +86,7 @@ const Detail =(props)=>{
             <InfoBox>
                 <ProductContentsBox>
                     
-                    <h3>애플워치6 스테인리스 싸게 팝니다. {props.title}</h3>
+                    <div>{post_info.title} {props.title}</div>
                     <PriceBox><p><span>110,000</span> 원</p></PriceBox>
                     <IconsBox>
                         <FavoriteIcon style={{ fontSize: 20,  margin: "5px 10px", color:"#CCCCCC" }}/>    
