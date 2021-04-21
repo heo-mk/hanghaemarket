@@ -20,7 +20,7 @@ const Detail =(props)=>{
    
   
     //여기에 클릭했을 때 getPostAPI 해온 정보들 가져오고싶음
-    
+  
     
     const dispatch = useDispatch();
     const is_login = useSelector((state) => state.user.is_login);
@@ -28,6 +28,7 @@ const Detail =(props)=>{
     const [ is_chatmodal, setChatModal ] = useState();
     const [ btnChange, setBtnChange ] = useState(false);
     
+
     const detail_id = props.match.params.id;  // 참고 사이트 : https://velopert.com/3417
     const is_me = useSelector((state) => state.user.user.username);  // 지금 로그인한 바로 나!
     const user_info = useSelector((state) => state.user.user);  // 

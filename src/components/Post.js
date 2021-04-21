@@ -31,7 +31,7 @@ const Post = (props) =>{
   
   const BoardId=props.id;
   const BoardTitle=props.title;
- 
+  console.log(BoardTitle);
 
   const openDetailModal = () => {
     setDetailModal(true);
@@ -52,7 +52,7 @@ const Post = (props) =>{
 
   const goDetail = (e) => {
 
-    dispatch(postActions.getPostAPI(BoardId,BoardTitle));
+    dispatch(postActions.getPostAPI(BoardId));
     
     history.replace("/boards/details/");
   }
