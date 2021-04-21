@@ -14,13 +14,14 @@ const setUser = createAction(SET_USER, (user) => ({user}));
 const logOut = createAction(LOG_OUT, (user) => ({user}));
 
 // 초기 스테이트 : initial State
-const initialState = {
+const initialState = {  
   user: {
     username: "",
     password: "", 
     email: "", 
     city: "",
     street: "",
+    uid: "",
     // profile: "",
   },
   is_login: false,
@@ -196,7 +197,14 @@ export default handleActions(
       draft.is_login = true;
     }),
     [LOG_OUT]: (state, action) => produce(state, (draft) => {
-      draft.user = null;
+      draft.user = {
+                      username: "",
+                      password: "", 
+                      email: "", 
+                      city: "",
+                      street: "",
+                      uid: "",
+                  } 
       draft.is_login = false;
     }),
   },
