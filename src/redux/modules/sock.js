@@ -12,7 +12,7 @@ export const ChatContainer = ({}) => {
   const [username, setUsername] = React.useState('');
   const [message, setMessage] = React.useState("");
 
-  .useEffect(()=>{
+  React.useEffect(()=>{
     stompClient.connect({},()=>{
       stompClient.subscribe('/topic/userEmail',(data)=>{  // email로 방구분
         const newMessage : message = JSON.parse(data.body) as message;
