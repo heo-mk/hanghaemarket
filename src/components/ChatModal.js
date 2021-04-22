@@ -195,7 +195,7 @@ const ChatModal = (props) => {
       <Component onClick={props.close}/>
       <ExitContainer>
         <ExitBtn onClick={props.close}>
-          <CloseIcon fontsize="large"/>
+          <CloseIcon fontSize="large"/>
         </ExitBtn>
       </ExitContainer>
       {/* 모달 본체 : 헤더 + 바디 + 맨 아래 채팅 입력창*/}
