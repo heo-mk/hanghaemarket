@@ -43,8 +43,6 @@ margin:auto;
 background:#fff;
 height:100vh;
 width:1000px;
-
-
 `;
 
 const Title=styled.h2`
@@ -55,7 +53,7 @@ const WrapProducts=styled.div`
 display:flex;
 flex-direction:row;
 flex-wrap:wrap;
-justify-content:space-evenly;
+justify-content: flex-start;
 `;
 
 export default PostList;

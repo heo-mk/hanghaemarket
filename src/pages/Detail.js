@@ -38,6 +38,9 @@ const Detail =(props)=>{
     console.log(user_info);
     console.log(detail_id);
 
+    const BoardId=props.id;
+ 
+
     // React.useEffect(() => {
     //   dispatch(postActions.getPostAPI(detail_id));
       
@@ -55,6 +58,17 @@ const Detail =(props)=>{
       setBtnChange(!btnChange);
     };
 
+    const likeSubmit = () => {
+      let post = {//입력하는거
+        like_check:false
+      }
+      
+      console.log(post) //작은 포스트 안에 라이크cnt있음
+      dispatch(postActions.getHeartAPI(BoardId));//라이크서브밋함수에서 입력 받아서 editlikeax 미들웨어로 보내주기
+
+    }
+    
+    
     // React.useEffect(() => {
     //   dispatch(chatActions.getChatAPI.())
     // }, [])
@@ -105,18 +119,20 @@ const Detail =(props)=>{
                 <ButtonBox>
                   
                     <LikeButton
-                      onClick={(e)=>{
-                        if(btnChange===false)
-                        {
-                          changeHeart();
-                          e.preventDefault();
-                          e.stopPropagation();
-                        }else{
-                          changeHeart();
-                          e.preventDefault();
-                          e.stopPropagation();
-                        }
-                      }}>
+                      onClick={likeSubmit}
+                      // onClick={(e)=>{
+                      //   if(btnChange===false)
+                      //   {
+                      //     changeHeart();
+                      //     e.preventDefault();
+                      //     e.stopPropagation();
+                      //   }else{
+                      //     changeHeart();
+                      //     e.preventDefault();
+                      //     e.stopPropagation();
+                      //   }
+                      // }}
+                      >
                     {btnChange===false? <FavoriteBorderIcon style={{ fontSize: 15, margin: "0 10px" }}/>:<FavoriteIcon style={{ fontSize: 15 }}/>}
                         {/* <HeartStyle>
                             <FavoriteBorderIcon style={{ fontSize: 15 }}/>
