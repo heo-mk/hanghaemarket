@@ -30,7 +30,7 @@ const Post = (props) =>{
   const [ is_changemodal, setChangeModal] = useState();
   
   const BoardId=props.id;
- 
+
 
   const openDetailModal = () => {
     setDetailModal(true);
@@ -51,7 +51,7 @@ const Post = (props) =>{
 
   const goDetail = () => {
 
-    //dispatch(postActions.getPostAPI(BoardId));
+    // dispatch(postActions.getPostAPI(BoardId));
     //dispatch(postActions.getHeartAPI(BoardId));//살렸음
     // history.replace("/boards/details/");
     history.push(`/boards/details/${BoardId}`);

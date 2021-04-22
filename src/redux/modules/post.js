@@ -30,7 +30,6 @@ const getHeart = createAction(GET_HEART, (heart) => ({ heart }));
 const initialState={
   list : [], // 메인페이지 포스트들의 정보를 배열로 모은다
   detail_list : [], // 디테일 페이지 하나하나의 정보를 배열로 모은다
- 
   heart: {
 
   }
@@ -67,9 +66,10 @@ const addPostAPI = (post) => {
   let token = {
     headers : { Authorization: `${_token}` }, 
   }
-  
-  //지은 const API = 'http://seungwook.shop/boards';
-  const API = 'http://seungwook.shop/boards';
+
+  // const API = 'http://52.78.12.253/boards';
+  const API = "http://seungwook.shop/boards";
+  // const API = 'http://seungwook.shop/boards';
   axios.post(API, formData, token)
     .then((response) => {
       console.log(response.data)
@@ -95,7 +95,7 @@ const addPostAPI = (post) => {
 // 지은 const API = 'http://seungwook.shop/main';   
 const getMainAPI = () => {
   return function (dispatch, getState) {
-    
+  // const API = 'http://52.78.12.253/main';   
   const API = 'http://seungwook.shop/main';   
   axios.get(API)
     .then((response) => {
@@ -131,13 +131,12 @@ const getMainAPI = () => {
 // 서버에 있는 상품 데이터를 가져온다.
 const getPostAPI = (boardId) => { 
   return function (dispatch, getState) {
-    console.log(boardId);
-    
     const _token = localStorage.getItem("Authorization");
     let token = {
       headers : { Authorization: `${_token}` }, 
     }
-   // 지은 const API = `http://seungwook.shop/boards/${boardId}/details`;
+
+    // const API = `http://52.78.12.253/boards/${boardId}/details`;
     const API = `http://seungwook.shop/boards/${boardId}/details`;
     axios.get(API, token)
       .then((response) => {
@@ -149,8 +148,8 @@ const getPostAPI = (boardId) => {
           id: boardId, 
           seller_id: response.data.userId,  // 작성자 id, 노션에는 response에 작성자 정보가 없음.
           // 수정할 때 변경할 데이터는 아래 네가지
-          email: response.data.userEmail, 
-          image_url: response.data.imgUrl, 
+          email: response.data.userEmail,
+          image_url: response.data.imgUrl,
           title: response.data.title,
           price: response.data.price,
           content: response.data.content,
@@ -199,7 +198,8 @@ const editPostAPI = (boardId, post) => {
       }
 
       console.log(post)
-      // 지은 const API = `http://seungwook.shop/boards/${boardId}`;
+      // const API = "http://seungwook.shop/boards/${boardId}";
+      // const API = `http://52.78.12.253/${boardId}`;
       const API = `http://seungwook.shop/boards/${boardId}`;
       axios.put(API, formData, token)
         .then((response) => {
@@ -235,8 +235,8 @@ const editPostAPI = (boardId, post) => {
         }
     
         console.log(post)
-        // 지은 const API = `http://seungwook.shop/boards/${boardId}`;
         const API = `http://seungwook.shop/boards/${boardId}`;
+        // const API = `http://52.78.12.253/boards/${boardId}`;
         axios.put(API, formData, token) //수정하라고 요청
           .then((response) => {
             console.log(response.data);

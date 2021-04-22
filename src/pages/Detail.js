@@ -38,10 +38,18 @@ const Detail =(props)=>{
     console.log(is_me);
     console.log(user_info);
     console.log(detail_id);
-    
-    
-    const post_list = useSelector((state) => state.post.detail_list);
-   
+    // dispatch(postActions.getPostAPI(detail_id));
+
+    React.useEffect(() => {
+      dispatch(postActions.getPostAPI(detail_id));
+    }, []);
+
+    const post_list = useSelector((state) => {
+      // console.log(state)
+      // window.alert('')
+      return state.post.detail_list
+    });
+
     console.log(post_list);
     const target_idx = post_list.findIndex((p) => p.id == detail_id);
     console.log(target_idx);
@@ -98,8 +106,11 @@ const Detail =(props)=>{
     //   setChats(e.target.value);
     // };
 
-    return (
-    <React.Fragment>
+    return ( 
+      <>
+      {post_target && 
+    <React.Fragment> 
+      
         <DetailMainContainer>
         <SellInfo>
             <ImgBox><img src={post_target.image_url} width="400px" height="400px"></img></ImgBox>
@@ -192,7 +203,8 @@ const Detail =(props)=>{
           />
           : null}
     </React.Fragment>
-        
+      }
+      </>
     );
 }
 
