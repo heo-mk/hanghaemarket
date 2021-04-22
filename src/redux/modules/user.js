@@ -46,7 +46,8 @@ const signupAPI = (email, password, username, city, street) => {
     // }
     console.log(email, password, username, city, street);
     
-    const API = "http://seungwook.shop/signups";
+    // const API = "http://seungwook.shop/signups";
+    const API = "http://52.78.12.253/signups";
     console.log(API);
 
     axios.post(API,
@@ -88,7 +89,7 @@ const loginAPI = (username, password) => {
   return function (dispatch, getState, {history}) {
 
     console.log(username, password);
-    const API = 'http://seungwook.shop/login';
+    const API = 'http://52.78.12.253/login';
     axios.post(API, {
       // 클라이언트에서 서버로 request(요청)하며 보내주는 데이터
       // 로그인창에서 클라이언트가 입력하는 데이터

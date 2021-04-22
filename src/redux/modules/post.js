@@ -12,6 +12,7 @@ import moment from "moment";
 //Actions
 const ADD_POST = "ADD_POST";  // 상품 정보 추가하기
 const SET_POST = "SET_POST";  // Post들 가져와서 화면에 뿌리기
+const SET_DETAIL_POST = "SET_DETAIL_POST" // 디테일 Post 정보 가져오기.
 const EDIT_POST = "EDIT_POST";  // Post 수정 
 const DELETE_POST= "DELETE_POST";  // Post 삭제
 
@@ -19,14 +20,15 @@ const DELETE_POST= "DELETE_POST";  // Post 삭제
 //타입, 파라미터 넘겨준거 적기
 const addPost = createAction(ADD_POST, (post) => ({post}));
 const setPost = createAction(SET_POST, (post_list) => ({post_list}));
+const setDetailPost = createAction(SET_DETAIL_POST, (post_list) => ({post_list}));
 const editPost = createAction(EDIT_POST, (post, post_id) => ({post, post_id}));
 const deletePost = createAction(DELETE_POST, (id) => ({id}));
 
 
 //initialStates   state => state.post.list
 const initialState={
-  list : [],
-
+  list : [], // 메인페이지 포스트들의 정보를 배열로 모은다
+  detail_list : [], // 디테일 페이지 하나하나의 정보를 배열로 모은다
 };
 
 
@@ -60,7 +62,7 @@ const addPostAPI = (post) => {
     headers : { Authorization: `${_token}` }, 
   }
 
-  const API = 'http://seungwook.shop/boards';
+  const API = 'http://52.78.12.253/boards';
   axios.post(API, formData, token)
     .then((response) => {
       console.log(response.data)
@@ -85,7 +87,7 @@ const addPostAPI = (post) => {
 
 const getMainAPI = () => {
   return function (dispatch, getState) {
-  const API = 'http://seungwook.shop/main';   
+  const API = 'http://52.78.12.253/main';   
   axios.get(API)
     .then((response) => {
     console.log(response.data)
@@ -127,13 +129,12 @@ const getPostAPI = (boardId) => {
     }
 
     
-    const API = `http://seungwook.shop/boards/${boardId}/details`;
+    const API = `http://52.78.12.253/${boardId}/details`;
     axios.get(API, token)
       .then((response) => {
         console.log(response.data);
 
-        let post_list = [];
-
+        let detail_post = [];
         let post = {
           // id: _post.id, 설명용. 이게 아니라 아래것을 쓸 것이다.
           id: boardId, 
@@ -141,15 +142,15 @@ const getPostAPI = (boardId) => {
           // 수정할 때 변경할 데이터는 아래 네가지
           email: response.data.userEmail,
           image_url: response.data.imageUrl,
+          // image_url: response.data.imgUrl, ??
           title: response.data.title,
           price: response.data.price,
           content: response.data.content,
         }
         
-      post_list.unshift(post); // 최신순으로 포스트가 정렬되게 unshift로 한다.
-      console.log(post_list);
-      dispatch(setPost(post_list));
-      
+      detail_post.unshift(post); // 최신순으로 포스트가 정렬되게 unshift로 한다.
+      console.log(detail_post);
+      dispatch(setDetailPost(detail_post)); // 리덕스의 값 변경
     }).catch((error) => {
       window.alert("상품게시물을 가져오지 못했습니다.");
       console.log(error);
@@ -190,7 +191,7 @@ const editPostAPI = (boardId, post) => {
       }
 
       console.log(post)
-      const API = `http://seungwook.shop/boards/${boardId}`;
+      const API = `http://52.78.12.253/${boardId}`;
       axios.put(API, formData, token)
         .then((response) => {
           console.log(response.data);
@@ -225,7 +226,7 @@ const editPostAPI = (boardId, post) => {
         }
     
         console.log(post)
-        const API = `http://seungwook.shop/boards/${boardId}`;
+        const API = `http://52.78.12.253/${boardId}`;
         axios.put(API, formData, token) //수정하라고 요청
           .then((response) => {
             console.log(response.data);
@@ -261,7 +262,7 @@ const deletePostAPI = (boardId) => {
     headers : { Authorization: `${_token}`}
   }
 
-  const API = `http://seungwook.shop/boards/${boardId}`;
+  const API = `http://52.78.12.253/${boardId}`;
   axios.delete(API, token)
     .then((response) => {
       console.log(response.data);
@@ -294,6 +295,11 @@ export default handleActions({
       }, [])
     }),
 
+    [SET_DETAIL_POST]: (state, action) => produce(state, (draft) => {
+      draft.detail_list = action.payload.post_list;
+      console.log(draft.detail_list);
+    }),
+
     [EDIT_POST]: (state, action) => produce(state, (draft) => {
       let idx = draft.list.findIndex((p) => p.id == action.payload.post_id);
       //찾았으면 몇번쨰고
@@ -319,14 +325,15 @@ export default handleActions({
 //action creator export
 const actionCreators={
     setPost,
+    setDetailPost,
     addPost,
     editPost,
     deletePost,
     addPostAPI,
+    getMainAPI,
     getPostAPI,
     editPostAPI,
     deletePostAPI,
-    getMainAPI,
 };
 
 export { actionCreators };
