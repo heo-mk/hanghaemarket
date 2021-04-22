@@ -35,7 +35,6 @@ const PostListMainContainer = styled.div`
   padding-top: 90px; 
   display: flex;
   flex-direction: column;
-
 `;
 
 const PostListContainer=styled.div`
@@ -43,6 +42,11 @@ margin:auto;
 background:#fff;
 height:100vh;
 width:1000px;
+
+@media (max-width: 975) {
+  width: 80%;
+  height: auto;  
+}
 `;
 
 const Title=styled.h2`

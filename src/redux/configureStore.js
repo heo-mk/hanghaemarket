@@ -7,7 +7,7 @@ import { connectRouter } from "connected-react-router"
 import User from './modules/user'
 import Post from "./modules/post"
 import Image from "./modules/image"
-// import Chat from "./modules/chat"
+import Chat from "./modules/chat"
 
 
 export const history = createBrowserHistory()
@@ -16,7 +16,7 @@ const rootReducer = combineReducers({
 //   comment: Comment,
   user: User,
   post: Post, //Detail.js에 있는 state. const post_list = useSelector((state) => state.post.detail_list);
-  // chat: Chat,
+  chat: Chat,
   image: Image,
   router: connectRouter(history),
 })
