@@ -51,7 +51,7 @@ const Post = (props) =>{
 
   const goDetail = () => {
 
-    // dispatch(postActions.getPostAPI(BoardId));
+    //dispatch(postActions.getHeartAPI(BoardId));//살렸음
     // history.replace("/boards/details/");
     history.push(`/boards/details/${BoardId}`);
   }
@@ -111,6 +111,7 @@ border-radius: "30px";
 
 const WrapModal=styled.div`
 margin-left: 200px;
+height:10px;
 `;
 
 const ImgDiv=styled.div`

@@ -28,7 +28,8 @@ const Detail =(props)=>{
     const [ chat, setChats ] = useState();
     const [ is_chatmodal, setChatModal ] = useState();
     const [ btnChange, setBtnChange ] = useState(false);
-    
+
+    const BoardId=props.id;
     const detail_id = props.match.params.ids;  // 참고 사이트 : https://velopert.com/3417
     const is_me = useSelector((state) => state.user.user.username);  // 지금 로그인한 바로 나!
     const user_info = useSelector((state) => state.user.user);  // 
@@ -69,6 +70,16 @@ const Detail =(props)=>{
       setChatModal(false);
     };
 
+    const likeSubmit = () => {
+      let post = {//입력하는거
+        like_check:false
+      }
+      console.log(post) //작은 포스트 안에 라이크cnt있음
+      dispatch(postActions.getHeartAPI(BoardId));//라이크서브밋함수에서 입력 받아서 editlikeax 미들웨어로 보내주기
+
+    }
+    
+    
     // React.useEffect(() => {
     //   dispatch(chatActions.getChatAPI.())
     // }, [])
@@ -100,18 +111,20 @@ const Detail =(props)=>{
                 <ButtonBox>
                   
                     <LikeButton
-                      onClick={(e)=>{
-                        if(btnChange===false)
-                        {
-                          changeHeart();
-                          e.preventDefault();
-                          e.stopPropagation();
-                        }else{
-                          changeHeart();
-                          e.preventDefault();
-                          e.stopPropagation();
-                        }
-                      }}>
+                      onClick={likeSubmit}
+                      // onClick={(e)=>{
+                      //   if(btnChange===false)
+                      //   {
+                      //     changeHeart();
+                      //     e.preventDefault();
+                      //     e.stopPropagation();
+                      //   }else{
+                      //     changeHeart();
+                      //     e.preventDefault();
+                      //     e.stopPropagation();
+                      //   }
+                      // }}
+                      >
                     {btnChange===false? <FavoriteBorderIcon style={{ fontSize: 15, margin: "0 10px" }}/>:<FavoriteIcon style={{ fontSize: 15 }}/>}
                         {/* <HeartStyle>
                             <FavoriteBorderIcon style={{ fontSize: 15 }}/>

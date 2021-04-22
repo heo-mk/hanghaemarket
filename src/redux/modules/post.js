@@ -15,6 +15,7 @@ const SET_POST = "SET_POST";  // Post들 가져와서 화면에 뿌리기
 const SET_DETAIL_POST = "SET_DETAIL_POST" // 디테일 Post 정보 가져오기.
 const EDIT_POST = "EDIT_POST";  // Post 수정 
 const DELETE_POST= "DELETE_POST";  // Post 삭제
+const GET_HEART = "GET_HEART";
 
 //ActionCreaters
 //타입, 파라미터 넘겨준거 적기
@@ -23,12 +24,20 @@ const setPost = createAction(SET_POST, (post_list) => ({post_list}));
 const setDetailPost = createAction(SET_DETAIL_POST, (post_list) => ({post_list}));
 const editPost = createAction(EDIT_POST, (post, post_id) => ({post, post_id}));
 const deletePost = createAction(DELETE_POST, (id) => ({id}));
-
+const getHeart = createAction(GET_HEART, (heart) => ({ heart }));
 
 //initialStates   state => state.post.list
 const initialState={
+<<<<<<< HEAD
   list : [], // 메인페이지 포스트들의 정보를 배열로 모은다
   detail_list : [], // 디테일 페이지 하나하나의 정보를 배열로 모은다
+=======
+  list : [],
+  heart: {
+
+  }
+
+>>>>>>> upstream/main
 };
 
 
@@ -61,8 +70,14 @@ const addPostAPI = (post) => {
   let token = {
     headers : { Authorization: `${_token}` }, 
   }
+<<<<<<< HEAD
 
   const API = 'http://52.78.12.253/boards';
+=======
+  
+  //지은 const API = 'http://seungwook.shop/boards';
+  const API = 'http://seungwook.shop/boards';
+>>>>>>> upstream/main
   axios.post(API, formData, token)
     .then((response) => {
       console.log(response.data)
@@ -85,9 +100,15 @@ const addPostAPI = (post) => {
   }
 }
 
+// 지은 const API = 'http://seungwook.shop/main';   
 const getMainAPI = () => {
   return function (dispatch, getState) {
+<<<<<<< HEAD
   const API = 'http://52.78.12.253/main';   
+=======
+    
+    const API = 'http://seungwook.shop/main';   
+>>>>>>> upstream/main
   axios.get(API)
     .then((response) => {
     console.log(response.data)
@@ -127,9 +148,14 @@ const getPostAPI = (boardId) => {
     let token = {
       headers : { Authorization: `${_token}` }, 
     }
+<<<<<<< HEAD
 
     
     const API = `http://52.78.12.253/${boardId}/details`;
+=======
+   // 지은 const API = `http://seungwook.shop/boards/${boardId}/details`;
+    const API = `http://seungwook.shop/boards/${boardId}/details`;
+>>>>>>> upstream/main
     axios.get(API, token)
       .then((response) => {
         console.log(response.data);
@@ -141,6 +167,7 @@ const getPostAPI = (boardId) => {
           seller_id: response.data.userId,  // 작성자 id, 노션에는 response에 작성자 정보가 없음.
           // 수정할 때 변경할 데이터는 아래 네가지
           email: response.data.userEmail,
+<<<<<<< HEAD
           image_url: response.data.imageUrl,
           // image_url: response.data.imgUrl, ??
           title: response.data.title,
@@ -152,6 +179,20 @@ const getPostAPI = (boardId) => {
       console.log(detail_post);
       dispatch(setDetailPost(detail_post)); // 리덕스의 값 변경
     }).catch((error) => {
+=======
+          image_url: response.data.imgUrl,
+          title: response.data.title,
+          price: response.data.price,
+          content: response.data.content,
+
+        }    
+      post_list.unshift(post); // 최신순으로 포스트가 정렬되게 unshift로 한다.
+      console.log(post_list);
+      dispatch(setPost(post_list));
+      
+    }).then(() =>dispatch(getHeartAPI()) )
+    .catch((error) => {
+>>>>>>> upstream/main
       window.alert("상품게시물을 가져오지 못했습니다.");
       console.log(error);
     })
@@ -167,7 +208,7 @@ const editPostAPI = (boardId, post) => {
       return;
     }
 
-    // const _image = getState().image.preview;
+    
     const post_list = getState().post.list;
     console.log(post_list);
     const target_idx = post_list.findIndex((p) => p.id == boardId);
@@ -191,7 +232,12 @@ const editPostAPI = (boardId, post) => {
       }
 
       console.log(post)
+<<<<<<< HEAD
       const API = `http://52.78.12.253/${boardId}`;
+=======
+      // 지은 const API = `http://seungwook.shop/boards/${boardId}`;
+      const API = `http://seungwook.shop/boards/${boardId}`;
+>>>>>>> upstream/main
       axios.put(API, formData, token)
         .then((response) => {
           console.log(response.data);
@@ -226,7 +272,12 @@ const editPostAPI = (boardId, post) => {
         }
     
         console.log(post)
+<<<<<<< HEAD
         const API = `http://52.78.12.253/${boardId}`;
+=======
+        // 지은 const API = `http://seungwook.shop/boards/${boardId}`;
+        const API = `http://seungwook.shop/boards/${boardId}`;
+>>>>>>> upstream/main
         axios.put(API, formData, token) //수정하라고 요청
           .then((response) => {
             console.log(response.data);
@@ -251,6 +302,114 @@ const editPostAPI = (boardId, post) => {
         }
       }
 }
+
+// //like
+// const getHeartAPI = (boardId) => { 
+//   return function (dispatch, getState) {
+
+//     const _token = localStorage.getItem("Authorization");
+//     let token = {
+//       headers : { Authorization: `${_token}` }, 
+//     }
+    
+//     const API = `http://seungwook.shop/boards/${boardId}/heart`;
+//     axios.get(API, token)
+//       .then((response) => {
+//         console.log(response.data);
+      
+//       const like_check=response.data;
+      
+//       console.log(like_check);
+
+//       dispatch(heartPost(like_check)); //서버에서 좋아요 상태인지 아닌지 true, false로 받아온것임
+        
+//     }).catch((error) => {
+//       window.alert("상품게시물을 가져오지 못했습니다.");
+//       console.log(error);
+//     })
+//   }
+// }
+
+// 좋아요 정보 조회
+const getHeartAPI = (boardId) => {
+  return function (dispatch, getState, { history }) {
+    const API = `http://seungwook.shop/boards/${boardId}/heart`;
+    const token = localStorage.getItem('is_token');
+
+    axios.get(API,
+      {
+        headers: {
+          'Authorization': `${token}`,
+        }
+      })
+      .then((response) => {
+        return response.data
+      })
+      .then((_heart_info) => {
+        // 리덕스에 담기
+        dispatch(getHeart(_heart_info));
+      }).catch((error) => {
+        console.log(error);
+      });
+  }
+}
+
+// 좋아요
+const addHeartAPI = (boardId) => {
+  return function (dispatch, getState, { history }) {
+
+    const API = `http://seungwook.shop/boards/${boardId}/heart`;
+    const token = localStorage.getItem('is_token');
+    // 로그아웃 상태이면 실행하지 않기
+    if (!token) {
+      return
+    }
+
+    axios({
+      method: "POST",
+      url: API,
+      headers: {
+        'Authorization': `${token}`,
+        'Content-Type': 'application/json'
+      }
+    }).then((res) => {
+      dispatch(getHeartAPI(boardId));
+      window.alert('좋아요 하셨습니다.');
+    }).catch(error => {
+      console.log(error);
+      throw new Error(error);
+    });
+  }
+
+}
+
+// 좋아요 취소
+const deleteHeartAPI = (boardId) => {
+  return function (dispatch, getState, { history }) {
+
+    const API = `http://seungwook.shop/boards/${boardId}/heart`;
+    const token = localStorage.getItem('is_token');
+    // 로그아웃 상태이면 실행하지 않기
+    if (!token) {
+      return
+    }
+    axios.delete(API,
+      {
+        headers: {
+          'Authorization': `${token}`,
+        }
+      })
+      .then((response) => {
+        dispatch(getHeartAPI(boardId));
+        window.alert('좋아요를 취소하셨습니다.');
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+}
+
+
 
 // 상품 게시물 삭제하기.
 // 서버에서도 삭제하고, 리덕스에서도 데이터를 삭제한다.
@@ -318,6 +477,9 @@ export default handleActions({
         }
       })
     }),
+    [GET_HEART]: (state, action) => produce(state, (draft) => {
+      draft.heart = action.payload.heart;
+    }),
   },
   initialState
 );
@@ -334,6 +496,13 @@ const actionCreators={
     getPostAPI,
     editPostAPI,
     deletePostAPI,
+<<<<<<< HEAD
+=======
+    getMainAPI,
+    getHeartAPI,
+    addHeartAPI,
+    deleteHeartAPI,
+>>>>>>> upstream/main
 };
 
 export { actionCreators };
