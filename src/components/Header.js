@@ -93,6 +93,9 @@ const HeaderContainer = styled.div`
   border: none;
   border-bottom: 1px solid #DBDBDB;
   z-index: 10;
+  @media (max-width: 975px){
+    width: 80%;
+  }
 `;
 
 const HeaderInnerContainer = styled.div`
@@ -106,7 +109,7 @@ const HeaderInnerContainer = styled.div`
   /* 페이지가 축소 되면 오른쪽 부분이 잘려서 보이지 않는 것을 막는 태그 */
   box-sizing: border-box;
   @media (max-width: 975px){
-    width: 100%;
+    width: 80%;
   }
 `;
 

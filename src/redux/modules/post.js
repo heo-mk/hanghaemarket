@@ -69,7 +69,6 @@ const addPostAPI = (post) => {
 
   // const API = 'http://52.78.12.253/boards';
   const API = "http://seungwook.shop/boards";
-  // const API = 'http://seungwook.shop/boards';
   axios.post(API, formData, token)
     .then((response) => {
       console.log(response.data)
@@ -92,7 +91,7 @@ const addPostAPI = (post) => {
   }
 }
 
-// 지은 const API = 'http://seungwook.shop/main';   
+
 const getMainAPI = () => {
   return function (dispatch, getState) {
   // const API = 'http://52.78.12.253/main';   
@@ -174,7 +173,6 @@ const editPostAPI = (boardId, post) => {
       return;
     }
 
-    
     const post_list = getState().post.list;
     console.log(post_list);
     const target_idx = post_list.findIndex((p) => p.id == boardId);
@@ -198,8 +196,7 @@ const editPostAPI = (boardId, post) => {
       }
 
       console.log(post)
-      // const API = "http://seungwook.shop/boards/${boardId}";
-      // const API = `http://52.78.12.253/${boardId}`;
+      // const API = `http://52.78.12.253/boards/${boardId}`;
       const API = `http://seungwook.shop/boards/${boardId}`;
       axios.put(API, formData, token)
         .then((response) => {
@@ -345,7 +342,7 @@ const addHeartAPI = (boardId) => {
 // 좋아요 취소
 const deleteHeartAPI = (boardId) => {
   return function (dispatch, getState, { history }) {
-
+    
     const API = `http://seungwook.shop/boards/${boardId}/heart`;
     const token = localStorage.getItem('is_token');
     // 로그아웃 상태이면 실행하지 않기
@@ -380,6 +377,7 @@ const deletePostAPI = (boardId) => {
     headers : { Authorization: `${_token}`}
   }
 
+  // const API = `http://52.78.12.253/boards/${boardId}`;
   const API = `http://seungwook.shop/boards/${boardId}`;
   axios.delete(API, token)
     .then((response) => {

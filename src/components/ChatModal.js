@@ -12,7 +12,7 @@ import SockJS from 'sockjs-client';
 import StompJS from '@stomp/stompjs';
 
 import { history } from "../redux/configureStore";
-// import { actionCreators as chatActions } from "../redux/modules/chat"
+import { actionCreators as chatActions } from "../redux/modules/chat"
 import { actionCreators as userActions } from "../redux/modules/user"; 
 import { useDispatch, useSelector } from "react-redux";
 
@@ -25,12 +25,25 @@ import { useDispatch, useSelector } from "react-redux";
 
 const ChatModal = (props) => {
 
+  const dispatch = useDispatch();
+
   let socket = new SockJS("http://52.78.12.253/chatting");
   // const ws = Stomp.over(sock);
   const stompClient = Stomp.over(socket);  // endpoint
 
+  const post_list = useSelector((state) => {
+      // console.log(state)
+      // window.alert('')
+      return state.post.detail_list
+    });
+  const target_idx = post_list.findIndex((p) => p.id == props.detail_id);
+  const post_target = post_list[target_idx]
+  
+  // 이메일 정보
+  const receiverEmail = post_target.email;
   const userEmail = localStorage.getItem('email');
-  const receiverEmail = "aaa@gmail.com"
+  console.log(receiverEmail);
+  
   const _token = localStorage.getItem("Authorization");
     let token = {
       headers : { Authorization: `${_token}` }, 
@@ -41,7 +54,7 @@ const ChatModal = (props) => {
     .then((response) => {
       console.log(response.data);
 
-      let sender = {
+      let chatInfo = {
         senderName: response.data.senderName,
         senderEmail: response.data.senderEmail,
         senderId: response.data.senderId,
@@ -49,9 +62,8 @@ const ChatModal = (props) => {
       }
 
       console.log(response.data.messages);
-      // let message_list = []
-      // .forEach((_messages) => {
-      //   _messages
+      console.log(chatInfo);
+      dispatch(chatActions.getChatRoomInfo(chatInfo));
       // }
     }).catch((error) => {
       console.log(error)
@@ -73,36 +85,20 @@ const ChatModal = (props) => {
         });
     }, []);
 
-  // const handleEnter = (username, content) => {
-  //   const newMessage = { username, content };
-  //   stompClient.send("/app/chat/send",{},JSON.stringify(newMessage)); // 메시지 보내기
-  //   setMessage("");
-  // };    
-
-  // 방 제목 가져오기 
-  // const roomName = useSelector((state) => state.chat.urrentCchat.roomName);
-  // const roomId = useSelector((state) => state.chat.currentChat.roomId);  
-  
-  // // 토큰
-  // const dispatch = useDispatch();
-  // const token = localStorage.getItem('Authorization'); 
-
-  // 보낼 메시지 텍스트
-  // const messageText = useSelector((state) => state.chat.messageText);
-  // let sender = useSelector((state) => state.user.user?.username);
-  // if (!sender) {
-  //   sender = localStorage.getItem('email');
-  // }
-
   const is_login = useSelector((state) => state.user.is_login);
   const is_me = useSelector((state) => state.user.user.uid);
   const user_info = useSelector((state) => state.user.user);
-  // const chat_info = useSelector((state) => state.chat.list[props.id]);
+
+  const chat_info = useSelector((state) => state.chat.currentchat);
+  console.log(chat_info);
+  const chat_recevier = chat_info.receiverName;
+  const chat_sender = chat_info.senderName;
+  
   const [chats, setChats] = useState();
   const ok_submit = chats ? true : false;
 
   const selectChat = (e) => {
-    // console.log(e.target.value);
+    console.log(e.target.value);
     setChats(e.target.value);
   }
 
@@ -206,11 +202,10 @@ const ChatModal = (props) => {
       <ModalComponent>
         <ModalHeader>
           {/* <ChatRoomInfo roomName={roomName}> */}
-          <ChatRoomInfo>
             {/* <ProCircle src={props.profile_image_url} /> */}
             {/* <ProCircle/> */}
-            <SellerOfThis>{props.username}</SellerOfThis>
-          </ChatRoomInfo>
+            <SellerOfThis>{chat_recevier}</SellerOfThis>
+          {/* </ChatRoomInfo> */}
         </ModalHeader>
         <BodyChatBox>
           {/* {props.is_chat ?
@@ -219,10 +214,11 @@ const ChatModal = (props) => {
               {/* <ProCircle src={c.profile_url}/> */}
               <Chat>
                 <div>
-                  <Chatername></Chatername>
+                  <Chatername>{chat_sender}</Chatername>
                   {/* <Chatername>{c.user_name}</Chatername> */}
                     {/* {c.chat} */}
                   {/* <InsertTime>{timeForToday(props.insert_dt)}</InsertTime> */}
+                  {/* {chat_message} */}
                 </div>
               </Chat>
             </ChatBox>
@@ -234,7 +230,7 @@ const ChatModal = (props) => {
           <ChatInput 
               type="text"
               placeholder="채팅입력"
-              // onChange={selectChat} 
+              onChange={selectChat} 
               // value={chats}
               />
           {/* {ok_submit ?  */}

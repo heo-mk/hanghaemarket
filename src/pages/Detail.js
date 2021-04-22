@@ -55,24 +55,13 @@ const Detail =(props)=>{
     //console.log(target_idx);
     const post_target = post_list[target_idx]
     //console.log(post_target);
-
-    // dispatch(postActions.getPostAPI(detail_id));
     
-    // useEffect(() => {
-      
-    //   dispatch(postActions.getPostAPI(detail_id));
-
-    // }, []);
-
-
-
     // const post_list = useSelector((state) => state.post.list)
     // console.log(post_list);
     // const target_idx = post_list.findIndex((p) => p.id == detail_id);
     // console.log(target_idx);
     // const post_target = post_list[target_idx]
     // console.log(post_target);
-
 
     const changeHeart = () => {
       setBtnChange(!btnChange);
@@ -153,6 +142,7 @@ const Detail =(props)=>{
 
                     <ChatButton 
                       onClick={openChatModal}
+                      detail_id={detail_id}
                       // is_chat={is_chat}
                       // chat_list={chat_list}
                       // is_me={is_me}
@@ -196,6 +186,7 @@ const Detail =(props)=>{
           <ChatModal
             close={closeChatModal}
             {...props}
+            detail_id={detail_id}
             // chat_list={chat_list}
             // is_chat={is_chat}
             // is_me={is_me}
@@ -214,7 +205,6 @@ Detail.defaultProps = {
 
 const DetailMainContainer= styled.div`
   padding-top: 90px; 
-  
 `;
 
 const SellInfo=styled.div`
