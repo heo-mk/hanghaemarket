@@ -40,13 +40,15 @@ const PostListMainContainer = styled.div`
 
 const PostListContainer=styled.div`
 margin:auto;
-background:#fff;
+
 height:100vh;
 width:1000px;
 `;
 
 const Title=styled.h2`
-margin-top: 25px;
+margin-bottom: 30px;
+margin-top: 40px;
+text-align:center;
 `;
 
 const WrapProducts=styled.div`
@@ -54,6 +56,7 @@ display:flex;
 flex-direction:row;
 flex-wrap:wrap;
 justify-content: flex-start;
+
 `;
 
 export default PostList;

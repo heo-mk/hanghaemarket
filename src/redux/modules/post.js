@@ -131,14 +131,14 @@ const getMainAPI = () => {
 // 서버에 있는 상품 데이터를 가져온다.
 const getPostAPI = (boardId) => { 
   return function (dispatch, getState) {
-    const _token = localStorage.getItem("Authorization");
+    const _token = localStorage.getItem("Authorization");//로그인한사람만접근
     let token = {
       headers : { Authorization: `${_token}` }, 
     }
 
     // const API = `http://52.78.12.253/boards/${boardId}/details`;
     const API = `http://seungwook.shop/boards/${boardId}/details`;
-    axios.get(API, token)
+    axios.get(API)
       .then((response) => {
         console.log(response.data);
 

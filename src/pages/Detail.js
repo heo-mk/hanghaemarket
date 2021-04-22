@@ -35,9 +35,9 @@ const Detail =(props)=>{
     const user_info = useSelector((state) => state.user.user);  // 
     // const chat_list = useSelector((state) => state.chat.list[props.id]);  // 채팅리스트를 가져온다
     // const is_chat = chat_list ? true : false;  // 채팅리스트가 있는가?
-    console.log(is_me);
-    console.log(user_info);
-    console.log(detail_id);
+    // console.log(is_me);
+    // console.log(user_info);
+    // console.log(detail_id);
     // dispatch(postActions.getPostAPI(detail_id));
 
     React.useEffect(() => {
@@ -50,19 +50,19 @@ const Detail =(props)=>{
       return state.post.detail_list
     });
 
-    console.log(post_list);
+    //console.log(post_list);
     const target_idx = post_list.findIndex((p) => p.id == detail_id);
-    console.log(target_idx);
+    //console.log(target_idx);
     const post_target = post_list[target_idx]
-    console.log(post_target);
+    //console.log(post_target);
 
-    dispatch(postActions.getPostAPI(detail_id));
+    // dispatch(postActions.getPostAPI(detail_id));
     
-    useEffect(() => {
+    // useEffect(() => {
       
-      dispatch(postActions.getPostAPI(detail_id));
+    //   dispatch(postActions.getPostAPI(detail_id));
 
-    }, []);
+    // }, []);
 
 
 
@@ -90,7 +90,7 @@ const Detail =(props)=>{
       let post = {//입력하는거
         like_check:false
       }
-      console.log(post) //작은 포스트 안에 라이크cnt있음
+      //console.log(post) //작은 포스트 안에 라이크cnt있음
       dispatch(postActions.getHeartAPI(BoardId));//라이크서브밋함수에서 입력 받아서 editlikeax 미들웨어로 보내주기
 
     }
@@ -130,19 +130,19 @@ const Detail =(props)=>{
                 <ButtonBox>
                   
                     <LikeButton
-                      onClick={likeSubmit}
-                      // onClick={(e)=>{
-                      //   if(btnChange===false)
-                      //   {
-                      //     changeHeart();
-                      //     e.preventDefault();
-                      //     e.stopPropagation();
-                      //   }else{
-                      //     changeHeart();
-                      //     e.preventDefault();
-                      //     e.stopPropagation();
-                      //   }
-                      // }}
+                      // onClick={likeSubmit}
+                      onClick={(e)=>{
+                        if(btnChange===false)
+                        {
+                          changeHeart();
+                          e.preventDefault();
+                          e.stopPropagation();
+                        }else{
+                          changeHeart();
+                          e.preventDefault();
+                          e.stopPropagation();
+                        }
+                      }}
                       >
                     {btnChange===false? <FavoriteBorderIcon style={{ fontSize: 15, margin: "0 10px" }}/>:<FavoriteIcon style={{ fontSize: 15 }}/>}
                         {/* <HeartStyle>
@@ -221,9 +221,18 @@ const SellInfo=styled.div`
 display: flex;
 padding: 30px 0px;
 justify-content:center;
-
+margin:auto;
+width:1020px;
 padding-bottom: 20px;
 
+@media (max-width: 950px){
+  width:350px;
+  height:auto;
+  } 
+@media (max-width: 350px)
+{ width: 100% ;
+  height:auto;
+}
 `;
 
 const TitleBox=styled.div`
@@ -243,6 +252,7 @@ flex-direction: column;
 -webkit-box-pack: justify;
 justify-content: space-between;
 align-items:center;
+margin-right: 50px;
 
 `;
 
@@ -286,7 +296,7 @@ background-color:#6fa1f6;
 border-radius:30px;
 margin:8px;
 border:1px solid #6fa1f6;
-width:15vw;
+width:11vw;
 font-size:15px;
 color:#fff;
 cursor: pointer;
@@ -303,10 +313,11 @@ background-color:#6fa1f6;
 border-radius:30px;
 margin:8px;
 border:1px solid #6fa1f6;
-width:15vw;
+width:11vw;
 font-size:15px;
 color:#fff;
 cursor: pointer;
+
 `;
 
 const ChatStyle=styled.div`
@@ -329,6 +340,16 @@ const SelectInfoBar=styled.div`
 display: flex;
 height: 70px;
 margin-top: 30px;
+
+@media (max-width: 950px){
+  width:350px;
+  height:auto;
+  } 
+@media (max-width: 350px)
+{ width: 100% ;
+  height:auto;
+}
+
 `;
 
 const ProductInfoButton=styled.button`
@@ -375,6 +396,15 @@ const WrapSelectInfo=styled.div`
 padding-right: 30px;
 border-right: 1px solid rgb(238, 238, 238);
 height: calc(100% - 50px);
+
+@media (max-width: 950px){
+  width:350px;
+  height:auto;
+  } 
+@media (max-width: 350px)
+{ width: 100% ;
+  height:auto;
+}
 `;
 
 const ProductInfo=styled.div`
