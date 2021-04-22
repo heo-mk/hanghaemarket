@@ -380,7 +380,7 @@ const deletePostAPI = (boardId) => {
     headers : { Authorization: `${_token}`}
   }
 
-  const API = `http://52.78.12.253/${boardId}`;
+  const API = `http://seungwook.shop/boards/${boardId}`;
   axios.delete(API, token)
     .then((response) => {
       console.log(response.data);

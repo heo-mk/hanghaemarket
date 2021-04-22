@@ -1,4 +1,5 @@
-import React,{useState} from 'react';
+import React,{useState,useEffect} from 'react';
+
 import styled from 'styled-components';
 import img from "../shared/watch6.jpg";
 
@@ -21,7 +22,6 @@ const Detail =(props)=>{
 
   
     //여기에 클릭했을 때 getPostAPI 해온 정보들 가져오고싶음
-  
     
     const dispatch = useDispatch();
     const is_login = useSelector((state) => state.user.is_login);
@@ -55,6 +55,16 @@ const Detail =(props)=>{
     console.log(target_idx);
     const post_target = post_list[target_idx]
     console.log(post_target);
+
+    dispatch(postActions.getPostAPI(detail_id));
+    
+    useEffect(() => {
+      
+      dispatch(postActions.getPostAPI(detail_id));
+
+    }, []);
+
+
 
     // const post_list = useSelector((state) => state.post.list)
     // console.log(post_list);
