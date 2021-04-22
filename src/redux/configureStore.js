@@ -15,7 +15,7 @@ export const history = createBrowserHistory()
 const rootReducer = combineReducers({
 //   comment: Comment,
   user: User,
-  post: Post,
+  post: Post, //Detail.js에 있는 state. const post_list = useSelector((state) => state.post.detail_list);
   // chat: Chat,
   image: Image,
   router: connectRouter(history),

@@ -28,16 +28,13 @@ const getHeart = createAction(GET_HEART, (heart) => ({ heart }));
 
 //initialStates   state => state.post.list
 const initialState={
-<<<<<<< HEAD
   list : [], // 메인페이지 포스트들의 정보를 배열로 모은다
   detail_list : [], // 디테일 페이지 하나하나의 정보를 배열로 모은다
-=======
-  list : [],
+ 
   heart: {
 
   }
 
->>>>>>> upstream/main
 };
 
 
@@ -70,14 +67,9 @@ const addPostAPI = (post) => {
   let token = {
     headers : { Authorization: `${_token}` }, 
   }
-<<<<<<< HEAD
-
-  const API = 'http://52.78.12.253/boards';
-=======
   
   //지은 const API = 'http://seungwook.shop/boards';
   const API = 'http://seungwook.shop/boards';
->>>>>>> upstream/main
   axios.post(API, formData, token)
     .then((response) => {
       console.log(response.data)
@@ -103,12 +95,8 @@ const addPostAPI = (post) => {
 // 지은 const API = 'http://seungwook.shop/main';   
 const getMainAPI = () => {
   return function (dispatch, getState) {
-<<<<<<< HEAD
-  const API = 'http://52.78.12.253/main';   
-=======
     
-    const API = 'http://seungwook.shop/main';   
->>>>>>> upstream/main
+  const API = 'http://seungwook.shop/main';   
   axios.get(API)
     .then((response) => {
     console.log(response.data)
@@ -143,19 +131,14 @@ const getMainAPI = () => {
 // 서버에 있는 상품 데이터를 가져온다.
 const getPostAPI = (boardId) => { 
   return function (dispatch, getState) {
-
+    console.log(boardId);
+    
     const _token = localStorage.getItem("Authorization");
     let token = {
       headers : { Authorization: `${_token}` }, 
     }
-<<<<<<< HEAD
-
-    
-    const API = `http://52.78.12.253/${boardId}/details`;
-=======
    // 지은 const API = `http://seungwook.shop/boards/${boardId}/details`;
     const API = `http://seungwook.shop/boards/${boardId}/details`;
->>>>>>> upstream/main
     axios.get(API, token)
       .then((response) => {
         console.log(response.data);
@@ -166,10 +149,8 @@ const getPostAPI = (boardId) => {
           id: boardId, 
           seller_id: response.data.userId,  // 작성자 id, 노션에는 response에 작성자 정보가 없음.
           // 수정할 때 변경할 데이터는 아래 네가지
-          email: response.data.userEmail,
-<<<<<<< HEAD
-          image_url: response.data.imageUrl,
-          // image_url: response.data.imgUrl, ??
+          email: response.data.userEmail, 
+          image_url: response.data.imgUrl, 
           title: response.data.title,
           price: response.data.price,
           content: response.data.content,
@@ -179,20 +160,6 @@ const getPostAPI = (boardId) => {
       console.log(detail_post);
       dispatch(setDetailPost(detail_post)); // 리덕스의 값 변경
     }).catch((error) => {
-=======
-          image_url: response.data.imgUrl,
-          title: response.data.title,
-          price: response.data.price,
-          content: response.data.content,
-
-        }    
-      post_list.unshift(post); // 최신순으로 포스트가 정렬되게 unshift로 한다.
-      console.log(post_list);
-      dispatch(setPost(post_list));
-      
-    }).then(() =>dispatch(getHeartAPI()) )
-    .catch((error) => {
->>>>>>> upstream/main
       window.alert("상품게시물을 가져오지 못했습니다.");
       console.log(error);
     })
@@ -232,12 +199,8 @@ const editPostAPI = (boardId, post) => {
       }
 
       console.log(post)
-<<<<<<< HEAD
-      const API = `http://52.78.12.253/${boardId}`;
-=======
       // 지은 const API = `http://seungwook.shop/boards/${boardId}`;
       const API = `http://seungwook.shop/boards/${boardId}`;
->>>>>>> upstream/main
       axios.put(API, formData, token)
         .then((response) => {
           console.log(response.data);
@@ -272,12 +235,8 @@ const editPostAPI = (boardId, post) => {
         }
     
         console.log(post)
-<<<<<<< HEAD
-        const API = `http://52.78.12.253/${boardId}`;
-=======
         // 지은 const API = `http://seungwook.shop/boards/${boardId}`;
         const API = `http://seungwook.shop/boards/${boardId}`;
->>>>>>> upstream/main
         axios.put(API, formData, token) //수정하라고 요청
           .then((response) => {
             console.log(response.data);
@@ -421,7 +380,7 @@ const deletePostAPI = (boardId) => {
     headers : { Authorization: `${_token}`}
   }
 
-  const API = `http://52.78.12.253/${boardId}`;
+  const API = `http://seungwook.shop/boards/${boardId}`;
   axios.delete(API, token)
     .then((response) => {
       console.log(response.data);
@@ -496,13 +455,10 @@ const actionCreators={
     getPostAPI,
     editPostAPI,
     deletePostAPI,
-<<<<<<< HEAD
-=======
     getMainAPI,
     getHeartAPI,
     addHeartAPI,
     deleteHeartAPI,
->>>>>>> upstream/main
 };
 
 export { actionCreators };

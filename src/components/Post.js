@@ -19,13 +19,13 @@ import { Link } from "react-router-dom";
 const Post = (props) =>{
   
   const {image_url, title, price, content, id, seller_id} = props;
-  console.log(props)  // 여기서 seller_id는 number
+
 
   const dispatch = useDispatch();
   const is_login = useSelector((state) => state.user.is_login);
   const is_me = useSelector((state) => state.user.user.uid);  // 로그인한 사용자. 
   const user_info = useSelector((state) => state.user.user);
-  console.log(user_info); // 여기서 uid는 string
+  
   const [ is_modal, setDetailModal ] = useState();
   const [ is_changemodal, setChangeModal] = useState();
   
@@ -51,6 +51,7 @@ const Post = (props) =>{
 
   const goDetail = () => {
 
+    //dispatch(postActions.getPostAPI(BoardId));
     //dispatch(postActions.getHeartAPI(BoardId));//살렸음
     // history.replace("/boards/details/");
     history.push(`/boards/details/${BoardId}`);

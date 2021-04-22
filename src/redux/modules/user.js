@@ -89,7 +89,7 @@ const loginAPI = (username, password) => {
   return function (dispatch, getState, {history}) {
 
     console.log(username, password);
-    const API = 'http://52.78.12.253/login';
+    const API = 'http://seungwook.shop/login';
     axios.post(API, {
       // 클라이언트에서 서버로 request(요청)하며 보내주는 데이터
       // 로그인창에서 클라이언트가 입력하는 데이터
