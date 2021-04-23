@@ -41,7 +41,7 @@ const PostWrite = (props) => {
     if (is_edit){
       dispatch(imageActions.setPreview(_post.image_url)) // 페이지가 렌더링 되면서 기존 이미지 같이 렌더링
     } else{
-      dispatch(imageActions.setPreview("http://via.placeholder.com/400x300"))
+      dispatch(imageActions.setPreview("http://via.placeholder.com/400x300")) // 기존의 이미지가 없다면 이 이미지를 보여준다.
     }
   }, [])
 
@@ -73,6 +73,7 @@ const PostWrite = (props) => {
 
     }
     console.log(post);
+    // 모듈의 미들웨어 함수를 발동시켜 작성한 데이터를 서버로 보낸다.
     dispatch(postActions.addPostAPI(post));
     history.replace('/');
     //dispatch(markerActions.addBoard(props.markerId, markerClass ))
@@ -93,6 +94,7 @@ const PostWrite = (props) => {
       image: image,
     }
 
+    // 모듈의 미들웨어 함수를 발동시켜 수정한 데이터를 서버로 보낸다.
     dispatch(postActions.editPostAPI(post_id, post)) 
   }
 

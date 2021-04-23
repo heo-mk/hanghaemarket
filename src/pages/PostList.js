@@ -20,7 +20,12 @@ const PostList = (props) => {
         <React.Fragment>
             <PostListContainer>
                 <Title>오늘의 상품 추천!</Title>     
-                <WrapProducts>           
+                <WrapProducts>
+                    {/* 상품게시물 데이터가 있는
+                    post_list 데이터를 리덕스 스토어에서 받고
+                    그것을 자식 컴포넌트에 props 데이터로 넘겨준다.
+                    post_list는 배열 데이터이므로 map 함수를 이용해서
+                    상품게시물을 하나씩 생성하게 한다. */}
                     {post_list.map((p, idx) => {
                       return <Post key={p.id} {...p}/>
                     })}

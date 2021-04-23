@@ -91,7 +91,7 @@ const addPostAPI = (post) => {
   }
 }
 
-
+// 메인 페이지에 나오는 여러 상품게시물의 데이터를 서버로부터 받아 오는 미들웨어
 const getMainAPI = () => {
   return function (dispatch, getState) {
   // const API = 'http://52.78.12.253/main';   
@@ -128,6 +128,9 @@ const getMainAPI = () => {
 }
 
 // 서버에 있는 상품 데이터를 가져온다.
+// 상세페이지의 여러 데이터를 가져온다.
+// 메인페이지에 보이는 상품의 정보와는 달리
+// 한 상품에 관한 더 상세하고 방대한 정보를 받아 온다.
 const getPostAPI = (boardId) => { 
   return function (dispatch, getState) {
     const _token = localStorage.getItem("Authorization");//로그인한사람만접근

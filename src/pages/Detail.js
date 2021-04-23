@@ -40,6 +40,7 @@ const Detail =(props)=>{
     // console.log(detail_id);
     // dispatch(postActions.getPostAPI(detail_id));
 
+    // 44 - 58번줄은 45번줄 함수의 실행에서 일어나는 비동기처리를 제어하기 위한 코드
     React.useEffect(() => {
       dispatch(postActions.getPostAPI(detail_id));
     }, []);
@@ -50,6 +51,7 @@ const Detail =(props)=>{
       return state.post.detail_list
     });
 
+    // const post_list = useSelector((state) => state.post.detail_list);
     //console.log(post_list);
     const target_idx = post_list.findIndex((p) => p.id == detail_id);
     //console.log(target_idx);
