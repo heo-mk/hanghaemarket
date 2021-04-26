@@ -22,5 +22,11 @@ https://www.youtube.com/watch?v=idAJS0OLPhY
     + 메인페이지/상세페이지 뷰 제작
     + 상품게시물 작성/수정 페이지 뷰 제작
     + 상품게시물 수정/삭제 모달창 제작
++ Backend - Spring
+  + 장현준
+  + 김승욱
+  + 이은지
+  + Source (해당 주소에서 확인이 가능합니다)
+    + https://github.com/rlatmd0829/hanghae99_market
 
 
