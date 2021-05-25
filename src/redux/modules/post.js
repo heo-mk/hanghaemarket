@@ -57,7 +57,7 @@ const addPostAPI = (post) => {
 
   // 데이터를 JSON 형식으로 준비
   const formData = new FormData();
-  formData.append('file', post.image); //이름을 image가 아니라 file로 보내기?
+  formData.append('file', post.image);    // 이름을 image가 아니라 file로 보내기?
   formData.append('title', post.title);
   formData.append('price', post.price);
   formData.append('content', post.content);

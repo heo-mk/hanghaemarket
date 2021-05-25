@@ -20,7 +20,6 @@ const Post = (props) =>{
   
   const {image_url, title, price, content, id, seller_id} = props;
 
-
   const dispatch = useDispatch();
   const is_login = useSelector((state) => state.user.is_login);
   const is_me = useSelector((state) => state.user.user.uid);  // 로그인한 사용자. 
