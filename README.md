@@ -29,4 +29,7 @@ https://www.youtube.com/watch?v=idAJS0OLPhY
   + Source (해당 주소에서 확인이 가능합니다)
     + https://github.com/rlatmd0829/hanghae99_market
 
+## 구동사진
 
+### 1. 회원가입
+![회원가입 페이지](./
