@@ -32,4 +32,4 @@ https://www.youtube.com/watch?v=idAJS0OLPhY
 ## 구동사진
 
 ### 1. 회원가입
-![회원가입 페이지](./
+![회원가입 페이지](./src/shared/ReadMeImages/항해1.jpg)
