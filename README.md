@@ -97,8 +97,7 @@
 
 ## 아쉬운 점 
 ### 절반의 성공으로 끝난 채팅용 코드(서버와 통신은 성공, 시간부족으로 구현 완성은 실패)
-
-### SockJs, STOMP 패키지를 이용한 서버와의 채팅용 통신을 위한 코드
+#### SockJs, STOMP 패키지를 이용한 서버와의 채팅용 통신을 위한 코드
 ```ChatModal.js
 // 소켓 통신
 import Stomp from 'stompjs';
@@ -178,9 +177,47 @@ const ChatModal = (props) => {
 
 
 ## 프로젝트 수행중 가장 크게 배운 점
+### React는 비동기 처리가 많으므로 그로인한 문제가 생기면 제어를 해줘야 한다.
 
-### React는 비동기 처리가 많으므로 그로인한 문제가 생기면 제어를 해줘야 한다. 
+-문제코드 - 게시물 상세 페이지 컴포넌트(Detail.js)
+``` Detail.js
+    React.useEffect(() => {
+      dispatch(postActions.getPostAPI(detail_id));
+    }, []);
 
+    // 상세게시물 데이터
+    const post_list = useSelector((state) => state.post.detail_list);
 
+    const target_idx = post_list.findIndex((p) => p.id == detail_id);
+    const post_target = post_list[target_idx]
+```
 
+- 이 코드의 문제점
+  - Redux store에서 useSelector로 데이터를 받아서 post_list에 할당되는데, 이것이 undefined라며 오류가 나면서 렌더링이 되지 않는다.
+  - 하지만 서버에서 데이터가 오므로, 나중에는 post_list가 할당된다고 나오지만 그래도 오류는 해결되지 않는다.
 
+- 문제의 원인
+  - post_list에 데이터가 할당 되기 전에 브라우저가 렌더링 시켜 버리려고 하는 것이 문제
+  - 이는 리액트의 비동기처리 때문으로, post_list에 데이터가 할당 되면서 동시에 렌더링시켜버리기 때문이다.
+
+- 해결 방법
+  - post_list에 데이터가 할당 된 다음에 렌더링 되도록 한다.
+
+- 해결 코드
+``` Detail.js 
+    React.useEffect(() => {
+      dispatch(postActions.getPostAPI(detail_id));
+    }, []);
+
+    const post_list = useSelector((state) => {
+      // console.log(state)
+      // window.alert('')
+      return state.post.detail_list
+    });
+
+    const target_idx = post_list.findIndex((p) => p.id == detail_id);
+    const post_target = post_list[target_idx]
+```
+  - post_list는 useSelector를 이용해 할당 되는데, 
+  - return값을 저렇게 명시해줌으로써 post_list가 할당되게 한 다음에 렌더링 되게 **강제로** 설정해준다.
+  - 이렇게 하면 비동기로 인한 문제가 제어된다.
