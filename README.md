@@ -94,3 +94,80 @@
 ![항해9](https://user-images.githubusercontent.com/79818840/119585984-d35b7680-be06-11eb-94f8-8bc836a11f4b.JPG)
 ![항해10](https://user-images.githubusercontent.com/79818840/119585987-d48ca380-be06-11eb-9977-d88f446ba534.JPG)
 
+### 아쉬운 점 - 채팅용 코드(서버와 통신은 성공, 시간부족으로 구현 완성은 실패
+
+## SockJs, STOMP 패키지를 이용한 서버와의 채팅용 통신을 위한 코드
+```ChatModal.js
+// 소켓 통신
+import Stomp from 'stompjs';
+import SockJS from 'sockjs-client';
+import StompJS from '@stomp/stompjs';
+
+const ChatModal = (props) => {
+
+  const dispatch = useDispatch();
+
+  let socket = new SockJS("http://52.78.12.253/chatting");
+  // const ws = Stomp.over(sock);
+  const stompClient = Stomp.over(socket);  // endpoint
+
+  const post_list = useSelector((state) => {
+      // console.log(state)
+      // window.alert('')
+      return state.post.detail_list
+    });
+  const target_idx = post_list.findIndex((p) => p.id == props.detail_id);
+  const post_target = post_list[target_idx]
+  
+  // 이메일 정보
+  const receiverEmail = post_target.email;
+  const userEmail = localStorage.getItem('email');
+  console.log(receiverEmail);
+
+  const _token = localStorage.getItem("Authorization");
+    let token = {
+      headers : { Authorization: `${_token}` }, 
+    }
+
+  const API = `http://52.78.12.253/api/chat/newChat?receiver=${receiverEmail}&sender=${userEmail}`;
+  axios.post(API, token)
+    .then((response) => {
+      console.log(response.data);
+
+      let chatInfo = {
+        senderName: response.data.senderName,
+        senderEmail: response.data.senderEmail,
+        senderId: response.data.senderId,
+        receiverName: response.data.receiverName,
+      }
+
+      console.log(response.data.messages);
+      console.log(chatInfo);
+      dispatch(chatActions.getChatRoomInfo(chatInfo));
+      // }
+    }).catch((error) => {
+      console.log(error)
+      window.alert("채팅 데이터들을 가져오지 못했습니다.")
+    })
+
+  React.useEffect(()=>{
+    const userEmail = localStorage.getItem('email');
+    console.log(stompClient);
+    stompClient.connect({}, function () {
+        stompClient.subscribe('/topic/' + userEmail, function (e) {
+            if(e.body.toString() == "notice"){
+                // alertClosing('noticeCome',2000);
+            }
+            else{
+                // alertClosing('comeMessage',2000);
+            }
+          });
+        });
+    }, []);
+    
+```
+
+
+
+
+
