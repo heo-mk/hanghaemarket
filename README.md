@@ -58,7 +58,7 @@
 ![image](https://user-images.githubusercontent.com/70622731/115699379-9122bd80-a3a0-11eb-97e6-f309d5b65f61.png)
 ![image](https://user-images.githubusercontent.com/70622731/115699448-a0097000-a3a0-11eb-9efc-1780f32e21b8.png)
 
-## 서비스 구동 사진
+## 서비스 구현 사진
 
 ### 1. 회원가입
 - 메인페이지
@@ -86,7 +86,8 @@
 
 - 채팅창
   - 게시물 상세페이지의 채팅하기 버튼을 누르면 채팅창이 열린다.
-  - 
+  - STOMP, SockJS을 이용해 서버와 통신은 성공
+  - 시간 부족으로 인해서 채팅 구현은 완성하지 못
 ![항해8](https://user-images.githubusercontent.com/79818840/119585979-d2c2e000-be06-11eb-9aeb-324c5e9fd97f.JPG)
 ![항해9](https://user-images.githubusercontent.com/79818840/119585984-d35b7680-be06-11eb-94f8-8bc836a11f4b.JPG)
 ![항해10](https://user-images.githubusercontent.com/79818840/119585987-d48ca380-be06-11eb-9977-d88f446ba534.JPG)
