@@ -167,6 +167,12 @@ const ChatModal = (props) => {
     }, []);
     
 ```
+- STOMP와 SockJS를 이용해 서버와 채팅용 양방향 통신을 위한 세팅을 해줌
+- 그리고 useEffect에 채팅용 통신을 위한 코드를 넣어서, 채팅창이 뜨면 실행되게 한다.
+
+그러면 다음과 같이 개발자 도구에 통신이 연결 되었다는 메시지가 뜬다. 
+![KakaoTalk_20210531_031935632](https://user-images.githubusercontent.com/79818840/120115649-9e14a700-c1bf-11eb-95bd-3847a3941bd5.jpg)
+
 
 
 
