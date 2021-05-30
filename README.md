@@ -21,11 +21,10 @@
     + 메인페이지/상세페이지 뷰 제작
     + 상품게시물 작성/수정 페이지 뷰 제작
     + 상품게시물 수정/삭제 모달창 제작
-+ Backend - Spring
++ Backend - Spring ([벡엔드 깃허브 레포](https://github.com/rlatmd0829/hanghae99_market)) 
   + 장현준
   + 김승욱
   + 이은지
-    + <h4><a href="http://hanghaemarket.shop/" target="_blank">백엔드 깃허브</a>
 
 ## 구동사진
 
