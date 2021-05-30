@@ -1,11 +1,10 @@
 # 🎊 항해99 미니프로젝트
 
 ## 항해마켓 | 중고제품 직거래 플랫폼 사이트
-http://hanghaemarket.shop/
-(현재는 서버가 내려간 상태입니다)
+<h4><a href="http://hanghaemarket.shop/" target="_blank">사이트 바로가기(현재는 서버가 내려간 상태입니다)</a>
 
 ## 소개 유튜브 영상
-<h4><a href="https://www.youtube.com/watch?v=idAJS0OLPhY" target="_blank">SFlash 시연 영상</a>
+<h4><a href="https://www.youtube.com/watch?v=idAJS0OLPhY" target="_blank">항해마켓 시연 영상</a>
 
 ### 개발기간
 + 2021년 4월 9일(금) ~ 2021년 4월 22일(목)
