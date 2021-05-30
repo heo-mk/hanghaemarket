@@ -94,9 +94,10 @@
 ![항해9](https://user-images.githubusercontent.com/79818840/119585984-d35b7680-be06-11eb-94f8-8bc836a11f4b.JPG)
 ![항해10](https://user-images.githubusercontent.com/79818840/119585987-d48ca380-be06-11eb-9977-d88f446ba534.JPG)
 
-### 아쉬운 점 - 채팅용 코드(서버와 통신은 성공, 시간부족으로 구현 완성은 실패
 
-## SockJs, STOMP 패키지를 이용한 서버와의 채팅용 통신을 위한 코드
+##아쉬운 점 - 채팅용 코드(서버와 통신은 성공, 시간부족으로 구현 완성은 실패
+
+### SockJs, STOMP 패키지를 이용한 서버와의 채팅용 통신을 위한 코드
 ```ChatModal.js
 // 소켓 통신
 import Stomp from 'stompjs';
