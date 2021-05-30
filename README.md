@@ -58,18 +58,35 @@
 ![image](https://user-images.githubusercontent.com/70622731/115699379-9122bd80-a3a0-11eb-97e6-f309d5b65f61.png)
 ![image](https://user-images.githubusercontent.com/70622731/115699448-a0097000-a3a0-11eb-9efc-1780f32e21b8.png)
 
-## 구동사진
+## 서비스 구동 사진
 
 ### 1. 회원가입
 - 메인페이지
-  - 전체적인구성은 
+  - 전체적인 구성 : 위에서부터 헤더/가운데글/상품 게시물 목록 
 ![항해1](https://user-images.githubusercontent.com/79818840/119585961-c76fb480-be06-11eb-9135-3f4b510d3d21.JPG)
+
+- 회원가입페이지
 ![항해2](https://user-images.githubusercontent.com/79818840/119585965-cb033b80-be06-11eb-84fc-5db72df29391.JPG)
+
+- 로그인 페이지
+  - 일반로그인을 구현
 ![항해3](https://user-images.githubusercontent.com/79818840/119585968-ccccff00-be06-11eb-88d8-8cffc50b94fc.JPG)
+
+- 게시물 작성창
+  - 게시물 사진, 제목, 가격, 설명을 올린다.
+  - API를 이용해 서버로 데이터를 보내고, 리덕스에 데이터를 저장시켜 새로고침 없이도 메인페이지에 게시물로 뜨게 한다.
 ![항해4](https://user-images.githubusercontent.com/79818840/119585970-cdfe2c00-be06-11eb-8094-144f4c13704e.JPG)
 ![항해5](https://user-images.githubusercontent.com/79818840/119585972-cf2f5900-be06-11eb-8529-7c312a09c47c.JPG)
 ![항해6](https://user-images.githubusercontent.com/79818840/119585975-d0608600-be06-11eb-8d68-af7ca40929a2.JPG)
+
+- 게시물 상세페이지
+  - 메인페이지에는 보이지 않는 더 상세한 정보(배송비, 거래지역 등등)를 보여준다.
+  - 찜, 채팅기능이 있다
 ![항해7](https://user-images.githubusercontent.com/79818840/119585977-d191b300-be06-11eb-9235-d60254e32f50.JPG)
+
+- 채팅창
+  - 게시물 상세페이지의 채팅하기 버튼을 누르면 채팅창이 열린다.
+  - 
 ![항해8](https://user-images.githubusercontent.com/79818840/119585979-d2c2e000-be06-11eb-9aeb-324c5e9fd97f.JPG)
 ![항해9](https://user-images.githubusercontent.com/79818840/119585984-d35b7680-be06-11eb-94f8-8bc836a11f4b.JPG)
 ![항해10](https://user-images.githubusercontent.com/79818840/119585987-d48ca380-be06-11eb-9977-d88f446ba534.JPG)
