@@ -3,13 +3,17 @@
 ## 항해마켓 | 중고제품 직거래 플랫폼 사이트
 <h4><a href="http://hanghaemarket.shop/" target="_blank">사이트 바로가기(현재는 서버가 내려간 상태입니다)</a>
 
-## 소개 유튜브 영상
-<h4><a href="https://www.youtube.com/watch?v=idAJS0OLPhY" target="_blank">항해마켓 시연 영상</a>
+### 개요
+- 명칭 : 항해마켓
+- 개발 인원 : 5명 (프론트 2명[허민규,이지은], 백엔드 3명[김승욱,장현준,이은지])
+- 개발 기간 : 2021.04.09 ~ 2021.04.22
+- 개발 환경 : React, Spring
+- 형상 관리 툴 : git
+- 일정 관리 툴 : [Notion](https://www.notion.so/3295a6aca9bd411b9cc7b5eadb9239cb?v=002a8755c0414bf388614efa88f27d8a)
+- 사이트 : [항해마켓](http://hanghaemarket.shop/)
+- 시연 영상 : [유튜브 링크](https://youtube.com/watch?v=idAJS0OLPhY&feature=share)  
 
-### 개발기간
-+ 2021년 4월 9일(금) ~ 2021년 4월 22일(목)
-
-### 멤버구성
+#### 멤버구성
 + Frontend - React
   + 허민규
     + 회원가입/로그인 구현
@@ -52,7 +56,8 @@
 ## 구동사진
 
 ### 1. 회원가입
-![회원가입 페이지]
+- 메인페이지
+  - 전체적인구성은 
 ![항해1](https://user-images.githubusercontent.com/79818840/119585961-c76fb480-be06-11eb-9135-3f4b510d3d21.JPG)
 ![항해2](https://user-images.githubusercontent.com/79818840/119585965-cb033b80-be06-11eb-84fc-5db72df29391.JPG)
 ![항해3](https://user-images.githubusercontent.com/79818840/119585968-ccccff00-be06-11eb-88d8-8cffc50b94fc.JPG)
