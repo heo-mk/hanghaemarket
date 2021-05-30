@@ -1,7 +1,6 @@
 # 🎊 항해99 미니프로젝트
 
 ## 항해마켓 | 중고제품 직거래 플랫폼 사이트
-<h4><a href="http://hanghaemarket.shop/" target="_blank">사이트 바로가기(현재는 서버가 내려간 상태입니다)</a>
 
 ### 개요
 - 명칭 : 항해마켓
@@ -10,7 +9,7 @@
 - 개발 환경 : React, Spring
 - 형상 관리 툴 : git
 - 일정 관리 툴 : [Notion](https://www.notion.so/3295a6aca9bd411b9cc7b5eadb9239cb?v=002a8755c0414bf388614efa88f27d8a)
-- 사이트 : [항해마켓](http://hanghaemarket.shop/)
+- 사이트 : [항해마켓(현재는 서버가 내려간 상태)](http://hanghaemarket.shop/)
 - 시연 영상 : [유튜브 링크](https://youtube.com/watch?v=idAJS0OLPhY&feature=share)  
 
 #### 멤버구성
