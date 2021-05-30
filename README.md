@@ -5,7 +5,7 @@ http://hanghaemarket.shop/
 (현재는 서버가 내려간 상태입니다)
 
 ## 소개 유튜브 영상
-https://www.youtube.com/watch?v=idAJS0OLPhY
+<h4><a href="https://www.youtube.com/watch?v=idAJS0OLPhY" target="_blank">SFlash 시연 영상</a>
 
 ### 개발기간
 + 2021년 4월 9일(금) ~ 2021년 4월 22일(목)
