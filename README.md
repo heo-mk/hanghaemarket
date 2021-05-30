@@ -95,6 +95,7 @@
 ![항해10](https://user-images.githubusercontent.com/79818840/119585987-d48ca380-be06-11eb-9977-d88f446ba534.JPG)
 
 
+
 ## 아쉬운 점 
 ### 절반의 성공으로 끝난 채팅용 코드(서버와 통신은 성공, 시간부족으로 구현 완성은 실패)
 #### SockJs, STOMP 패키지를 이용한 서버와의 채팅용 통신을 위한 코드
@@ -174,6 +175,7 @@ const ChatModal = (props) => {
 ![KakaoTalk_20210531_031935632](https://user-images.githubusercontent.com/79818840/120115649-9e14a700-c1bf-11eb-95bd-3847a3941bd5.jpg)
 
 하지만 프로젝트 기간이 끝나가는 시점이라서 시간이 부족해 더는 구현하지 못한 아쉬움이 있다.
+
 
 
 ## 프로젝트 수행중 가장 크게 배운 점
