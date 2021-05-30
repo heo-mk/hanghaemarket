@@ -12,7 +12,7 @@
 - 사이트 : [항해마켓(현재는 서버가 내려간 상태)](http://hanghaemarket.shop/)
 - 시연 영상 : [유튜브 링크](https://youtube.com/watch?v=idAJS0OLPhY&feature=share)  
 
-#### 멤버구성
+### 멤버구성
 + Frontend - React
   + 허민규
     + 회원가입/로그인 구현
@@ -51,6 +51,12 @@
 - 찜하기 (좋아요)
 - 팔로우
 - 채팅
+
+### API 설계
+![image](https://user-images.githubusercontent.com/70622731/115699219-6b95b400-a3a0-11eb-8c00-c4fcd0c3f420.png)
+![image](https://user-images.githubusercontent.com/70622731/115699310-823c0b00-a3a0-11eb-94ca-103b24c80005.png)
+![image](https://user-images.githubusercontent.com/70622731/115699379-9122bd80-a3a0-11eb-97e6-f309d5b65f61.png)
+![image](https://user-images.githubusercontent.com/70622731/115699448-a0097000-a3a0-11eb-9efc-1780f32e21b8.png)
 
 ## 구동사진
 
