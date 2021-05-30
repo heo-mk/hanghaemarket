@@ -87,8 +87,10 @@
 - 채팅창
   - 게시물 상세페이지의 채팅하기 버튼을 누르면 채팅창이 열린다.
   - STOMP, SockJS을 이용해 서버와 통신은 성공
-  - 시간 부족으로 인해서 채팅 구현은 완성하지 못
+  - 시간 부족으로 인해서 채팅 구현은 완성하지 못함
 ![항해8](https://user-images.githubusercontent.com/79818840/119585979-d2c2e000-be06-11eb-9aeb-324c5e9fd97f.JPG)
+
+- 로그아웃시, localStorage의 모든 데이터들이 지워지게 설정했다.
 ![항해9](https://user-images.githubusercontent.com/79818840/119585984-d35b7680-be06-11eb-94f8-8bc836a11f4b.JPG)
 ![항해10](https://user-images.githubusercontent.com/79818840/119585987-d48ca380-be06-11eb-9977-d88f446ba534.JPG)
 
