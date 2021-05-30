@@ -25,8 +25,7 @@
   + 장현준
   + 김승욱
   + 이은지
-  + Source (해당 주소에서 확인이 가능합니다)
-    + https://github.com/rlatmd0829/hanghae99_market
+    + <h4><a href="http://hanghaemarket.shop/" target="_blank">백엔드 깃허브</a>
 
 ## 구동사진
 
